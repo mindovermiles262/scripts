@@ -3,7 +3,7 @@
 # Removes unwanted characters and prepends "0" onto any single digit files in a directory
 # Usage: 
 #     'ruby la_rename_files [PATH]'
-#     './la_rename_files [PATH]'
+#     './la_rename_files [PATH]' (Make sure file has execute permissions)
 #
 # Example I/O:
 #     '1 - Some Video, Text, or Any %%%% file' => '01-SomeVideoTextorAny----file'
