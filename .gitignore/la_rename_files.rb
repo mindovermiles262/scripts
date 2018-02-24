@@ -29,7 +29,23 @@ def rename_files(path)
   end
 end
 
-if ARGF.argv.length == 1
+def recursive(filename)
+  if File.directory?(filename)
+    puts "DIR: #{filename}"
+    Dir.chdir(filename)
+    puts Dir.glob('*')
+  else
+    puts "FILE: #{filename}"
+    puts File.directory?(filename)
+  end
+end
+
+if ARGF.argv[0] == '-R'
+  puts "Recursive"
+  Dir.glob('*').each do |filename|
+    recursive(filename)
+  end
+elsif ARGF.argv.length == 1
   rename_files(ARGF.argv[0]) if ARGF.argv.length == 1
 elsif ARGF.argv.length == 0
   get_directory
