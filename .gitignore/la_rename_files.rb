@@ -31,17 +31,15 @@ end
 
 def recursive(filename)
   if File.directory?(filename)
-    puts "DIR: #{filename}"
+    rename_files(filename)
     Dir.chdir(filename)
-    puts Dir.glob('*')
-  else
-    puts "FILE: #{filename}"
-    puts File.directory?(filename)
+    Dir.glob('*').each{ |child| recursive(child) }
+    Dir.chdir('..')
   end
 end
 
 if ARGF.argv[0] == '-R'
-  puts "Recursive"
+  rename_files(Dir.pwd)
   Dir.glob('*').each do |filename|
     recursive(filename)
   end
