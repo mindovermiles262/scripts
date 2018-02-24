@@ -5,6 +5,10 @@
 #     'ruby la_rename_files [PATH]'
 #     './la_rename_files [PATH]' (Make sure file has execute permissions)
 #
+# Flags:
+#    -R, --recursive
+#        Recursivly search and change directory and file names
+#
 # Example I/O:
 #     '1 - Some Video, Text, or Any %%%% file' => '01-SomeVideoTextorAny----file'
 
