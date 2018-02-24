@@ -2,8 +2,8 @@
 
 # Removes unwanted characters and prepends "0" onto any single digit files in a directory
 # Usage: 
-#     'ruby la_rename_files [PATH]'
-#     './la_rename_files [PATH]' (Make sure file has execute permissions)
+#     'ruby la_rename_files [DIR-PATH]'
+#     './la_rename_files [DIR-PATH]' (Make sure file has execute permissions)
 #
 # Flags:
 #    -R, --recursive
@@ -42,13 +42,17 @@ def recursive(filename)
   end
 end
 
-if ARGF.argv[0] == '-R'
+if %w[-R --recursive].include?(ARGF.argv[0])
   rename_files(Dir.pwd)
   Dir.glob('*').each do |filename|
     recursive(filename)
   end
 elsif ARGF.argv.length == 1
-  rename_files(ARGF.argv[0]) if ARGF.argv.length == 1
+  unless File.directory?(ARGF.argv[0])
+    puts "USAGE: la_rename_files [DIR-PATH, OPTIONS]"
+    return 1
+  end
+  rename_files(ARGF.argv[0])
 elsif ARGF.argv.length == 0
   get_directory
 end
