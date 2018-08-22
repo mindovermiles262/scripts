@@ -1,8 +1,11 @@
 #!/bin/sh
 
+EDP="eDP1"
+DP="DP1"
+
 # Set XPS screen as primary:
-xrandr --output eDP-1 --mode 1920x1080 --primary
+xrandr --output $EDP --mode 1920x1080
 
 # Set HP Screen:
-xrandr --output DP-1 --mode 1920x1080 --above eDP-1 
+xrandr --output $DP --mode 1920x1080 --above $EDP --primary
 

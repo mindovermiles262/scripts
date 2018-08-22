@@ -1,8 +1,11 @@
 #!/bin/sh
 
+EDP="eDP1"
+DP="DP1-1"
+
 # Set XPS screen as primary:
-xrandr --output eDP-1 --mode 1920x1080
+xrandr --output $EDP --mode 1920x1080
 
 # Set LG Screen:
-xrandr --output DP-1-1 --mode 2560x1440 --left-of eDP-1 --primary
+xrandr --output $DP --mode 2560x1440 --right-of $EDP --primary
 
