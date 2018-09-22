@@ -1,6 +1,9 @@
 # File Location: ~/.bash_profile
 # Run the following to download and initialize:
-# curl -o ~/.bash_profile https://raw.githubusercontent.com/mindovermiles262/dots/master/bash/bash_profile && source ~/.bash_profile
+# curl -o ~/.bash_profile https://raw.githubusercontent.com/mindovermiles262/scripts/master/bash/bash_profile && source ~/.bash_profile
+
+BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/bash/bash_profile"
+VIM_RC_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/vim/vimrc"
 
 # Load settings from .bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
@@ -15,14 +18,15 @@ alias open="xdg-open ."
 
 # Add color to Terminal:
 export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-# export PS1="\W\`parse_git_branch\` \\$ "
-# export PS1="\[\e[1;31m\W\]\[\e[32m\$(parse_git_branch)\]\[\e[00m $\] "
-# \e[44;30m              => Color definition
-# \W                     => Prints CWD
-# \e[40;32m              => Color definition
-# \$(parse_git_branch)   => Includes git branch
-# \e[00m                 => Default Color
-# $                      => Prompt Character
+
+		# export PS1="\W\`parse_git_branch\` \\$ "
+		# export PS1="\[\e[1;31m\W\]\[\e[32m\$(parse_git_branch)\]\[\e[00m $\] "
+		# \e[44;30m              => Color definition
+		# \W                     => Prints CWD
+		# \e[40;32m              => Color definition
+		# \$(parse_git_branch)   => Includes git branch
+		# \e[00m                 => Default Color
+		# $                      => Prompt Character
 
 # Git branch in terminal.
 parse_git_branch() {
@@ -51,16 +55,14 @@ alias sbash="source ~/.bash_profile"
 # Download VIM-Plug and initialize in ~/.vim/autoload, then download .vimrc
 alias vim-init="printf 'Downloading Plug\n' \
   && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
-  && curl -o ~/.vimrc https://raw.githubusercontent.com/mindovermiles262/dots/master/vim/vimrc"
+  && curl -o ~/.vimrc $VIM_RC_URL"
 
 # Download and update program profiles
 alias vim-update="printf 'Updating .vimrc file:\n' \
-  && curl -o ~/.vimrc https://raw.githubusercontent.com/mindovermiles262/dots/master/vim/vimrc"
+  && curl -o ~/.vimrc $VIM_RC_URL"
   
-alias bash-update="curl -o ~/.bash_profile https://raw.githubusercontent.com/mindovermiles262/dots/master/bash/bash_profile \
-  && source ~/.bash_profile \
-  && clear \
-  && printf 'Updated .bash_profile from Github\n'"
+alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL \
+  && source ~/.bash_profile"
 
 # Get current IP address
 alias cip="curl https://andyduss.com/ip"
