@@ -1,0 +1,76 @@
+# File Location: ~/.bash_profile
+# Run the following to download and initialize:
+# curl -o ~/.bash_profile https://raw.githubusercontent.com/mindovermiles262/dots/master/bash/bash_profile && source ~/.bash_profile
+
+# Load settings from .bashrc
+[[ -r ~/.bashrc ]] && . ~/.bashrc
+
+alias linux-upgrade="sudo apt-get update \
+  && sudo apt-get -y upgrade \
+  && sudo apt-get -y dist-upgrade \
+  && printf '\n\n' \
+  && printf 'Linux Has Been Updated\n  {apt-get update}\n  {apt-get upgrade}\n  {apt-get dist-upgrade}\n'"
+
+alias open="xdg-open ."
+
+# Add color to Terminal:
+export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+# export PS1="\W\`parse_git_branch\` \\$ "
+# export PS1="\[\e[1;31m\W\]\[\e[32m\$(parse_git_branch)\]\[\e[00m $\] "
+# \e[44;30m              => Color definition
+# \W                     => Prints CWD
+# \e[40;32m              => Color definition
+# \$(parse_git_branch)   => Includes git branch
+# \e[00m                 => Default Color
+# $                      => Prompt Character
+
+# Git branch in terminal.
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# File Aliases
+alias ll="ls -lha"
+alias la="ls -lha"
+alias l="ls -lh"
+
+# Add Rails Aliases
+alias reset="rails db:migrate:reset; rails db:seed"
+alias migrate="rails db:migrate"
+alias seed="rails db:seed"
+
+# Editor Aliases
+alias v="vim"
+alias sv="sudo vim"
+alias c="code ."
+
+# Editing Bash Profile
+alias vbash="vim ~/.bash_profile"
+alias sbash="source ~/.bash_profile"
+
+# Download VIM-Plug and initialize in ~/.vim/autoload, then download .vimrc
+alias vim-init="printf 'Downloading Plug\n' \
+  && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+  && curl -o ~/.vimrc https://raw.githubusercontent.com/mindovermiles262/dots/master/vim/vimrc"
+
+# Download and update program profiles
+alias vim-update="printf 'Updating .vimrc file:\n' \
+  && curl -o ~/.vimrc https://raw.githubusercontent.com/mindovermiles262/dots/master/vim/vimrc"
+  
+alias bash-update="curl -o ~/.bash_profile https://raw.githubusercontent.com/mindovermiles262/dots/master/bash/bash_profile \
+  && source ~/.bash_profile \
+  && clear \
+  && printf 'Updated .bash_profile from Github\n'"
+
+# Get current IP address
+alias cip="curl https://andyduss.com/ip"
+
+# Search man Pages for flag: 
+# USAGE: manf <command> <flag>
+function manf () { man $1 | less -p "^ +$2"; }
+
+# Add rbenv to PATH
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi

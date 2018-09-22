@@ -1,0 +1,62 @@
+" File Location: ~/
+" File Name: .vimrc
+
+syntax on
+
+" Vim-Plug Plugin Manager.
+" Set up with following Script:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" Add 'Plug '<github_user/repo_name'
+" then :PlugInstall to install plugins
+
+call plug#begin('~/.vim/extensions')
+      Plug 'spf13/vim-autoclose'
+      Plug 'tpope/vim-endwise'
+      Plug 'tpope/vim-surround'
+      Plug 'tpope/vim-rails'
+      Plug 'Xuyuanp/nerdtree-git-plugin'
+      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+      Plug 'junegunn/fzf.vim'
+      Plug 'tpope/vim-commentary'
+      Plug 'tpope/vim-fugitive'
+      Plug 'mattn/emmet-vim'
+      Plug 'pangloss/vim-javascript'
+call plug#end()
+
+set autoindent
+set relativenumber number
+set ruler
+set showcmd
+set showmode
+set backspace=indent,eol,start
+" Turn off autochdir so FZF doesn't get stuck in child DIR
+" set autochdir
+set nowrap
+:imap jj <Esc>
+
+" Set TAB to 2 Spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set smarttab
+
+" Map copy/paste to use xclip across networks
+" https://defuse.ca/blog/clipboard-over-ssh-with-vim.html
+" vmap "+y :!xclip -f -sel clip
+" map "+p :r!xclip -o -sel clip
+
+" Start NERDTree when 'vim' is called
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" :command Tree NERDTreeToggle
+
+" Map <tab> to expand Emmet
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" Configure FZF to use CTRL-P bindings
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+nnoremap <c-p> :FZF<cr>

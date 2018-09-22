@@ -1,0 +1,43 @@
+###########################
+# xbindkeys configuration #
+# Copy to ~/.xbindkeysrc then
+# run 'xbindkeys' to load
+###########################
+
+# Examples of commands:
+
+"xbindkeys_show" 
+  control+shift + q
+
+# -- Mouse Controls --
+# Logitech Triathalon M720:
+#    b:1 - Left Click
+#    b:2 - Wheel Click
+#    b:3 - Right Click
+#    b:4 - Wheel towards
+#    b:5 - Wheel away
+#    b:6 - Wheel button right
+#    b:7 - Wheel button left
+#    b:8 - Side Back
+#    b:9 - Side Forward
+
+# Move One Desktop Right
+"xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + 1) % $(xdotool get_num_desktops))"
+  b:9
+
+# Move One Desktop Left 
+"xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + $(expr $(xdotool get_num_desktops) - 1)) % $(xdotool get_num_desktops))"
+  b:8
+
+# Volume Down
+"xdotool key XF86AudioLowerVolume"
+  b:7
+
+# Volume Up
+"xdotool key XF86AudioRaiseVolume"
+  b:6
+
+
+##################################
+# End of xbindkeys configuration #
+##################################

@@ -1,0 +1,13 @@
+# File Location: /usr/share/xfce4/terminal/colorschemes/one-dark-vivid.theme
+# Font: Source Code Pro Semibold 10
+
+[Scheme]
+Name=One Dark
+ColorForeground=#ABB2BF
+ColorCursor=#ABB2BF
+ColorBackground=#282C34
+ColorSelection=#3B4451
+ColorSelectionUseDefault=FALSE
+ColorBold=#ABB2BF
+ColorBoldUseDefault=FALSE
+ColorPalette=#282C34:#E06C75:#98c379:#d19a66:#61aeee:#c678dd:#56b6c2:#abb2bf:#5c6370:#e06c75:#98c379:#d19a66:#62afee:#c678dd:#56b6c2:#ffffff
