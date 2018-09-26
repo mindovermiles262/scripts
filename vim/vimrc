@@ -48,9 +48,9 @@ set smarttab
 " map "+p :r!xclip -o -sel clip
 
 " Start NERDTree when 'vim' is called
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" :command Tree NERDTreeToggle
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+:command Tree NERDTreeToggle
 
 " Map <tab> to expand Emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
