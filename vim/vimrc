@@ -21,6 +21,7 @@ call plug#begin('~/.vim/extensions')
       Plug 'tpope/vim-fugitive'
       Plug 'mattn/emmet-vim'
       Plug 'pangloss/vim-javascript'
+      Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 set autoindent
