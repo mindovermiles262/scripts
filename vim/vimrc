@@ -35,6 +35,7 @@ set backspace=indent,eol,start
 " set autochdir
 set nowrap
 :imap jj <Esc>
+:cnoremap qq wqa!
 
 " Set TAB to 2 Spaces
 set tabstop=2
