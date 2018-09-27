@@ -54,12 +54,12 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 :command Tree NERDTreeToggle
 
-" Map <tab> to expand Emmet
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" Map <Shift><tab> to expand Emmet
+imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " Configure FZF to use CTRL-P bindings
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
       \ }
-nnoremap <c-p> :FZF<cr>
+nnoremap <C-p> :FZF<cr>
