@@ -15,7 +15,7 @@ if [[ "$OSTYPE" == 'linux'* ]]; then
     && sudo apt-get -y upgrade \
     && sudo apt-get -y dist-upgrade \
     && printf 'Linux Has Been Updated\n  {apt-get update}\n  {apt-get upgrade}\n  {apt-get dist-upgrade}\n'"
-  alias open="xdg-open ."
+  alias open="xdg-open"
 elif [[ "$OSTYPE" == "darwin17" ]]; then
   export CLICOLOR=1
   export LSCOLORS=GxFxCxDxBxegedabagaced
