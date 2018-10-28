@@ -52,7 +52,7 @@ alias vim-init="printf 'Downloading Plug\n' \
 # Download and update program profiles
 alias vim-update="curl -o ~/.vimrc $VIM_RC_URL"
 alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL && source ~/.bash_profile"
-alias nord-download="wget -O ~/Documents/nord_ovpn.zip https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
+alias nord-init="wget -O ~/Documents/nord_ovpn.zip https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
 
 # Get current IP address
 alias cip="curl https://andyduss.com/ip"
