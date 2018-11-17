@@ -23,6 +23,10 @@ call plug#begin('~/.vim/extensions')
       Plug 'mattn/emmet-vim'
       Plug 'pangloss/vim-javascript'
       Plug 'airblade/vim-gitgutter'
+      Plug 'pangloss/vim-javascript'
+      Plug 'mxw/vim-jsx'
+      Plug 'vim-airline/vim-airline'
+      Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 set autoindent
@@ -36,6 +40,7 @@ set backspace=indent,eol,start
 set nowrap
 :imap jj <Esc>
 :cnoremap qq wqa!
+:cnoremap qy qa!
 
 " Set TAB to 2 Spaces
 set tabstop=2
@@ -63,3 +68,10 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit'
       \ }
 nnoremap <C-p> :FZF<cr>
+
+" Extend Emmet in .js files
+let g:user_emmet_settings = {
+\  'javascript' : {
+\    'extends' : 'jsx',
+\  },
+\}
