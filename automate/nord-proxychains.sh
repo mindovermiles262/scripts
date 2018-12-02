@@ -8,8 +8,8 @@
 # Be sure to change username & password
 
 DOMAIN="us"
-LOW=2100
-HIGH=2150
+LOW=1822
+HIGH=1841
 
 USERNAME="user@example.com"
 PASSWORD="yoursecretpassword"
