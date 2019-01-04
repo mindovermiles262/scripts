@@ -29,6 +29,10 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+###########
+# Aliases #
+###########
+
 # File Aliases
 alias ll="ls -lha"
 alias la="ls -lha"
@@ -49,13 +53,11 @@ alias vim-init="printf 'Downloading Plug\n' \
   && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
   && curl -o ~/.vimrc $VIM_RC_URL"
 
-# Download and update program profiles
 alias vim-update="curl -o ~/.vimrc $VIM_RC_URL"
 alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL && source ~/.bash_profile"
 alias nord-init="wget -O ~/Documents/nord_ovpn.zip https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
-
-# Get current IP address
 alias cip="curl https://andyduss.com/ip"
+alias tada="tmux attach -t d"
 
 # Search man Pages for flag: 
 # USAGE: manf <command> <flag>
