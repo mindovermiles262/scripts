@@ -1,0 +1,37 @@
+[
+   {
+      "group" : "Radio",
+      "image" : null,
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "The Current",
+            "notifications" : true,
+            "url" : "https://current.stream.publicradio.org/kcmp.mp3"
+         },
+         {
+            "image" : "",
+            "name" : "KEXP",
+            "notifications" : true,
+            "url" : "https://kexp-mp3-128.streamguys1.com/kexp128.mp3"
+         }
+      ]
+   },
+   {
+      "group" : "root",
+      "image" : "",
+      "stations" : []
+   },
+   {
+      "group" : "NPR/Talk",
+      "image" : "",
+      "stations" : [
+         {
+            "image" : "",
+            "name" : "KALW San Francisco",
+            "notifications" : true,
+            "url" : "https://live.streamguys1.com:2435/kalw"
+         }
+      ]
+   }
+]
