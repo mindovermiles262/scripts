@@ -58,7 +58,7 @@ alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL && source ~/.bash_p
 alias nord-init="wget -O ~/Documents/nord_ovpn.zip https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
 alias cip="curl https://andyduss.com/ip"
 alias tada="tmux attach -t d"
-alias tana="tnux new -s d"
+alias tana="tmux new -s d"
 alias lip="ifconfig | grep 'inet '"
 
 # Search man Pages for flag: 
