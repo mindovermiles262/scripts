@@ -6,7 +6,7 @@ BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/mas
 VIM_RC_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/vim/vimrc"
 
 # Load settings from .bashrc
-[[ -r ~/.bashrc ]] && . ~/.bashrc
+# [[ -r ~/.bashrc ]] && . ~/.bashrc
 
 
 # OS Specific Commands
