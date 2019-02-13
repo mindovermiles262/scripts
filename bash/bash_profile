@@ -47,7 +47,6 @@ alias seed="rails db:seed"
 alias v="vim"
 alias sv="sudo vim"
 alias c="code ."
-alias vim="vimx"
 
 # Download VIM-Plug and initialize in ~/.vim/autoload, then download .vimrc
 alias vim-init="printf 'Downloading Plug\n' \
