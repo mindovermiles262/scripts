@@ -60,6 +60,7 @@ alias cip="curl https://andyduss.com/ip"
 alias tada="tmux attach -t d"
 alias tana="tmux new -s d"
 alias lip="ifconfig | grep 'inet '"
+alias \:q="exit"
 
 # Add asdf to PATH
 if [ -d "$HOME/.asdf" ]; then
