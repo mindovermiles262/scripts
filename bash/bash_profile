@@ -6,7 +6,7 @@ BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/mas
 VIM_RC_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/vim/vimrc"
 
 # Load settings from .bashrc
-# [[ -r ~/.bashrc ]] && . ~/.bashrc
+[[ -r ~/.bashrc ]] && . ~/.bashrc
 
 
 # OS Specific Commands
@@ -16,7 +16,7 @@ if [[ "$OSTYPE" == 'linux'* ]]; then
     && sudo apt-get -y dist-upgrade \
     && printf 'Linux Has Been Updated\n  {apt-get update}\n  {apt-get upgrade}\n  {apt-get dist-upgrade}\n'"
   alias open="xdg-open"
-elif [[ "$OSTYPE" == "darwin17" ]]; then
+elif [[ "$OSTYPE" =~ "darwin" ]]; then
   export CLICOLOR=1
   export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
@@ -24,6 +24,7 @@ fi
 # Add color to Terminal:
 # export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 export PS1='\[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
+
 # Git branch in terminal.
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -42,11 +43,6 @@ alias l="ls -lh"
 alias reset="rails db:migrate:reset; rails db:seed"
 alias migrate="rails db:migrate"
 alias seed="rails db:seed"
-
-# Editor Aliases
-alias v="vim"
-alias sv="sudo vim"
-alias c="code ."
 
 # Download VIM-Plug and initialize in ~/.vim/autoload, then download .vimrc
 alias vim-init="printf 'Downloading Plug\n' \
