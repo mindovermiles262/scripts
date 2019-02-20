@@ -38,3 +38,10 @@ source ~/.bash_profile
 asdf plugin-add ruby
 asdf plugin-add nodejs
 
+# SymLink tmux.conf
+if [ -f ~/.tmux.conf ]; then
+  printf "Removing .tmux.conf ... "
+  rm ~/.tmux.conf
+  printf "Done.\n"
+fi
+ln -s ~/Documents/scripts/tmux.conf ~/.tmux.conf

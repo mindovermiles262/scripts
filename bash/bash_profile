@@ -33,7 +33,7 @@ parse_git_branch() {
 ###########
 # Aliases #
 ###########
-
+#
 # File Aliases
 alias ll="ls -lha"
 alias la="ls -lha"
@@ -43,6 +43,9 @@ alias l="ls -lh"
 alias reset="rails db:migrate:reset; rails db:seed"
 alias migrate="rails db:migrate"
 alias seed="rails db:seed"
+
+# Python Aliases
+alias py="python3"
 
 # Download VIM-Plug and initialize in ~/.vim/autoload, then download .vimrc
 alias vim-init="printf 'Downloading Plug\n' \
