@@ -45,3 +45,10 @@ if [ -f ~/.tmux.conf ]; then
   printf "Done.\n"
 fi
 ln -s ~/Documents/scripts/tmux.conf ~/.tmux.conf
+
+# Use libinput touchpad settings
+sudo cp ~/Documents/scripts/40-libinput.conf /usr/share/X11/xorg.conf.d/
+if [ -f /usr/share/X11/xorg.conf.d/70-synaptics.conf]; then
+  sudo mv 70-synaptics.conf 70-synaptics.conf.bak
+fi
+

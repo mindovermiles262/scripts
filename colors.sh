@@ -1,5 +1,8 @@
 #!/bin/bash
 
+printf "\n\n** TMUX COLORS **\n\n"
+for i in {0..255}; do printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done
+
 # http://bitmote.com/index.php?post/2012/11/19/Using-ANSI-Color-Codes-to-Colorize-Your-Bash-Prompt-on-Linux
 #
 # This file echoes a bunch of color codes to the terminal to demonstrate
@@ -7,6 +10,8 @@
 # out of 17 (default + 16 escapes), followed by a test use of that color
 # on all nine background colors (default + 8 escapes).
 #
+
+printf "\n\n** BASH COLORS **\n\n"
 T='gYw'   # The test text
 echo -e "\n                 40m     41m     42m     43m     44m     45m     46m     47m";
 for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' '1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' '  36m' '1;36m' '  37m' '1;37m';
