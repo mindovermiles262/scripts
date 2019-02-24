@@ -13,7 +13,7 @@ sudo apt-get update
 sudo apt-get install -y git vim
 
 # Ruby/Rails Prereqs
-sudo apt-get install -y curl git nodejs gcc make libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev
+sudo apt-get install -y curl git gcc make libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev
 
 # Install and Initiate VIM
 sudo apt-get install -y vim
@@ -48,7 +48,11 @@ ln -s ~/Documents/scripts/tmux.conf ~/.tmux.conf
 
 # Use libinput touchpad settings
 sudo cp ~/Documents/scripts/40-libinput.conf /usr/share/X11/xorg.conf.d/
-if [ -f /usr/share/X11/xorg.conf.d/70-synaptics.conf]; then
-  sudo mv 70-synaptics.conf 70-synaptics.conf.bak
+if [ -f /usr/share/X11/xorg.conf.d/70-synaptics.conf ]; then
+  sudo mv /usr/share/X11/xorg.conf.d/70-synaptics.conf /usr/share/X11/xorg.conf.d/70-synaptics.conf.bak
 fi
+
+# Set Git username/email
+git config --global user.name "Andy D"
+git config --global user.email "mindovermiles262@gmail.com"
 
