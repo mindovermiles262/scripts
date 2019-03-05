@@ -59,6 +59,9 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 :command Tree NERDTreeToggle
 
+" Remove '^G' from beginning of files on Mac using NerdTree:
+let g:NERDTreeNodeDelimiter = "\u00a0"
+
 " Map <Shift><tab> to expand Emmet
 imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<tab>")
 
