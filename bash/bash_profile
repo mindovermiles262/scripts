@@ -60,6 +60,7 @@ alias tada="tmux attach -t d"
 alias tana="tmux new -s d"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
+alias dirsize="du -sh ./*"
 
 # Add asdf to PATH
 if [ -d "$HOME/.asdf" ]; then
