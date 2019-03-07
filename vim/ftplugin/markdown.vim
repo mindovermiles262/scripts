@@ -4,3 +4,7 @@
 setlocal wrap
 setlocal spell
 
+highlight clear SpellBad
+highlight SpellBad cterm=underline
+highlight SpellBad ctermfg=Red
+
