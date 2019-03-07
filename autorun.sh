@@ -9,7 +9,7 @@ if [[ "$OSTYPE" =~ "darwin" ]]; then
 
   # Install Homebrew
 
-  if [[ $(which homebrew) ]]; then
+  if [[ $(which brew) ]]; then
     printf "Homebrew is already installed... continuing...\n"
   else
     printf "Cannot find homebrew in PATH, Installing now... "
