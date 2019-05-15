@@ -60,7 +60,6 @@ alias tada="tmux attach -t d"
 alias tana="tmux new -s d"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
-alias dirsize="du -sh ./*"
 
 # Add asdf to PATH
 if [ -d "$HOME/.asdf" ]; then
@@ -68,3 +67,7 @@ if [ -d "$HOME/.asdf" ]; then
   . $HOME/.asdf/completions/asdf.bash
 fi
 
+# Add Arcanist to PATH
+if [ -d "$HOME/Applications/arcanist" ]; then
+  export PATH=$PATH:~/Applications/arcanist/bin
+fi
