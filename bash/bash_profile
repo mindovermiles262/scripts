@@ -5,6 +5,7 @@
 BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/bash/bash_profile"
 VIM_RC_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/vim/vimrc"
 
+
 # Load settings from .bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
@@ -58,6 +59,8 @@ alias nord-init="wget -O ~/Documents/nord_ovpn.zip https://downloads.nordcdn.com
 alias cip="curl https://andyduss.com/ip"
 alias tada="tmux attach -t d"
 alias tana="tmux new -s d"
+alias ta="tmux attach -t $1"
+alias tl="tmux ls"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 
