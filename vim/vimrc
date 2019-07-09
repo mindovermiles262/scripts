@@ -35,6 +35,7 @@ filetype plugin on
 set autoindent
 set relativenumber number
 set ruler
+" set colorcolumn=80
 set showcmd
 set showmode
 set backspace=indent,eol,start
