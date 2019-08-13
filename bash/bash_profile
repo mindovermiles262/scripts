@@ -34,7 +34,7 @@ parse_git_branch() {
 ###########
 # Aliases #
 ###########
-#
+
 # File Aliases
 alias ll="ls -lha"
 alias la="ls -lha"
@@ -48,23 +48,45 @@ alias seed="rails db:seed"
 # Python Aliases
 alias py="python3"
 
+# Git Aliases
+alias gss="git status"
+alias gaa="git add ."
+alias gcc="git commit -m $1"
+
 # Download VIM-Plug and initialize in ~/.vim/autoload, then download .vimrc
 alias vim-init="printf 'Downloading Plug\n' \
   && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
   && curl -o ~/.vimrc $VIM_RC_URL"
 
+# Random Aliases
 alias vim-update="curl -o ~/.vimrc $VIM_RC_URL"
 alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL && source ~/.bash_profile"
 alias nord-init="wget -O ~/Documents/nord_ovpn.zip https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
 alias cip="curl https://andyduss.com/ip"
+alias lip="ifconfig | grep 'inet '"
+alias \:q="exit"
+alias c="cd .."
+alias exitcode="echo $?"
+alias cl="cd && clear"
+
+# Tmux Aliases
 alias tada="tmux attach -t d"
 alias tana="tmux new -s d"
 alias ta="tmux attach -t $1"
 alias tn="tmux new -s $1"
 alias tls="tmux ls"
-alias lip="ifconfig | grep 'inet '"
-alias \:q="exit"
-alias c="cd .."
+
+# Work Aliases
+alias mcc="makecatalogs ~/code/cpe_munki"
+alias auth="ssh-add -K ~/.ssh/id_rsa && hologram use iteng"
+ldapp() {
+  ldapsearch -xLLL -H ldaps://ldap.ec2.pin220.com -b dc=pinterest,dc=com uid=$1;
+}
+alias munki="cd ~/code/cpe_munki"
+
+# AWS CLI Alises
+awsls() { aws s3 ls s3://$1; }
+awscp() { aws s3 cp s3://$1 $2; }
 
 # Add asdf to PATH
 if [ -d "$HOME/.asdf" ]; then
@@ -93,10 +115,5 @@ fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc' ]; 
   then . '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc'; 
-fi
-
-# Add Arcanist to PATH
-if [ -d "$HOME/Applications/arcanist" ]; then
-  export PATH=$PATH:~/Applications/arcanist/bin
 fi
 

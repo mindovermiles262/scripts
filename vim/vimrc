@@ -21,12 +21,12 @@ call plug#begin('~/.vim/extensions')
       Plug 'tpope/vim-commentary'
       Plug 'tpope/vim-fugitive'
       Plug 'mattn/emmet-vim'
-      Plug 'pangloss/vim-javascript'
       Plug 'airblade/vim-gitgutter'
-      Plug 'pangloss/vim-javascript'
-      Plug 'mxw/vim-jsx'
+      " Plug 'pangloss/vim-javascript'
+      " Plug 'mxw/vim-jsx'
       Plug 'vim-airline/vim-airline'
       Plug 'vim-airline/vim-airline-themes'
+      " Plug 'w0rp/ale'
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin

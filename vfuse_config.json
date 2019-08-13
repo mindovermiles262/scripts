@@ -1,11 +1,11 @@
 {
-  "source_dmg": "~/path/to/autodmg/osx-10.13.6-17G2208.apfs.dmg",
+  "source_dmg": "~/code/cpe_cdn/autodmg/osx-10.14.4-18E226.apfs.dmg",
   "output_dir": "~/Virtual Machines.localized",
-  "output_name": "macOS-10.13.6",
+  "output_name": "macOS-10.14.4",
   "hw_version": 14,
   "bridged": false,
   "hw_model": "MacBookPro13,3",
-  "serial_number": "VMLN1VFkQTG1",
+  "serial_number": "VMLN1VFkQTG2",
   "snapshot": true,
   "snapshot_name": "vfuse-init"
 }
