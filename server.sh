@@ -4,8 +4,7 @@
 # To be run on a tempary server. Installs Bash Profile, Vim, and Tmux Configs
 #
 
-sudo apt-get update -y
-sudo apt-get install vim git tmux
+PWD=$(pwd)
 
 # Link Bash Profile
 if [ -f ~/.bash_profile ]; then
