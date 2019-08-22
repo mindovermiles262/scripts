@@ -27,6 +27,7 @@ call plug#begin('~/.vim/extensions')
       Plug 'vim-airline/vim-airline'
       Plug 'vim-airline/vim-airline-themes'
       " Plug 'w0rp/ale'
+      " Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin
@@ -82,3 +83,5 @@ let g:user_emmet_settings = {
 \    'extends' : 'jsx',
 \  },
 \}
+
+au BufRead,BufNewFile *.asm set filetype=asm

@@ -82,7 +82,6 @@ alias auth="ssh-add -K ~/.ssh/id_rsa && hologram use iteng"
 ldapp() {
   ldapsearch -xLLL -H ldaps://ldap.ec2.pin220.com -b dc=pinterest,dc=com uid=$1;
 }
-alias munki="cd ~/code/cpe_munki"
 
 # AWS CLI Alises
 awsls() { aws s3 ls s3://$1; }
