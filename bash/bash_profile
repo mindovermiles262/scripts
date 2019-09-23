@@ -82,6 +82,7 @@ alias auth="ssh-add -K ~/.ssh/id_rsa && hologram use iteng"
 ldapp() {
   ldapsearch -xLLL -H ldaps://ldap.ec2.pin220.com -b dc=pinterest,dc=com uid=$1;
 }
+alias unmount="diskutil unmountDisk $1"
 
 # AWS CLI Alises
 awsls() { aws s3 ls s3://$1; }
@@ -116,3 +117,6 @@ if [ -f '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc' ];
   then . '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc'; 
 fi
 
+if [ -d "$HOME/nand2tetris/tools" ]; then
+  export PATH=$PATH:$HOME/nand2tetris/tools
+fi
