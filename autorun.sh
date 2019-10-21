@@ -56,49 +56,53 @@ fi
 #==================
 
 # Link Bash Profile
-if [ -f ~/.bash_profile ]; then
+if [[ -f "$HOME/.bash_profile"  || -L "$HOME/.bash_profile" ]]; then
   printf "Removing bash_profile ... "
-  rm ~/.bash_profile
+  rm "$HOME/.bash_profile"
   printf "Done.\n" 
 fi
 
-ln -s $PWD/bash/bash_profile ~/.bash_profile
+ln -s $PWD/bash/bash_profile "$HOME/.bash_profile"
 
 # Vim Settings
-if [ -f ~/.vimrc ]; then
+if [[ -f "$HOME/.vimrc" || -L "$HOME/.vimrc" ]]; then
   printf "Removing vimrc ... "
-  rm ~/.vimrc
+  rm "$HOME/.vimrc"
   printf "Done.\n" 
 fi
 
-if [ -d ~/.vim ]; then
+if [ -d "$HOME/.vim" ]; then
   printf "Removing vim directory ... "
-  rm -rf ~/.vim
+  rm -rf "$HOME/.vim"
   printf "Done.\n" 
 fi
 
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-ln -s $PWD/vim/vimrc ~/.vimrc
-ln -s $PWD/vim/ftplugin ~/.vim/
+curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -s $PWD/vim/vimrc "$HOME/.vimrc"
+ln -s $PWD/vim/ftplugin "$HOME/.vim/"
 vim +PlugInstall +qall
 
 # SymLink tmux.conf
-if [ -f ~/.tmux.conf ]; then
+if [[ -f "$HOME/.tmux.conf" || -L "$HOME/.tmux.conf" ]]; then
   printf "Removing .tmux.conf ... "
-  rm ~/.tmux.conf
+  rm "$HOME/.tmux.conf"
   printf "Done.\n"
 fi
-if [ -f ~/.tmux.macos ]; then
+ln -s $PWD/tmux.conf "$HOME/.tmux.conf"
+
+# Symlink tmux.macos
+if [[ -f "$HOME/.tmux.macos" || -L "$HOME/.tmux.macos" ]]; then
   printf "Removing .tmux.macos ... "
-  rm ~/.tmux.macos
+  rm "$HOME/.tmux.macos"
   printf "Done.\n"
 fi
-if [ -f ~/.tmux.linux ]; then
+ln -s $PWD/tmux.macos "$HOME/.tmux.macos"
+
+# Symlink tmux.linux
+if [[ -f "$HOME/.tmux.linux" || -L "$HOME/.tmux.linux" ]]; then
   printf "Removing .tmux.linux ... "
-  rm ~/.tmux.linux
+  rm "$HOME/.tmux.linux"
   printf "Done.\n"
 fi
-ln -s $PWD/tmux.conf ~/.tmux.conf
-ln -s $PWD/tmux.macos ~/.tmux.macos
-ln -s $PWD/tmux.linux ~/.tmux.linux
+ln -s $PWD/tmux.linux "$HOME/.tmux.linux"
 
