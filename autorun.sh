@@ -88,5 +88,17 @@ if [ -f ~/.tmux.conf ]; then
   rm ~/.tmux.conf
   printf "Done.\n"
 fi
+if [ -f ~/.tmux.macos ]; then
+  printf "Removing .tmux.macos ... "
+  rm ~/.tmux.macos
+  printf "Done.\n"
+fi
+if [ -f ~/.tmux.linux ]; then
+  printf "Removing .tmux.linux ... "
+  rm ~/.tmux.linux
+  printf "Done.\n"
+fi
 ln -s $PWD/tmux.conf ~/.tmux.conf
+ln -s $PWD/tmux.macos ~/.tmux.macos
+ln -s $PWD/tmux.linux ~/.tmux.linux
 
