@@ -1,0 +1,5 @@
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+export PS1='\[\033[01;34m\][VM \W]\[\033[00m\]\$ '
+
