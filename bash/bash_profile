@@ -83,6 +83,7 @@ ldapp() {
   ldapsearch -xLLL -H ldaps://ldap.ec2.pin220.com -b dc=pinterest,dc=com uid=$1;
 }
 alias unmount="diskutil unmountDisk $1"
+alias eject="diskutil unmountDisk $1"
 
 # AWS CLI Alises
 awsls() { aws s3 ls s3://$1; }
