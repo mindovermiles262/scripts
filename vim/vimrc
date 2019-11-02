@@ -25,6 +25,7 @@ call plug#begin('~/.vim/extensions')
       " Plug 'vim-airline/vim-airline-themes'
       " Plug 'w0rp/ale'
       Plug 'vim-syntastic/syntastic'
+      Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin
