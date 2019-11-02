@@ -24,7 +24,11 @@ fi
 
 # Add color to Terminal:
 # export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-export PS1='\[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
+if [ "$(hostname)" == "vultr.guest" ]; then
+  export PS1='\[\033[01;34m\][vultr \W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
+else
+  export PS1='\[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
+fi
 
 # Git branch in terminal.
 parse_git_branch() {
@@ -80,7 +84,7 @@ alias tls="tmux ls"
 alias mcc="makecatalogs ~/code/cpe_munki"
 alias auth="ssh-add -K ~/.ssh/id_rsa && hologram use iteng"
 ldapp() {
-  ldapsearch -xLLL -H ldaps://ldap.ec2.pin220.com -b dc=pinterest,dc=com uid=$1;
+  ldapsearch -xLLL -H ldaps://ldap.pinadmin.com -b dc=pinterest,dc=com uid=$1;
 }
 alias unmount="diskutil unmountDisk $1"
 alias eject="diskutil unmountDisk $1"

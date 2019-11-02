@@ -1,14 +1,13 @@
-" File Location: ~/
-" File Name: .vimrc
-
-syntax on
-
-" Vim-Plug Plugin Manager.
+"
 " Set up with following Script:
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " Add 'Plug '<github_user/repo_name'
 " then :PlugInstall to install plugins
+"
 
+syntax on
+
+" Vim-Plug Plugin Manager.
 call plug#begin('~/.vim/extensions')
       Plug 'spf13/vim-autoclose'
       Plug 'tpope/vim-endwise'
@@ -21,22 +20,22 @@ call plug#begin('~/.vim/extensions')
       Plug 'tpope/vim-commentary'
       Plug 'tpope/vim-fugitive'
       Plug 'mattn/emmet-vim'
-      Plug 'airblade/vim-gitgutter'
-      " Plug 'pangloss/vim-javascript'
-      " Plug 'mxw/vim-jsx'
-      Plug 'vim-airline/vim-airline'
-      Plug 'vim-airline/vim-airline-themes'
+      " Plug 'airblade/vim-gitgutter'
+      " Plug 'vim-airline/vim-airline'
+      " Plug 'vim-airline/vim-airline-themes'
       " Plug 'w0rp/ale'
-      " Plug 'vim-syntastic/syntastic'
+      Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin
 filetype plugin on
 
 set autoindent
-set relativenumber number
+set number
 set ruler
-" set colorcolumn=80
+set colorcolumn=81
+highlight ColorColumn ctermbg=233 
+" guibg=lightgrey
 set showcmd
 set showmode
 set backspace=indent,eol,start
@@ -85,3 +84,15 @@ let g:user_emmet_settings = {
 \}
 
 au BufRead,BufNewFile *.asm set filetype=asm
+
+" Syntastic Linter Settings
+" https://github.com/vim-syntastic/syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'passive_filetypes': ['xml'] }
