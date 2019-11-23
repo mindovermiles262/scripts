@@ -70,15 +70,38 @@ alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
-alias exitcode="echo $?"
-alias cl="cd && clear"
+
+# SMH Docker
+dog() {
+  docker exec -it "$1" /bin/sh
+}
+dvol() {
+  screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+}
 
 # Tmux Aliases
-alias tada="tmux attach -t d"
-alias tana="tmux new -s d"
 alias ta="tmux attach -t $1"
 alias tn="tmux new -s $1"
 alias tls="tmux ls"
+
+tada() {
+  # Check if tmux is installed
+  if [[ ! -f "/usr/local/bin/tmux" ]]; then
+    return 1
+  fi
+
+  tmux ls | grep -q cpe
+  CPE_EXITCODE=$?
+  if [[ "$CPE_EXITCODE" -eq 0 ]]; then
+    # 0 => Session is running, attach to existing session
+    echo "Attaching to 'cpe' session . . ."
+    tmux attach -t cpe
+  else
+    # 1 => Session does not exist, create new session
+    echo "Creating new tmux session, 'cpe' . . ."
+    tmux new -s cpe
+  fi
+}
 
 # Work Aliases
 alias mcc="makecatalogs ~/code/cpe_munki"
