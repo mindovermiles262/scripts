@@ -20,12 +20,13 @@ call plug#begin('~/.vim/extensions')
       Plug 'tpope/vim-commentary'
       Plug 'tpope/vim-fugitive'
       Plug 'mattn/emmet-vim'
-      " Plug 'airblade/vim-gitgutter'
-      " Plug 'vim-airline/vim-airline'
-      " Plug 'vim-airline/vim-airline-themes'
+      Plug 'airblade/vim-gitgutter'
+      Plug 'vim-airline/vim-airline'
+      Plug 'vim-airline/vim-airline-themes'
       " Plug 'w0rp/ale'
       Plug 'vim-syntastic/syntastic'
       Plug 'fatih/vim-go'
+      Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin
@@ -40,8 +41,6 @@ highlight ColorColumn ctermbg=233
 set showcmd
 set showmode
 set backspace=indent,eol,start
-" Turn off autochdir so FZF doesn't get stuck in child DIR
-" set autochdir
 set nowrap
 :imap jj <Esc>
 :cnoremap qq wqa!
@@ -60,9 +59,12 @@ set smarttab
 " map "+p :r!xclip -o -sel clip
 
 " Start NERDTree when 'vim' is called
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-:command Tree NERDTreeToggle
+" "autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" :command Tree NERDTreeToggle
+
+" Start VIM in explore mode if `vim` is called
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Explore | endif
 
 " Remove '^G' from beginning of files on Mac using NerdTree:
 let g:NERDTreeNodeDelimiter = "\u00a0"
@@ -77,14 +79,15 @@ let g:fzf_action = {
       \ }
 nnoremap <C-p> :FZF<cr>
 
-" Extend Emmet in .js files
+" Extend Emmet in .js and .plist files
 let g:user_emmet_settings = {
 \  'javascript' : {
 \    'extends' : 'jsx',
 \  },
+\  'html' : {
+\    'extends' : 'plist',
+\  },
 \}
-
-au BufRead,BufNewFile *.asm set filetype=asm
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
@@ -101,3 +104,10 @@ let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_python_checkers = ['flake8']
 " Use '\sc' to check syntax
 nmap <leader>sc :SyntasticCheck<CR> 
+
+" Vim-Terraform Settings
+" https://github.com/hashivim/vim-terraform
+let g:terraform_align=1
+let g:terraform_fold_sections=0
+let g:terraform_fmt_on_save=1
+
