@@ -34,14 +34,23 @@ filetype plugin on
 
 set autoindent
 set number
-set ruler
-set colorcolumn=81
+set numberwidth=3
+
+" Set Ruler
+set colorcolumn=79
 highlight ColorColumn ctermbg=233 
-" guibg=lightgrey
+
 set showcmd
 set showmode
 set backspace=indent,eol,start
 set nowrap
+
+" Vim Airline Theme
+" :AirlineTheme <theme name>
+" https://github.com/vim-airline/vim-airline/wiki/Screenshots
+let g:airline_theme='luna'
+
+" Key remapping
 :imap jj <Esc>
 :cnoremap qq wqa!
 :cnoremap qy qa!
@@ -59,12 +68,12 @@ set smarttab
 " map "+p :r!xclip -o -sel clip
 
 " Start NERDTree when 'vim' is called
-" "autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" :command Tree NERDTreeToggle
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+:command Tree NERDTreeToggle
 
 " Start VIM in explore mode if `vim` is called
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Explore | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Explore | endif
 
 " Remove '^G' from beginning of files on Mac using NerdTree:
 let g:NERDTreeNodeDelimiter = "\u00a0"
