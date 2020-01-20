@@ -23,12 +23,12 @@ elif [[ "$OSTYPE" =~ "darwin" ]]; then
 fi
 
 # Add color to Terminal:
-# export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-if [ "$(hostname)" == "vultr.guest" ]; then
-  export PS1='\[\033[01;34m\][vultr \W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
-else
-  export PS1='\[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
-fi
+export PS1='\[\033[01;32m\]$(hostname_displ) \[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
+
+hostname_displ() {
+  HOST="$(hostname | head -c 3)"
+  echo $HOST | tr '[:lower:]' '[:upper:]'
+}
 
 # Git branch in terminal.
 parse_git_branch() {
@@ -70,15 +70,7 @@ alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
-alias tf="terraform $1"
-
-# SMH Docker
-dog() {
-  docker exec -it "$1" /bin/sh
-}
-dvol() {
-  screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
-}
+alias ks="kubectl $1"
 
 # Tmux Aliases
 alias ta="tmux attach -t $1"
