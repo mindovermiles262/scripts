@@ -26,7 +26,7 @@ fi
 export PS1='\[\033[01;32m\]$(hostname_displ) \[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
 
 hostname_displ() {
-  HOST="$(hostname | head -c 3)"
+  HOST="$(hostname | head -c 4)"
   echo $HOST | tr '[:lower:]' '[:upper:]'
 }
 
