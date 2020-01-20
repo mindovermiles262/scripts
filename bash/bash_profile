@@ -70,6 +70,7 @@ alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
+alias tf="terraform $1"
 
 # SMH Docker
 dog() {
@@ -148,6 +149,13 @@ if [ -f '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc' ];
   then . '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc'; 
 fi
 
-if [ -d "$HOME/nand2tetris/tools" ]; then
-  export PATH=$PATH:$HOME/nand2tetris/tools
-fi
+# Add GOPATH to PATH
+# if [[ -d "$(go env GOPATH)" ]]; then
+#   export PATH=$PATH:"$(go env GOPATH)/bin"
+# fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/dipsea/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dipsea/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/dipsea/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/dipsea/Downloads/google-cloud-sdk/completion.bash.inc'; fi
