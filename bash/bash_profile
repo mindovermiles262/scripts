@@ -23,12 +23,12 @@ elif [[ "$OSTYPE" =~ "darwin" ]]; then
 fi
 
 # Add color to Terminal:
-# export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-if [ "$(hostname)" == "vultr.guest" ]; then
-  export PS1='\[\033[01;34m\][vultr \W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
-else
-  export PS1='\[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
-fi
+export PS1='\[\033[01;32m\]$(hostname_displ)\[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
+
+hostname_displ() {
+  HOST="$(hostname | head -c 3)"
+  echo $HOST | tr '[:lower:]' '[:upper:]'
+}
 
 # Git branch in terminal.
 parse_git_branch() {
