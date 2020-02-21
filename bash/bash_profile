@@ -20,14 +20,18 @@ if [[ "$OSTYPE" == 'linux'* ]]; then
 elif [[ "$OSTYPE" =~ "darwin" ]]; then
   export CLICOLOR=1
   export LSCOLORS=GxFxCxDxBxegedabagaced
+  alias unmount="diskutil unmountDisk $1"
+  alias eject="diskutil unmountDisk $1"
 fi
 
 # Add color to Terminal:
-export PS1='\[\033[01;32m\]$(hostname_displ) \[\033[01;34m\][\W]\[\033[01;33m\]$(parse_git_branch)\[\033[00m\]\$ '
+export PS1='\[\033[32m\]$(hostname_displ) \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
 
+# Get first 4 letters of hostname and upcase
 hostname_displ() {
   HOST="$(hostname | head -c 4)"
-  echo $HOST | tr '[:lower:]' '[:upper:]'
+  # echo $HOST | tr '[:lower:]' '[:upper:]'
+  echo $HOST | tr '[:upper:]' '[:lower:]'
 }
 
 # Git branch in terminal.
@@ -45,12 +49,12 @@ alias la="ls -lha"
 alias l="ls -lh"
 
 # Add Rails Aliases
-alias reset="rails db:migrate:reset; rails db:seed"
-alias migrate="rails db:migrate"
-alias seed="rails db:seed"
+# alias reset="rails db:migrate:reset; rails db:seed"
+# alias migrate="rails db:migrate"
+# alias seed="rails db:seed"
 
 # Python Aliases
-alias py="python3"
+# alias py="python3"
 
 # Git Aliases
 alias gss="git status"
@@ -65,17 +69,14 @@ alias vim-init="printf 'Downloading Plug\n' \
 # Random Aliases
 alias vim-update="curl -o ~/.vimrc $VIM_RC_URL"
 alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL && source ~/.bash_profile"
-alias nord-init="wget -O ~/Documents/nord_ovpn.zip https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip"
 alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
 alias ks="kubectl $1"
-
-# Tmux Aliases
-alias ta="tmux attach -t $1"
-alias tn="tmux new -s $1"
-alias tls="tmux ls"
+alias tf="terraform $1"
+alias tg="terragrunt $1"
+alias mk="minikube $1"
 
 tada() {
   # Check if tmux is installed
@@ -83,34 +84,18 @@ tada() {
     return 1
   fi
 
-  tmux ls | grep -q cpe
+  tmux ls | grep -q dflt
   CPE_EXITCODE=$?
   if [[ "$CPE_EXITCODE" -eq 0 ]]; then
     # 0 => Session is running, attach to existing session
-    echo "Attaching to 'cpe' session . . ."
-    tmux attach -t cpe
+    echo "Attaching to 'dflt' session . . ."
+    tmux attach -t dflt
   else
     # 1 => Session does not exist, create new session
-    echo "Creating new tmux session, 'cpe' . . ."
-    tmux new -s cpe
+    echo "Creating new tmux session, 'dflt' . . ."
+    tmux new -s dflt
   fi
 }
-
-# Work Aliases
-alias mcc="makecatalogs ~/code/cpe_munki"
-alias auth="ssh-add -K ~/.ssh/id_rsa && hologram use iteng"
-ldapp() {
-  ldapsearch -xLLL -H ldaps://ldap.pinadmin.com -b dc=pinterest,dc=com uid=$1;
-}
-alias unmount="diskutil unmountDisk $1"
-alias eject="diskutil unmountDisk $1"
-
-# AWS CLI Alises
-awsls() { aws s3 ls s3://$1; }
-awscp() { aws s3 cp s3://$1 $2; }
-
-# Neovim
-alias vin="nvim"
 
 # Add asdf to PATH
 if [ -d "$HOME/.asdf" ]; then
@@ -119,35 +104,33 @@ if [ -d "$HOME/.asdf" ]; then
 fi
 
 # Add pyenv to PATH
-if [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
+# if [ -d "$HOME/.pyenv" ]; then
+#   export PYENV_ROOT="$HOME/.pyenv"
+#   export PATH="$PYENV_ROOT/bin:$PATH"
+#   eval "$(pyenv init -)"
+# fi
 
 # Add rbenv to PATH
-if [ -d "$HOME/.rbenv" ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/aduss/Downloads/google-cloud-sdk/path.bash.inc' ]; then 
-  . '/Users/aduss/Downloads/google-cloud-sdk/path.bash.inc'; 
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc' ]; 
-  then . '/Users/aduss/Downloads/google-cloud-sdk/completion.bash.inc'; 
-fi
-
-# Add GOPATH to PATH
-# if [[ -d "$(go env GOPATH)" ]]; then
-#   export PATH=$PATH:"$(go env GOPATH)/bin"
+# if [ -d "$HOME/.rbenv" ]; then
+#   export PATH="$HOME/.rbenv/bin:$PATH"
+#   eval "$(rbenv init -)"
 # fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/dipsea/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dipsea/Downloads/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/Users/dipsea/Applications/google-cloud-sdk/path.bash.inc' ]; then 
+  . '/Users/dipsea/Applications/google-cloud-sdk/path.bash.inc'; 
+fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/dipsea/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/dipsea/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/Users/dipsea/Applications/google-cloud-sdk/completion.bash.inc' ]; then 
+  . '/Users/dipsea/Applications/google-cloud-sdk/completion.bash.inc'; 
+fi
+
+# Zoro Project Stuff
+if [ -f "$HOME/.asdf/installs/python/3.7.6/bin/zde" ]; then
+  PATH="$PATH:$HOME/.asdf/installs/python/3.7.6/bin/"
+  export ZDE_GIT_HOME=~/zoro
+  export ZDE_GCP_DEV_PROJECT_ID="ad-zoro-dev"
+  export ZDE_GCP_PROD_PROJECT_ID="ad-zoro-prod"
+  export ZDE_GCP_PREFIX="aduss"
+fi
