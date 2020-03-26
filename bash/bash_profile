@@ -47,6 +47,7 @@ parse_git_branch() {
 alias ll="ls -lha"
 alias la="ls -lha"
 alias l="ls -lh"
+alias ls="ls -lh"
 
 # Add Rails Aliases
 # alias reset="rails db:migrate:reset; rails db:seed"
@@ -66,6 +67,9 @@ alias vim-init="printf 'Downloading Plug\n' \
   && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
   && curl -o ~/.vimrc $VIM_RC_URL"
 
+# C++ Aliases
+alias cpp="g++ -std=c++0x $1"
+
 # Random Aliases
 alias vim-update="curl -o ~/.vimrc $VIM_RC_URL"
 alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL && source ~/.bash_profile"
@@ -73,10 +77,14 @@ alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
+alias dk="docker $1"
 alias ks="kubectl $1"
 alias tf="terraform $1"
 alias tg="terragrunt $1"
 alias mk="minikube $1"
+alias ta="tmux attach -t $1"
+alias tls="tmux ls"
+alias gc="gcloud $1"
 
 tada() {
   # Check if tmux is installed
@@ -126,11 +134,15 @@ if [ -f '/Users/dipsea/Applications/google-cloud-sdk/completion.bash.inc' ]; the
   . '/Users/dipsea/Applications/google-cloud-sdk/completion.bash.inc'; 
 fi
 
-# Zoro Project Stuff
-if [ -f "$HOME/.asdf/installs/python/3.7.6/bin/zde" ]; then
-  PATH="$PATH:$HOME/.asdf/installs/python/3.7.6/bin/"
-  export ZDE_GIT_HOME=~/zoro
-  export ZDE_GCP_DEV_PROJECT_ID="ad-zoro-dev"
-  export ZDE_GCP_PROD_PROJECT_ID="ad-zoro-prod"
-  export ZDE_GCP_PREFIX="aduss"
-fi
+# Set Java Version: `jdk 10` => Sets Java java10
+# https://github.com/AdoptOpenJDK/homebrew-openjdk
+jdk() {
+  if [ $1 == "list" ]; then
+    "$(/usr/libexec/java_home -V)"
+  else
+    version=$1
+    export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+    java -version
+  fi
+}
+
