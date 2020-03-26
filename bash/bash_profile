@@ -44,10 +44,10 @@ parse_git_branch() {
 ###########
 
 # File Aliases
-alias ll="ls -lha"
-alias la="ls -lha"
-alias l="ls -lh"
-alias ls="ls -lh"
+alias ll="ls -lha --color=auto"
+alias la="ls -lha --color=auto"
+alias l="ls -lh --color=auto"
+alias ls="ls -lh --color=auto"
 
 # Add Rails Aliases
 # alias reset="rails db:migrate:reset; rails db:seed"
