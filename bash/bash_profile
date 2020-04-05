@@ -68,7 +68,8 @@ alias gc="gcloud $1"
 
 tada() {
   # Check if tmux is installed
-  if [[ ! -f "/usr/local/bin/tmux" ]]; then
+  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" ]]; then
+    echo "Tmux not found.. exiting..."
     return 1
   fi
 
