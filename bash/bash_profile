@@ -3,7 +3,6 @@
 # curl -o ~/.bash_profile https://raw.githubusercontent.com/mindovermiles262/scripts/master/bash/bash_profile && source ~/.bash_profile
 
 BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/bash/bash_profile"
-VIM_RC_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/vim/vimrc"
 
 
 # Load settings from .bashrc
@@ -12,10 +11,6 @@ VIM_RC_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/vi
 
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
-  alias linux-upgrade="sudo apt-get update \
-    && sudo apt-get -y upgrade \
-    && sudo apt-get -y dist-upgrade \
-    && printf 'Linux Has Been Updated\n  {apt-get update}\n  {apt-get upgrade}\n  {apt-get dist-upgrade}\n'"
   alias open="xdg-open"
 elif [[ "$OSTYPE" =~ "darwin" ]]; then
   export CLICOLOR=1
@@ -49,30 +44,15 @@ alias la="ls -lha --color=auto"
 alias l="ls -lh --color=auto"
 alias ls="ls -lh --color=auto"
 
-# Add Rails Aliases
-# alias reset="rails db:migrate:reset; rails db:seed"
-# alias migrate="rails db:migrate"
-# alias seed="rails db:seed"
-
-# Python Aliases
-# alias py="python3"
-
 # Git Aliases
 alias gss="git status"
 alias gaa="git add ."
 alias gcc="git commit -m $1"
 
-# Download VIM-Plug and initialize in ~/.vim/autoload, then download .vimrc
-alias vim-init="printf 'Downloading Plug\n' \
-  && curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
-  && curl -o ~/.vimrc $VIM_RC_URL"
-
 # C++ Aliases
 alias cpp="g++ -std=c++0x $1"
 
 # Random Aliases
-alias vim-update="curl -o ~/.vimrc $VIM_RC_URL"
-alias bash-update="curl -o ~/.bash_profile $BASH_PROFILE_URL && source ~/.bash_profile"
 alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
@@ -123,26 +103,3 @@ fi
 #   export PATH="$HOME/.rbenv/bin:$PATH"
 #   eval "$(rbenv init -)"
 # fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/dipsea/Applications/google-cloud-sdk/path.bash.inc' ]; then 
-  . '/Users/dipsea/Applications/google-cloud-sdk/path.bash.inc'; 
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/dipsea/Applications/google-cloud-sdk/completion.bash.inc' ]; then 
-  . '/Users/dipsea/Applications/google-cloud-sdk/completion.bash.inc'; 
-fi
-
-# Set Java Version: `jdk 10` => Sets Java java10
-# https://github.com/AdoptOpenJDK/homebrew-openjdk
-jdk() {
-  if [ $1 == "list" ]; then
-    "$(/usr/libexec/java_home -V)"
-  else
-    version=$1
-    export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
-    java -version
-  fi
-}
-

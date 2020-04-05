@@ -1,10 +1,3 @@
-"
-" Set up with following Script:
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" Add 'Plug '<github_user/repo_name'
-" then :PlugInstall to install plugins
-"
-
 syntax on
 
 " Vim-Plug Plugin Manager.
@@ -21,13 +14,10 @@ call plug#begin('~/.vim/extensions')
       Plug 'tpope/vim-fugitive'
       Plug 'mattn/emmet-vim'
       Plug 'airblade/vim-gitgutter'
-      " Plug 'vim-airline/vim-airline'
-      " Plug 'vim-airline/vim-airline-themes'
-      " Plug 'w0rp/ale'
+"      Plug 'vim-airline/vim-airline'
+"      Plug 'vim-airline/vim-airline-themes'
       Plug 'vim-syntastic/syntastic'
-      Plug 'fatih/vim-go'
       Plug 'hashivim/vim-terraform'
-      Plug 'fatih/vim-go'
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin
@@ -46,9 +36,9 @@ set showmode
 set backspace=indent,eol,start
 set nowrap
 
-set listchars=space:•,tab:->
-set list
-highlight SpecialKey ctermfg=233
+" set listchars=space:•,tab:->
+" set list
+" highlight SpecialKey ctermfg=233
 
 " Vim Airline Theme
 " :AirlineTheme <theme name>
@@ -67,35 +57,17 @@ set softtabstop=2
 set expandtab
 set smarttab
 
-" Map copy/paste to use xclip across networks
-" https://defuse.ca/blog/clipboard-over-ssh-with-vim.html
-" vmap "+y :!xclip -f -sel clip
-" map "+p :r!xclip -o -sel clip
-
 " Start NERDTree when 'vim' is called
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 :command Tree NERDTreeToggle
 
-" Start VIM in explore mode if `vim` is called
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Explore | endif
-
 " Remove '^G' from beginning of files on Mac using NerdTree:
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " Map <Shift><tab> to expand Emmet
-" imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<tab>")
+imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<tab>")
 imap <C-e>e <plug>(emmet-expand-abbr)
-imap <S-tab>e <plug>(emmet-expand-abbr)
-" Extend Emmet in .js and .plist files
-" let g:user_emmet_settings = {
-" \  'javascript' : {
-" \    'extends' : 'jsx',
-" \  },
-" \  'html' : {
-" \    'extends' : 'plist',
-" \  },
-" \}
 
 " Configure FZF to use CTRL-P bindings
 let g:fzf_action = {
@@ -125,4 +97,3 @@ nmap <leader>sc :SyntasticCheck<CR>
 let g:terraform_align=1
 let g:terraform_fold_sections=0
 let g:terraform_fmt_on_save=1
-

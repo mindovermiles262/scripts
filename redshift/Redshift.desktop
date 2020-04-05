@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=Redshift
+Comment=Start Redshift with custom config
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
+Exec=/usr/bin/redshift -c /home/dipsea/.config/redshift.conf

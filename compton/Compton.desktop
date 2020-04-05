@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=Compton
+Comment=Start Compton Compositor with Settings
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
+Exec=compton --config /home/dipsea/.config/compton/compton.conf
