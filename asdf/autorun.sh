@@ -19,6 +19,7 @@ sudo apt-get -qq install -y \
   liblzma-dev \
   libncurses5-dev \
   libncursesw5-dev \
+  libpq-dev \
   libreadline-dev \
   libssl-dev \
   libsqlite3-dev \

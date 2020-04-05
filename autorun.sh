@@ -40,4 +40,5 @@ fi
 # Install and Configure Compton
 "$DIR/compton/autorun.sh"
 
-
+# Customize Keyboard
+"$DIR/keyboard/autorun.sh"

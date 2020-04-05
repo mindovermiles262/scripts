@@ -7,7 +7,7 @@
 # 2020-04-04
 #
 
-printf "[*] Installing and configuring git... "
+printf "[*] Installing git... "
 sudo apt-get -qq install -y git &> /dev/null
 
 git config --global user.name "Andy D"
