@@ -31,7 +31,7 @@ ln -sf "$PWD/$DIR/compton.conf" "$COMPTON_DIR"
 # Autostart Compton on login
 AUTOSTART_DIR="$HOME/.config/autostart"
 if [[ ! -d "$AUTOSTART_DIR" ]]; then
-  mkdir "$AUTOSTART_DIR"
+  mkdir -p "$AUTOSTART_DIR"
 fi
 ln -sf "$PWD/$DIR/Compton.desktop" "$AUTOSTART_DIR"
 echo "Done."
