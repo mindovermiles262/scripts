@@ -9,14 +9,26 @@
 
 printf "[*] Installing asdf... "
 sudo apt-get -qq install -y \
+  build-essential \
   curl \
-  git \
   gcc \
+  git \
   make \
-  libssl-dev \
+  libbz2-dev \
+  libffi-dev \
+  liblzma-dev \
+  libncurses5-dev \
+  libncursesw5-dev \
   libreadline-dev \
+  libssl-dev \
+  libsqlite3-dev \
+  llvm \
+  python-openssl \
+  tk-dev \
+  xz-utils \
   zlib1g-dev \
-  libsqlite3-dev &> /dev/null
+  wget &> /dev/null
+
 
 ASDF_DIR=$HOME/.asdf
 if [[ -d "$ASDF_DIR" ]]; then
