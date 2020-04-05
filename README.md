@@ -1,3 +1,9 @@
+# Scripts
+
+Configuration scripts for devices.
+
+Clone repo and run `./autorun.sh` from the base directory
+
 # TODO
 
 - [x] Figure out how to use "$HOME" variable in `.desktop` files (Compton and Redshift)
