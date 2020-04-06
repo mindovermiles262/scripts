@@ -13,6 +13,8 @@ sudo apt-get -qq install -y \
   curl \
   gcc \
   git \
+  gpg \
+  dirmngr \
   make \
   libbz2-dev \
   libffi-dev \
@@ -33,13 +35,22 @@ sudo apt-get -qq install -y \
 
 ASDF_DIR=$HOME/.asdf
 if [[ -d "$ASDF_DIR" ]]; then
-  rm -rf "$ASDF_DIR"
+  git pull --quiet origin master
+else
+  git clone --quiet https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
 fi
 
-git clone --quiet https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
-
 source ~/.bash_profile
-asdf plugin-add ruby &> /dev/null
-asdf plugin-add nodejs &> /dev/null
-asdf plugin-add python &> /dev/null
+
+for plug in ruby nodejs python
+do
+  PLUG_DIR="$HOME/.asdf/plugins/$plug"
+  if [[ ! -d "$PLUG_DIR" ]]; then
+    asdf plugin-add "$plug"
+  fi
+  
+done
+
+# Import NodeJS Keyring:
+"$HOME/.asdf/plugins/nodejs/bin/import-release-team-keyring" &> /dev/null
 echo "Done."

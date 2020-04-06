@@ -1,0 +1,23 @@
+# 
+# https://defuse.ca/blog/linux-switch-virtual-desktop-workspace-mouse-button.html
+#
+# -- Move Right --
+# This is the general command that works with any number of workspaces:
+# "xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + 1) % $(xdotool get_num_desktops))"
+# This is the optimized command for 5 workspaces:
+# "xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + 1) % 5)"
+
+"xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + 1) % $(xdotool get_num_desktops))"
+    b:8
+
+# -- Move Left --
+# This is the general command that works with any number of workspaces:
+# "xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + $(expr $(xdotool get_num_desktops) - 1)) % $(xdotool get_num_desktops))"
+# This is the optimized command for 5 workspaces:
+# "xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + 1) % 5)"
+
+"xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + $(expr $(xdotool get_num_desktops) - 1)) % $(xdotool get_num_desktops))"
+    b:9
+
+# "firefox-dev"
+#     b:9
