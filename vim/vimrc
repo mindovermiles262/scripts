@@ -35,6 +35,7 @@ set showcmd
 set showmode
 set backspace=indent,eol,start
 set nowrap
+set spell
 
 " set listchars=space:•,tab:->
 " set list

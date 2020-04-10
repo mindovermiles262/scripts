@@ -8,7 +8,7 @@
 #
 
 printf "[*] Installing tmux... "
-sudo apt-get -qq install -y tmux &> /dev/null
+sudo apt-get -qq install -y tmux xclip &> /dev/null
 
 PWD="$(pwd)"
 DIR="$(dirname $0)"
