@@ -7,8 +7,22 @@
 # 2020-04-04
 #
 
-printf "[*] Installing vim... "
-sudo apt-get -qq install -y vim curl &> /dev/null
+echo "[*] Installing vim... "
+
+if [[ "$TARGETENV" -eq "macos" ]]; then
+  brew list | grep vim &>/dev/null
+  VIMINSTALLED=$?
+
+  if [ "$VIMINSTALLED" -eq 0 ]; then
+    echo "[*] Vim is installed... Updating... "
+    brew upgrade vim
+  else
+    echo "[*] Vim not installed... Installing now... "
+    brew install vim
+  fi
+else
+  sudo apt-get -qq install -y vim curl &> /dev/null
+fi
 
 PWD="$(pwd)"
 DIR="$(dirname $0)"

@@ -39,10 +39,10 @@ parse_git_branch() {
 ###########
 
 # File Aliases
-alias ll="ls -lha --color=auto"
-alias la="ls -lha --color=auto"
-alias l="ls -lh --color=auto"
-alias ls="ls -lh --color=auto"
+alias ll="ls -lhaG"
+alias la="ls -lhaG"
+alias l="ls -lhG"
+alias ls="ls -hG"
 
 # Git Aliases
 alias gss="git status"
