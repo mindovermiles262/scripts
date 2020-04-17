@@ -44,6 +44,21 @@ alias la="ls -lhaG"
 alias l="ls -lhG"
 alias ls="ls -hG"
 
+# The Odin Project Development Shortcuts
+odinreset() {
+  rails db:drop
+  rails db:create
+  rails db:migrate
+  rails db:seed
+  rake curriculum:update_content
+}
+
+uc() {
+  rails db:migrate
+  rake curriculum:update_content
+}
+
+
 # Git Aliases
 alias gss="git status"
 alias gaa="git add ."

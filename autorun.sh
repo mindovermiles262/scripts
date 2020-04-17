@@ -10,7 +10,7 @@ fi
 if [[ "$OSTYPE" =~ "darwin" ]]; then
   echo "[*] MacOS Detected. Running `macos.sh`"
   "$DIR/macos.sh"
-elif [[ "$OSTYPE" == 'Linux'* ]]; then
+elif [[ "$OSTYPE" == 'linux'* ]]; then
   echo "[*] Linux Detected. Running `xubuntu.sh`"
   "$DIR/xubuntu.sh"
 else
