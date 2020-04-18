@@ -19,12 +19,16 @@ if [[ ! -d "$AUTOSTART_DIR" ]]; then
 fi
 ln -sf "$PWD/$DIR/Keyboard.desktop" "$AUTOSTART_DIR"
 
-# Install xmodmap to remap CTRL and ALT keys
-# Sleep command needed so changes not overwritten by setxkbmap
-# https://askubuntu.com/questions/54157/how-do-i-set-xmodmap-on-login
 ln -sf "$PWD/$DIR/Xmodmap" "$HOME/.Xmodmap"
-cp "$PWD/$DIR/xmodmap.template" "$PWD/$DIR/xmodmap.desktop"
-echo "Exec=/bin/bash -c \"sleep 5; /usr/bin/xmodmap $HOME/.Xmodmap\"" >> "$PWD/$DIR/xmodmap.desktop"
-ln -sf "$PWD/$DIR/xmodmap.desktop" "$AUTOSTART_DIR"
+ln -sf "$PWD/$DIR/start_xmodmap_on_login.sh" "$HOME/.start_xmodmap_on_login"
+
+if ! grep -q ".start_xmodmap_on_login" "$HOME/.profile";
+then
+  cat << EOF >> "$HOME/.profile"
+if [ -f "$HOME/.Xmodmap" ]; then
+  "$HOME/.start_xmodmap_on_login" &
+fi
+EOF
+fi
 
 echo "Done."

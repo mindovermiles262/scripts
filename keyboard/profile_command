@@ -1,0 +1,4 @@
+
+if [ -f "$HOME/.Xmodmap" ]; then
+  "$HOME/.start_xmodmap_on_login.sh"
+fi
