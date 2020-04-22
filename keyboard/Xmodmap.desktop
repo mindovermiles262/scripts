@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Xmodmap Customizations
+Comment=Loads custom Xmodmap via script
+Type=Application
+Terminal=false
+X-GNOME-Autostart-enabled=true
+Exec="$HOME/.start_xmodmap_on_login"

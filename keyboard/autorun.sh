@@ -22,14 +22,7 @@ ln -sf "$PWD/$DIR/Keyboard.desktop" "$AUTOSTART_DIR"
 ln -sf "$PWD/$DIR/Xmodmap" "$HOME/.Xmodmap"
 ln -sf "$PWD/$DIR/start_xmodmap_on_login.sh" "$HOME/.start_xmodmap_on_login"
 
-# Adds 'start_xmodmap_on_login' script to .profile so it is run on every login
-if ! grep -q ".start_xmodmap_on_login" "$HOME/.profile";
-then
-  cat << EOF >> "$HOME/.profile"
-if [ -f "$HOME/.Xmodmap" ]; then
-  "$HOME/.start_xmodmap_on_login" &
-fi
-EOF
-fi
+# Installs Xmodmap.desktop in autostart directory
+ln -sf "$PWD/$DIR/Xmodmap.desktop" "$AUTOSTART_DIR"
 
 echo "Done."
