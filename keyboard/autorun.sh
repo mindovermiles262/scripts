@@ -8,21 +8,21 @@
 # 2020-04-05
 #
 
-printf "[*] Installing keyboard customizations... "
+echo "[*] Installing keyboard customizations... "
 PWD="$(pwd)"
 DIR="$(dirname $0)"
 
 # Set Caps to CTRL
 AUTOSTART_DIR="$HOME/.config/autostart"
+echo "[*] Installing Keyboard.desktop... "
 if [[ ! -d "$AUTOSTART_DIR" ]]; then
   mkdir -p "$AUTOSTART_DIR"
 fi
 ln -sf "$PWD/$DIR/Keyboard.desktop" "$AUTOSTART_DIR"
 
+echo "[*] Installing xmodmap customizations..."
 ln -sf "$PWD/$DIR/Xmodmap" "$HOME/.Xmodmap"
 ln -sf "$PWD/$DIR/start_xmodmap_on_login.sh" "$HOME/.start_xmodmap_on_login"
-
-# Installs Xmodmap.desktop in autostart directory
 ln -sf "$PWD/$DIR/Xmodmap.desktop" "$AUTOSTART_DIR"
 
 echo "Done."
