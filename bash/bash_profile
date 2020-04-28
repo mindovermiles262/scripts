@@ -39,10 +39,10 @@ parse_git_branch() {
 ###########
 
 # File Aliases
-alias ll="ls -lhaG"
-alias la="ls -lhaG"
-alias l="ls -lhG"
-alias ls="ls -hG"
+alias l="/bin/ls -lhG | sed 's;PALOALTONETWORK;PAN;g' | sed 's;Domain\ Users ;DU;g'"
+alias ls="/bin/ls -hG"
+alias ll="/bin/ls -lhaG | sed 's;PALOALTONETWORK;PAN;g' | sed 's;Domain\ Users ;DU;g'"
+alias la="/bin/ls -haG"
 
 # The Odin Project Development Shortcuts
 odinreset() {
@@ -125,4 +125,9 @@ fi
 if [ -d "$HOME/.rbenv" ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+fi
+
+# Add gcloud to PATH
+if [ -d "$HOME/Applications/google-cloud-sdk/bin" ]; then
+  export PATH="$HOME/Applications/google-cloud-sdk/bin:$PATH"
 fi

@@ -7,30 +7,40 @@
 # 2020-04-04
 #
 
-printf "[*] Installing asdf... "
-sudo apt-get -qq install -y \
-  build-essential \
-  curl \
-  gcc \
-  git \
-  gpg \
-  dirmngr \
-  make \
-  libbz2-dev \
-  libffi-dev \
-  liblzma-dev \
-  libncurses5-dev \
-  libncursesw5-dev \
-  libpq-dev \
-  libreadline-dev \
-  libssl-dev \
-  libsqlite3-dev \
-  llvm \
-  python-openssl \
-  tk-dev \
-  xz-utils \
-  zlib1g-dev \
-  wget &> /dev/null
+printf "[*] Installing asdf "
+if [ "$TARGETENV" == "linux" ]; then
+  printf "for LINUX... "
+  sudo apt-get -qq install -y \
+    build-essential \
+    curl \
+    gcc \
+    git \
+    gpg \
+    dirmngr \
+    make \
+    libbz2-dev \
+    libffi-dev \
+    liblzma-dev \
+    libncurses5-dev \
+    libncursesw5-dev \
+    libpq-dev \
+    libreadline-dev \
+    libssl-dev \
+    libsqlite3-dev \
+    llvm \
+    python-openssl \
+    tk-dev \
+    xz-utils \
+    zlib1g-dev \
+    wget &> /dev/null
+elif [ "$TARGETENV" == "macos" ]; then
+  printf "for MACOS... "
+  brew install gnupg coreutils
+else
+  echo "[!] TARGETENV NOT SET"
+  echo "[!] Use 'export TARGETENV=macos or linux' to set"
+  exit 2
+fi
 
 
 ASDF_DIR=$HOME/.asdf
