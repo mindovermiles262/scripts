@@ -39,9 +39,9 @@ parse_git_branch() {
 ###########
 
 # File Aliases
-alias l="/bin/ls -lhG | sed 's;PALOALTONETWORK;PAN;g' | sed 's;Domain\ Users ;DU;g'"
+alias l="/bin/ls -lhG"
 alias ls="/bin/ls -hG"
-alias ll="/bin/ls -lhaG | sed 's;PALOALTONETWORK;PAN;g' | sed 's;Domain\ Users ;DU;g'"
+alias ll="/bin/ls -lhaG"
 alias la="/bin/ls -haG"
 
 # The Odin Project Development Shortcuts
@@ -130,4 +130,15 @@ fi
 # Add gcloud to PATH
 if [ -d "$HOME/Applications/google-cloud-sdk/bin" ]; then
   export PATH="$HOME/Applications/google-cloud-sdk/bin:$PATH"
+fi
+
+# Add istio to PATH
+if [ -d "$HOME/Applications/istio/bin" ]; then
+  export PATH="$HOME/Applications/istio/bin:$PATH"
+fi
+
+# Adds jenv to PATH
+if [ -d "$HOME/.jenv" ]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
 fi
