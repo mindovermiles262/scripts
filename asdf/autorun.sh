@@ -8,7 +8,7 @@
 #
 
 printf "[*] Installing asdf "
-if [ "$TARGETENV" == "linux" ]; then
+if [ "$TARGETENV" = "linux" ]; then
   printf "for LINUX... "
   sudo apt-get -qq install -y \
     build-essential \
@@ -33,13 +33,9 @@ if [ "$TARGETENV" == "linux" ]; then
     xz-utils \
     zlib1g-dev \
     wget &> /dev/null
-elif [ "$TARGETENV" == "macos" ]; then
+elif [ "$TARGETENV" = "macos" ]; then
   printf "for MACOS... "
   brew install gnupg coreutils
-else
-  echo "[!] TARGETENV NOT SET"
-  echo "[!] Use 'export TARGETENV=macos or linux' to set"
-  exit 2
 fi
 
 

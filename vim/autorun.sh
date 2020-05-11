@@ -9,7 +9,7 @@
 
 echo "[*] Installing vim... "
 
-if [[ "$TARGETENV" -eq "macos" ]]; then
+if [ "$TARGETENV" = "macos" ]; then
   brew list | grep vim &>/dev/null
   VIMINSTALLED=$?
 

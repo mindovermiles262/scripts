@@ -9,7 +9,7 @@
 
 echo "[*] Installing tmux... "
 
-if [[ "$TARGETENV" -eq "macos" ]]; then
+if [ "$TARGETENV" = "macos" ]; then
   brew list | grep tmux &> /dev/null
   TMUXINSTALLED=$?
   if [ "$TMUXINSTALLED" -eq 0 ]; then
