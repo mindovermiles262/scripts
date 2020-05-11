@@ -8,4 +8,4 @@ OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
 Hidden=false
-Exec=/usr/bin/redshift -c /home/dipsea/.config/redshift.conf
+Exec=/usr/bin/redshift -c /home/sage/.config/redshift.conf

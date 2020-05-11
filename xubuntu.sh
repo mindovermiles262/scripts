@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DIR="$(dirname $0)"
+export TARGETENV="linux"
 
 # Update apt
 "$DIR/apt/autorun.sh"

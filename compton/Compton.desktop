@@ -8,4 +8,4 @@ OnlyShowIn=XFCE;
 StartupNotify=false
 Terminal=false
 Hidden=false
-Exec=compton --config /home/dipsea/.config/compton/compton.conf
+Exec=compton --config /home/sage/.config/compton/compton.conf

@@ -10,7 +10,7 @@
 printf "[*] Installing asdf "
 if [ "$TARGETENV" = "linux" ]; then
   printf "for LINUX... "
-  sudo apt-get -qq install -y \
+  sudo apt-get install -y \
     build-essential \
     curl \
     gcc \
@@ -32,12 +32,12 @@ if [ "$TARGETENV" = "linux" ]; then
     tk-dev \
     xz-utils \
     zlib1g-dev \
-    wget &> /dev/null
+    wget
+    # &> /dev/null
 elif [ "$TARGETENV" = "macos" ]; then
   printf "for MACOS... "
   brew install gnupg coreutils
 fi
-
 
 ASDF_DIR=$HOME/.asdf
 if [[ -d "$ASDF_DIR" ]]; then
