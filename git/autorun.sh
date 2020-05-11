@@ -8,7 +8,12 @@
 #
 
 printf "[*] Installing git... "
-sudo apt-get -qq install -y git &> /dev/null
+
+if [ "$TARGETENV" = "fedora" ]; then
+  sudo dnf install -y git
+else
+  sudo apt-get -qq install -y git &> /dev/null
+fi
 
 git config --global user.name "Andy D"
 git config --global user.email "mindovermiles262@gmail"

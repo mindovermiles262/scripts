@@ -20,6 +20,8 @@ if [ "$TARGETENV" = "macos" ]; then
     echo "[*] Vim not installed... Installing now... "
     brew install vim
   fi
+elif [ "$TARGETENV" = "fedora" ]; then
+  sudo dnf install neovim
 else
   sudo apt-get -qq install -y vim curl &> /dev/null
 fi
@@ -32,6 +34,7 @@ if [[ ! -d "$HOME/.vim" ]]; then
 fi
 
 ln -sf "$PWD/$DIR/vimrc" "$HOME/.vimrc"
+ln -sf "$PWD/$DIR/vimrc" "$HOME/.nvimrc"
 
 # Install vim-plug
 curl -sfLo "$HOME/.vim/autoload/plug.vim" \

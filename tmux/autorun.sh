@@ -19,6 +19,8 @@ if [ "$TARGETENV" = "macos" ]; then
     echo "[*] Tmux not installed... Installing now... "
     brew install tmux reattach-to-user-namespace
   fi
+elif [ "$TARGETENV" = "fedora" ]; then
+  sudo dnf install -y tmux
 else
   # System is Linux
   sudo apt-get -qq install -y tmux xclip &> /dev/null
