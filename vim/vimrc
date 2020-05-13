@@ -2,7 +2,7 @@ syntax on
 
 " Vim-Plug Plugin Manager.
 call plug#begin('~/.vim/extensions')
-      Plug 'spf13/vim-autoclose'
+      " Plug 'spf13/vim-autoclose'
       Plug 'tpope/vim-endwise'
       Plug 'tpope/vim-surround'
       Plug 'tpope/vim-rails'
@@ -23,7 +23,7 @@ call plug#end()
 " Import filetype settings from ~/.vim/ftplugin
 filetype plugin on
 
-set autoindent
+" set autoindent
 set number
 set numberwidth=3
 
@@ -103,3 +103,7 @@ nmap <leader>sc :SyntasticCheck<CR>
 let g:terraform_align=1
 let g:terraform_fold_sections=0
 let g:terraform_fmt_on_save=1
+
+" Avro Schema (.avsc) files are JSON
+autocmd BufRead,BufNewFile *.avsc setlocal filetype=json
+
