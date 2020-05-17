@@ -20,11 +20,12 @@ elif [[ "$OSTYPE" =~ "darwin" ]]; then
 fi
 
 # Add color to Terminal:
-export PS1='\[\033[32m\]$(hostname_displ) \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
+export PS1='\[\033[32m\]\u \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
 
 # Get first 4 letters of hostname and upcase
 hostname_displ() {
-  HOST="$(hostname | head -c 4)"
+  # HOST="$(hostname | head -c 4)"
+  HOST="$(hostname)"
   # echo $HOST | tr '[:lower:]' '[:upper:]'
   echo $HOST | tr '[:upper:]' '[:lower:]'
 }
@@ -115,11 +116,11 @@ if [ -d "$HOME/.asdf" ]; then
 fi
 
 # Add pyenv to PATH
-# if [ -d "$HOME/.pyenv" ]; then
-#   export PYENV_ROOT="$HOME/.pyenv"
-#   export PATH="$PYENV_ROOT/bin:$PATH"
-#   eval "$(pyenv init -)"
-# fi
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
 # Add rbenv to PATH
 if [ -d "$HOME/.rbenv" ]; then
