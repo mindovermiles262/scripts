@@ -36,11 +36,11 @@ set showmode
 set backspace=indent,eol,start
 
 " Soft-Wrap text at 80 columns:
-set textwidth=0
-set wrapmargin=0
-set wrap
-set linebreak 
-set columns=80
+" set textwidth=0
+" set wrapmargin=0
+" set wrap
+" set linebreak 
+" set columns=80
 
 " set listchars=space:•,tab:->
 " set list
