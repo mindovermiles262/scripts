@@ -17,6 +17,7 @@ elif [[ "$OSTYPE" =~ "darwin" ]]; then
   export LSCOLORS=GxFxCxDxBxegedabagaced
   alias unmount="diskutil unmountDisk $1"
   alias eject="diskutil unmountDisk $1"
+  export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 
 # Add color to Terminal:
@@ -41,10 +42,17 @@ parse_git_branch() {
 ###########
 
 # File Aliases
-alias l="/bin/ls -lhG --color=auto"
-alias ls="/bin/ls -hG --color=auto"
-alias ll="/bin/ls -lhaG --color=auto"
-alias la="/bin/ls -haG --color=auto"
+if [[ "$OSTYPE" == 'linux'* ]]; then
+  alias l="/bin/ls -lh --color"
+  alias ls="/bin/ls -h --color"
+  alias ll="/bin/ls -lha --color"
+  alias la="/bin/ls -ha --color"
+else
+  alias l="/bin/ls -lhG"
+  alias ls="/bin/ls -hG"
+  alias ll="/bin/ls -lhaG"
+  alias la="/bin/ls -haG"
+fi
 
 # The Odin Project Development Shortcuts
 odinreset() {
