@@ -21,7 +21,7 @@ fi
 
 # Add color to Terminal:
 # export PS1='\[\033[32m\]$(hostname_displ) \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
-export PS1='\[\033[32m\]\u \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
+export PS1='\[\033[32m\]\u \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$ '
 
 # Get first 4 letters of hostname and upcase
 hostname_displ() {
@@ -41,10 +41,10 @@ parse_git_branch() {
 ###########
 
 # File Aliases
-alias l="/bin/ls -lhG"
-alias ls="/bin/ls -hG"
-alias ll="/bin/ls -lhaG"
-alias la="/bin/ls -haG"
+alias l="/bin/ls -lhG --color=auto"
+alias ls="/bin/ls -hG --color=auto"
+alias ll="/bin/ls -lhaG --color=auto"
+alias la="/bin/ls -haG --color=auto"
 
 # The Odin Project Development Shortcuts
 odinreset() {
@@ -64,7 +64,7 @@ uc() {
 # Git Aliases
 alias gss="git status"
 alias gaa="git add ."
-alias gcc="git commit -m $1"
+# alias gcc="git commit -m $1"
 
 # C++ Aliases
 alias cpp="g++ -std=c++0x $1"
@@ -81,6 +81,7 @@ alias mk="minikube $1"
 alias ta="tmux attach -t $1"
 alias tls="tmux ls"
 alias gc="gcloud $1"
+alias vpn="expressvpn $@"
 
 ks() {
   if [[ -f "/snap/bin/microk8s" ]]; then
@@ -89,6 +90,7 @@ ks() {
     kubectl "$@"
   fi
 }
+export KUBE_EDITOR=vim
 
 tada() {
   # Check if tmux is installed
@@ -141,9 +143,21 @@ if [ -d "$HOME/.jenv" ]; then
   eval "$(jenv init -)"
 fi
 
+# Add golang to PATH
+if [ -d "/usr/local/go" ]; then
+  export PATH="$PATH:/usr/local/go/bin"
+fi
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc'; fi
+
+# Load NVM
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi

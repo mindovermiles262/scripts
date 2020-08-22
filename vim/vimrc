@@ -2,22 +2,12 @@ syntax on
 
 " Vim-Plug Plugin Manager.
 call plug#begin('~/.vim/extensions')
-      " Plug 'spf13/vim-autoclose'
-      Plug 'tpope/vim-endwise'
       Plug 'tpope/vim-surround'
-      Plug 'tpope/vim-rails'
-      Plug 'scrooloose/nerdtree'
-      Plug 'Xuyuanp/nerdtree-git-plugin'
       Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
       Plug 'junegunn/fzf.vim'
       Plug 'tpope/vim-commentary'
-      Plug 'tpope/vim-fugitive'
-      Plug 'mattn/emmet-vim'
       Plug 'airblade/vim-gitgutter'
-"      Plug 'vim-airline/vim-airline'
-"      Plug 'vim-airline/vim-airline-themes'
       Plug 'vim-syntastic/syntastic'
-      Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin
@@ -40,21 +30,14 @@ set textwidth=0
 set wrapmargin=0
 set wrap
 set linebreak 
-set columns=80
+" set columns=80
 
 " set listchars=space:•,tab:->
 " set list
 " highlight SpecialKey ctermfg=233
 
-" Vim Airline Theme
-" :AirlineTheme <theme name>
-" https://github.com/vim-airline/vim-airline/wiki/Screenshots
-let g:airline_theme='luna'
-
 " Key remapping
 :imap jj <Esc>
-:cnoremap qq wqa!
-:cnoremap qy qa!
 
 " Set TAB to 2 Spaces
 set tabstop=2
@@ -63,17 +46,8 @@ set softtabstop=2
 set expandtab
 set smarttab
 
-" Start NERDTree when 'vim' is called
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-:command Tree NERDTreeToggle
-
 " Remove '^G' from beginning of files on Mac using NerdTree:
 let g:NERDTreeNodeDelimiter = "\u00a0"
-
-" Map <Shift><tab> to expand Emmet
-imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<tab>")
-imap <C-e>e <plug>(emmet-expand-abbr)
 
 " Configure FZF to use CTRL-P bindings
 let g:fzf_action = {
@@ -98,12 +72,10 @@ let g:syntastic_python_checkers = ['flake8']
 " Use '\sc' to check syntax
 nmap <leader>sc :SyntasticCheck<CR> 
 
-" Vim-Terraform Settings
-" https://github.com/hashivim/vim-terraform
-let g:terraform_align=1
-let g:terraform_fold_sections=0
-let g:terraform_fmt_on_save=1
-
 " Avro Schema (.avsc) files are JSON
 autocmd BufRead,BufNewFile *.avsc setlocal filetype=json
+
+
+" YAML Editing
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 

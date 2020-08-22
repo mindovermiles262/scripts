@@ -8,7 +8,12 @@
 #
 
 printf "[*] Installing mouse customizations... "
-sudo apt-get -qq install -y xbindkeys xdotool &> /dev/null
+if [[ "$TARGETENV" -eq "feodra" ]]; then
+  printf "for Fedora... "
+  sudo dnf install -y xbindkeys xdotool
+else
+  sudo apt-get -qq install -y xbindkeys xdotool &> /dev/null
+fi
 
 PWD="$(pwd)"
 DIR="$(dirname $0)"
