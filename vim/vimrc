@@ -18,6 +18,7 @@ call plug#begin('~/.vim/extensions')
 "      Plug 'vim-airline/vim-airline-themes'
       Plug 'vim-syntastic/syntastic'
       Plug 'hashivim/vim-terraform'
+      Plug 'ekalinin/Dockerfile.vim'
 call plug#end()
 
 " Import filetype settings from ~/.vim/ftplugin
@@ -92,9 +93,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'passive_filetypes': ['xml'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_python_checkers = ['flake8']
+
 " Use '\sc' to check syntax
 nmap <leader>sc :SyntasticCheck<CR> 
 

@@ -43,24 +43,23 @@ parse_git_branch() {
 
 # File Aliases
 alias l="/bin/ls -lhG"
-alias ls="/bin/ls -hG"
+alias ls="/bin/ls -lhG"
 alias ll="/bin/ls -lhaG"
 alias la="/bin/ls -haG"
+alias c="cd .."
 
-# The Odin Project Development Shortcuts
-odinreset() {
-  rails db:drop
-  rails db:create
-  rails db:migrate
-  rails db:seed
-  rake curriculum:update_content
-}
+# Work
+alias st="cd /opt/storable && ls -lGh"
+alias sf="cd /opt/sparefoot && ls -lGh"
 
-uc() {
-  rails db:migrate
-  rake curriculum:update_content
-}
+# DevOps Tool Aliases
+alias tf="terraform $@"
+alias tplan="terraform plan -out out.plan $@"
+alias mk="minikube $@"
+alias dc="docker-compose $@"
 
+# Python Aliases
+alias py="python3 $@"
 
 # Git Aliases
 alias gss="git status"
@@ -74,14 +73,7 @@ alias cpp="g++ -std=c++0x $1"
 alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
-alias c="cd .."
-alias dk="docker $1"
-alias tf="terraform $1"
-alias tg="terragrunt $1"
-alias mk="minikube $1"
-alias ta="tmux attach -t $1"
-alias tls="tmux ls"
-alias gc="gcloud $1"
+
 
 ks() {
   if [[ -f "/snap/bin/microk8s" ]]; then
@@ -130,21 +122,4 @@ if [ -d "$HOME/.rbenv" ]; then
   eval "$(rbenv init -)"
 fi
 
-
-# Add istio to PATH
-if [ -d "$HOME/Applications/istio/bin" ]; then
-  export PATH="$HOME/Applications/istio/bin:$PATH"
-fi
-
-# Adds jenv to PATH
-if [ -d "$HOME/.jenv" ]; then
-  export PATH="$HOME/.jenv/bin:$PATH"
-  eval "$(jenv init -)"
-fi
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc'; fi
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
