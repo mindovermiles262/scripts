@@ -1,16 +1,14 @@
 syntax on
 
 " Vim-Plug Plugin Manager.
-call plug#begin('~/.vim/extensions')
-      Plug 'tpope/vim-surround'
-      Plug 'tpope/vim-commentary'
-      Plug 'airblade/vim-gitgutter'
-      Plug 'vim-syntastic/syntastic'
-      Plug 'fatih/vim-go'
-call plug#end()
-
-" Import filetype settings from ~/.vim/ftplugin
-filetype plugin indent on
+" call plug#begin('~/.vim/extensions')
+"       Plug 'airblade/vim-gitgutter'
+"       Plug 'bling/vim-airline'
+"       Plug 'tpope/vim-surround'
+"       Plug 'tpope/vim-commentary'
+"       Plug 'vim-syntastic/syntastic'
+"       Plug 'fatih/vim-go'
+" call plug#end()
 
 " set autoindent
 set number
@@ -36,13 +34,6 @@ set smarttab
 
 " Remove '^G' from beginning of files on Mac using NerdTree:
 let g:NERDTreeNodeDelimiter = "\u00a0"
-
-" Configure FZF to use CTRL-P bindings
-let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit'
-      \ }
-nnoremap <C-p> :FZF<cr>
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
