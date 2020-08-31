@@ -7,6 +7,7 @@ BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/mas
 
 # Load settings from .bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
+source ~/Documents/bash-command-timer/bash_command_timer.sh
 
 
 # OS Specific Commands
@@ -137,34 +138,7 @@ if [ -d "$HOME/.rbenv" ]; then
   eval "$(rbenv init -)"
 fi
 
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-
-# Add istio to PATH
-if [ -d "$HOME/Applications/istio/bin" ]; then
-  export PATH="$HOME/Applications/istio/bin:$PATH"
-fi
-
-# Adds jenv to PATH
-if [ -d "$HOME/.jenv" ]; then
-  export PATH="$HOME/.jenv/bin:$PATH"
-  eval "$(jenv init -)"
-fi
-
 # Add golang to PATH
 if [ -d "/usr/local/go" ]; then
   export PATH="$PATH:/usr/local/go/bin"
 fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc'; fi
-
-# Load NVM
-if [ -d "$HOME/.nvm" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-fi
-source ~/Documents/bash-command-timer/bash_command_timer.sh
