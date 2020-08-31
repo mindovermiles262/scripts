@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export TARGETENV="fedora"
+export TARGETENV="macos"
 DIR="$(dirname $0)"
 
 if [[ ! "$DIR" == "." ]]; then

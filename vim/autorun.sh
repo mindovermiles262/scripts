@@ -34,12 +34,4 @@ if ! [[ -L "$HOME/.vim" && -d "$HOME/.vim" ]]; then
   ln -s "$PWD/$DIR" "$HOME/.vim"
 fi
 
-
-# Install vim-plug
-curl -sfLo "$HOME/.vim/autoload/plug.vim" \
-  --create-dirs \
-   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# Silent PlugInstall: https://github.com/junegunn/vim-plug/issues/730
-vim +'PlugInstall --sync' +qall &> /dev/null
 echo "Done."
