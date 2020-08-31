@@ -22,7 +22,7 @@ fi
 
 # Add color to Terminal:
 # export PS1='\[\033[32m\]$(hostname_displ) \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
-export PS1='\[\033[32m\]\u \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$ '
+export PS1='\[\033[32m\]\h \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$ '
 
 # Get first 4 letters of hostname and upcase
 hostname_displ() {
