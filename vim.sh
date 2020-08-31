@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export TARGETENV="fedora"
+export TARGETENV="macos"
 DIR="$(dirname $0)"
 
 if [[ ! "$DIR" == "." ]]; then
@@ -8,8 +8,4 @@ if [[ ! "$DIR" == "." ]]; then
   exit 1
 fi
 
-"$DIR/git/autorun.sh"
-"$DIR/mouse/autorun.sh"
-"$DIR/bash/autorun.sh"
 "$DIR/vim/autorun.sh"
-"$DIR/tmux/autorun.sh"

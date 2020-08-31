@@ -1,28 +1,5 @@
 syntax on
 
-" Vim-Plug Plugin Manager.
-call plug#begin('~/.vim/extensions')
-      " Plug 'spf13/vim-autoclose'
-      Plug 'tpope/vim-endwise'
-      Plug 'tpope/vim-surround'
-      Plug 'tpope/vim-rails'
-      Plug 'scrooloose/nerdtree'
-      Plug 'Xuyuanp/nerdtree-git-plugin'
-      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-      Plug 'junegunn/fzf.vim'
-      Plug 'tpope/vim-commentary'
-      Plug 'tpope/vim-fugitive'
-      Plug 'mattn/emmet-vim'
-      Plug 'airblade/vim-gitgutter'
-"      Plug 'vim-airline/vim-airline'
-"      Plug 'vim-airline/vim-airline-themes'
-      Plug 'vim-syntastic/syntastic'
-      Plug 'hashivim/vim-terraform'
-call plug#end()
-
-" Import filetype settings from ~/.vim/ftplugin
-filetype plugin on
-
 " set autoindent
 set number
 set numberwidth=3
@@ -35,26 +12,8 @@ set showcmd
 set showmode
 set backspace=indent,eol,start
 
-" Soft-Wrap text at 80 columns:
-" set textwidth=0
-" set wrapmargin=0
-" set wrap
-" set linebreak 
-" set columns=80
-
-" set listchars=space:•,tab:->
-" set list
-" highlight SpecialKey ctermfg=233
-
-" Vim Airline Theme
-" :AirlineTheme <theme name>
-" https://github.com/vim-airline/vim-airline/wiki/Screenshots
-let g:airline_theme='luna'
-
 " Key remapping
 :imap jj <Esc>
-:cnoremap qq wqa!
-:cnoremap qy qa!
 
 " Set TAB to 2 Spaces
 set tabstop=2
@@ -63,47 +22,38 @@ set softtabstop=2
 set expandtab
 set smarttab
 
-" Start NERDTree when 'vim' is called
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-:command Tree NERDTreeToggle
+" Autoclose brackets
+inoremap (<CR> (<CR>)<C-c>O<TAB>
+inoremap {<CR> {<CR>}<C-c>O<TAB>
+inoremap [<CR> [<CR>]<C-c>O<TAB>
+inoremap (;<CR> (<CR>);<C-c>O<TAB>
+inoremap {;<CR> {<CR>};<C-c>O<TAB>
+inoremap [;<CR> [<CR>];<C-c>O<TAB>
 
-" Remove '^G' from beginning of files on Mac using NerdTree:
-let g:NERDTreeNodeDelimiter = "\u00a0"
-
-" Map <Shift><tab> to expand Emmet
-imap <expr> <S-Tab> emmet#expandAbbrIntelligent("\<tab>")
-imap <C-e>e <plug>(emmet-expand-abbr)
-
-" Configure FZF to use CTRL-P bindings
-let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit'
-      \ }
-nnoremap <C-p> :FZF<cr>
+inoremap (<TAB> ()<C-c>i
+inoremap [<TAB> []<C-c>i
+inoremap {<TAB> {}<C-c>i
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'passive_filetypes': ['xml'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ["go"]
 " Use '\sc' to check syntax
 nmap <leader>sc :SyntasticCheck<CR> 
 
-" Vim-Terraform Settings
-" https://github.com/hashivim/vim-terraform
-let g:terraform_align=1
-let g:terraform_fold_sections=0
-let g:terraform_fmt_on_save=1
-
 " Avro Schema (.avsc) files are JSON
 autocmd BufRead,BufNewFile *.avsc setlocal filetype=json
+
+" Golang
+let g:go_def_mode="gopls"
+let g:go_info_mode="gopls"
 
