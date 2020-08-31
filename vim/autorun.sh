@@ -18,10 +18,10 @@ if [ "$TARGETENV" = "macos" ]; then
 
   if [ "$VIMINSTALLED" -eq 0 ]; then
     echo "[*] Vim is installed... Updating... "
-    brew upgrade vim
+    brew upgrade macvim
   else
     echo "[*] Vim not installed... Installing now... "
-    brew install vim
+    brew install macvim
   fi
 elif [ "$TARGETENV" = "fedora" ]; then
   sudo dnf install neovim
