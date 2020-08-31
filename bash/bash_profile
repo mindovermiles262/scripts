@@ -42,11 +42,17 @@ parse_git_branch() {
 ###########
 
 # File Aliases
-alias l="/bin/ls -lhG"
-alias ls="/bin/ls -lhG"
-alias ll="/bin/ls -lhaG"
-alias la="/bin/ls -haG"
-alias c="cd .."
+if [[ "$OSTYPE" == 'linux'* ]]; then
+  alias l="/bin/ls -lh --color"
+  alias ls="/bin/ls -h --color"
+  alias ll="/bin/ls -lha --color"
+  alias la="/bin/ls -ha --color"
+else
+  alias l="/bin/ls -lhG"
+  alias ls="/bin/ls -hG"
+  alias ll="/bin/ls -lhaG"
+  alias la="/bin/ls -haG"
+fi
 
 # Work
 alias st="cd /opt/storable && ls -lGh"
@@ -64,7 +70,7 @@ alias py="python3 $@"
 # Git Aliases
 alias gss="git status"
 alias gaa="git add ."
-alias gcc="git commit -m $1"
+# alias gcc="git commit -m $1"
 
 # C++ Aliases
 alias cpp="g++ -std=c++0x $1"
@@ -73,7 +79,15 @@ alias cpp="g++ -std=c++0x $1"
 alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
-
+alias c="cd .."
+alias dk="docker $1"
+alias tf="terraform $1"
+alias tg="terragrunt $1"
+alias mk="minikube $1"
+alias ta="tmux attach -t $1"
+alias tls="tmux ls"
+alias gc="gcloud $1"
+alias vpn="expressvpn $@"
 
 ks() {
   if [[ -f "/snap/bin/microk8s" ]]; then
@@ -82,6 +96,7 @@ ks() {
     kubectl "$@"
   fi
 }
+export KUBE_EDITOR=vim
 
 tada() {
   # Check if tmux is installed
@@ -123,3 +138,32 @@ if [ -d "$HOME/.rbenv" ]; then
 fi
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+# Add istio to PATH
+if [ -d "$HOME/Applications/istio/bin" ]; then
+  export PATH="$HOME/Applications/istio/bin:$PATH"
+fi
+
+# Adds jenv to PATH
+if [ -d "$HOME/.jenv" ]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
+
+# Add golang to PATH
+if [ -d "/usr/local/go" ]; then
+  export PATH="$PATH:/usr/local/go/bin"
+fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc'; fi
+
+# Load NVM
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
