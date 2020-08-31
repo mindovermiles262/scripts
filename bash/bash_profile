@@ -7,8 +7,11 @@ BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/mas
 
 # Load settings from .bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
-source ~/Documents/bash-command-timer/bash_command_timer.sh
 
+
+if [[ -f "~/Documents/bash-command-timer/bash_command_timer.sh" ]]; then
+  source ~/Documents/bash-command-timer/bash_command_timer.sh
+fi
 
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
@@ -22,7 +25,7 @@ elif [[ "$OSTYPE" =~ "darwin" ]]; then
 fi
 
 # Add color to Terminal:
-export PS1='\[\033[32m\]\h \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$ '
+export PS1='\[\033[31m\]\h \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$ '
 
 # Get first 4 letters of hostname and upcase
 hostname_displ() {
