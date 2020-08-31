@@ -1,15 +1,5 @@
 syntax on
 
-" Vim-Plug Plugin Manager.
-" call plug#begin('~/.vim/extensions')
-"       Plug 'airblade/vim-gitgutter'
-"       Plug 'bling/vim-airline'
-"       Plug 'tpope/vim-surround'
-"       Plug 'tpope/vim-commentary'
-"       Plug 'vim-syntastic/syntastic'
-"       Plug 'fatih/vim-go'
-" call plug#end()
-
 " set autoindent
 set number
 set numberwidth=3
@@ -32,14 +22,23 @@ set softtabstop=2
 set expandtab
 set smarttab
 
-" Remove '^G' from beginning of files on Mac using NerdTree:
-let g:NERDTreeNodeDelimiter = "\u00a0"
+" Autoclose brackets
+inoremap (<CR> (<CR>)<C-c>O<TAB>
+inoremap {<CR> {<CR>}<C-c>O<TAB>
+inoremap [<CR> [<CR>]<C-c>O<TAB>
+inoremap (;<CR> (<CR>);<C-c>O<TAB>
+inoremap {;<CR> {<CR>};<C-c>O<TAB>
+inoremap [;<CR> [<CR>];<C-c>O<TAB>
+
+inoremap (<TAB> ()<C-c>i
+inoremap [<TAB> []<C-c>i
+inoremap {<TAB> {}<C-c>i
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
