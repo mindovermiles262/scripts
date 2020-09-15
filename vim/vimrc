@@ -14,6 +14,7 @@ set backspace=indent,eol,start
 
 " Key remapping
 :imap jj <Esc>
+:map :qq :q!
 
 " Set TAB to 2 Spaces
 set tabstop=2
@@ -60,5 +61,5 @@ let g:go_info_mode="gopls"
 
 " Emmet Vim
 " let g:user_emmet_leader_key='<C-Z>'
-let g:user_emmet_expandabbr_key='<C-E>'
+let g:user_emmet_expandabbr_key='<C-e>'
 " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")

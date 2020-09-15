@@ -1,9 +1,6 @@
 [submodule "vim/pack/plugins/start/syntastic"]
 	path = "vim/pack/plugins/start/syntastic"
 	url = git@github.com:vim-syntastic/syntastic.git
-[submodule "vim/pack/plugins/start/syntastic"]
-	path = "vim/pack/plugins/start/syntastic"
-	url = git@github.com:vim-syntastic/syntastic.git
 [submodule "vim/pack/plugins/start/vim-airline"]
 	path = "vim/pack/plugins/start/vim-airline"
 	url = git@github.com:vim-airline/vim-airline.git
@@ -28,3 +25,6 @@
 [submodule "vim/pack/plugins/start/ctrlp.vim"]
 	path = "vim/pack/plugins/start/ctrlp.vim"
 	url = git@github.com:ctrlpvim/ctrlp.vim.git
+[submodule "vim/pack/plugins/start/emmet-vim"]
+	path = "vim/pack/plugins/start/emmet-vim"
+	url = git@github.com:mattn/emmet-vim.git
