@@ -18,10 +18,10 @@ if [ "$TARGETENV" = "macos" ]; then
 
   if [ "$VIMINSTALLED" -eq 0 ]; then
     echo "[*] Vim is installed... Updating... "
-    brew upgrade vim
+    brew upgrade macvim
   else
     echo "[*] Vim not installed... Installing now... "
-    brew install vim
+    brew install macvim
   fi
 elif [ "$TARGETENV" = "fedora" ]; then
   sudo dnf install neovim
@@ -34,12 +34,4 @@ if ! [[ -L "$HOME/.vim" && -d "$HOME/.vim" ]]; then
   ln -s "$PWD/$DIR" "$HOME/.vim"
 fi
 
-
-# Install vim-plug
-curl -sfLo "$HOME/.vim/autoload/plug.vim" \
-  --create-dirs \
-   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# Silent PlugInstall: https://github.com/junegunn/vim-plug/issues/730
-vim +'PlugInstall --sync' +qall &> /dev/null
 echo "Done."

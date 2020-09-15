@@ -7,6 +7,7 @@ BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/mas
 
 # Load settings from .bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
+source ~/Documents/bash-command-timer/bash_command_timer.sh
 
 
 # OS Specific Commands
@@ -22,7 +23,7 @@ fi
 
 # Add color to Terminal:
 # export PS1='\[\033[32m\]$(hostname_displ) \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
-export PS1='\[\033[32m\]\u \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$ '
+export PS1='\[\033[32m\]\u \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$\[\033[8m\]•\[\033[00m\]'
 
 # Get first 4 letters of hostname and upcase
 hostname_displ() {
@@ -54,20 +55,18 @@ else
   alias la="/bin/ls -haG"
 fi
 
-# The Odin Project Development Shortcuts
-odinreset() {
-  rails db:drop
-  rails db:create
-  rails db:migrate
-  rails db:seed
-  rake curriculum:update_content
-}
+# Work
+alias st="cd /opt/storable && ls -lGh"
+alias sf="cd /opt/sparefoot && ls -lGh"
 
-uc() {
-  rails db:migrate
-  rake curriculum:update_content
-}
+# DevOps Tool Aliases
+alias tf="terraform $@"
+alias tplan="terraform plan -out out.plan $@"
+alias mk="minikube $@"
+alias dc="docker-compose $@"
 
+# Python Aliases
+alias py="python3 $@"
 
 # Git Aliases
 alias gss="git status"
@@ -139,33 +138,7 @@ if [ -d "$HOME/.rbenv" ]; then
   eval "$(rbenv init -)"
 fi
 
-
-# Add istio to PATH
-if [ -d "$HOME/Applications/istio/bin" ]; then
-  export PATH="$HOME/Applications/istio/bin:$PATH"
-fi
-
-# Adds jenv to PATH
-if [ -d "$HOME/.jenv" ]; then
-  export PATH="$HOME/.jenv/bin:$PATH"
-  eval "$(jenv init -)"
-fi
-
 # Add golang to PATH
 if [ -d "/usr/local/go" ]; then
   export PATH="$PATH:/usr/local/go/bin"
-fi
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/aduss/Applications/google-cloud-sdk/completion.bash.inc'; fi
-
-# Load NVM
-if [ -d "$HOME/.nvm" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
