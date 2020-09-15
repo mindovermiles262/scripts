@@ -34,6 +34,12 @@ inoremap (<TAB> ()<C-c>i
 inoremap [<TAB> []<C-c>i
 inoremap {<TAB> {}<C-c>i
 
+" vim-commentary
+autocmd FileType python setlocal commentstring=#\ %s
+autocmd FileType sh setlocal commentstring=#\ %s
+autocmd FileType yaml setlocal commentstring=#\ %s
+autocmd FileType go setlocal commentstring=\/\/\ %s
+
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
 " set statusline+=%#warningmsg#
@@ -49,6 +55,7 @@ let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_go_checkers = ["go"]
 " Use '\sc' to check syntax
 nmap <leader>sc :SyntasticCheck<CR> 
+nmap <leader>si :SyntasticInfo<CR>
 
 " Avro Schema (.avsc) files are JSON
 autocmd BufRead,BufNewFile *.avsc setlocal filetype=json

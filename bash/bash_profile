@@ -57,7 +57,9 @@ fi
 
 # Work
 alias st="cd /opt/storable && ls -lGh"
+alias std="cd /opt/storable/devops && ls -lGh"
 alias sf="cd /opt/sparefoot && ls -lGh"
+alias sfd="cd /opt/sparefoot/devops && ls -lGh"
 
 # DevOps Tool Aliases
 alias tf="terraform $@"
