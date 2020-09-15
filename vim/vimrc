@@ -25,15 +25,12 @@ set autoindent
 set smartindent
 
 " Autoclose brackets
-" inoremap (<CR> (<CR>)<C-c>O<TAB>
-" inoremap {<CR> {<CR>}<C-c>O<TAB>
-" inoremap [<CR> [<CR>]<C-c>O<TAB>
-" inoremap (;<CR> (<CR>);<C-c>O<TAB>
-" inoremap {;<CR> {<CR>};<C-c>O<TAB>
-" inoremap [;<CR> [<CR>];<C-c>O<TAB>
-" inoremap () ()<C-c>i
-" inoremap [] []<C-c>i
-" inoremap {} {}<C-c>i
+inoremap (<CR> (<CR>)<C-c>O<TAB>
+inoremap {<CR> {<CR>}<C-c>O<TAB>
+inoremap [<CR> [<CR>]<C-c>O<TAB>
+inoremap (;<CR> (<CR>);<C-c>O<TAB>
+inoremap {;<CR> {<CR>};<C-c>O<TAB>
+inoremap [;<CR> [<CR>];<C-c>O<TAB>
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
