@@ -21,18 +21,19 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set smarttab
+set autoindent
+set smartindent
 
 " Autoclose brackets
-inoremap (<CR> (<CR>)<C-c>O<TAB>
-inoremap {<CR> {<CR>}<C-c>O<TAB>
-inoremap [<CR> [<CR>]<C-c>O<TAB>
-inoremap (;<CR> (<CR>);<C-c>O<TAB>
-inoremap {;<CR> {<CR>};<C-c>O<TAB>
-inoremap [;<CR> [<CR>];<C-c>O<TAB>
-
-inoremap (<TAB> ()<C-c>i
-inoremap [<TAB> []<C-c>i
-inoremap {<TAB> {}<C-c>i
+" inoremap (<CR> (<CR>)<C-c>O<TAB>
+" inoremap {<CR> {<CR>}<C-c>O<TAB>
+" inoremap [<CR> [<CR>]<C-c>O<TAB>
+" inoremap (;<CR> (<CR>);<C-c>O<TAB>
+" inoremap {;<CR> {<CR>};<C-c>O<TAB>
+" inoremap [;<CR> [<CR>];<C-c>O<TAB>
+" inoremap () ()<C-c>i
+" inoremap [] []<C-c>i
+" inoremap {} {}<C-c>i
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
