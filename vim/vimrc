@@ -11,6 +11,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'airblade/vim-gitgutter'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'fatih/vim-go'
+  Plug 'hashivim/vim-terraform'
   Plug 'kien/ctrlp.vim'
   Plug 'mattn/emmet-vim'
   Plug 'tpope/vim-commentary'
@@ -79,6 +80,7 @@ let g:go_def_mode="gopls"
 let g:go_info_mode="gopls"
 
 " Emmet Vim
-" let g:user_emmet_leader_key='<C-Z>'
 let g:user_emmet_expandabbr_key='<C-e>'
-" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" vim-terraform
+let g:terraform_fmt_on_save=1
