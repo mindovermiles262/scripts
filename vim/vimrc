@@ -1,5 +1,24 @@
 syntax on
 
+" Install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+  \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundle')
+  Plug 'airblade/vim-gitgutter'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'fatih/vim-go'
+  Plug 'kien/ctrlp.vim'
+  Plug 'mattn/emmet-vim'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-surround'
+  Plug 'vim-syntastic/syntastic'
+call plug#end()
+
 " set autoindent
 set number
 set numberwidth=3
