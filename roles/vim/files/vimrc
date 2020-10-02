@@ -31,6 +31,7 @@ highlight ColorColumn ctermbg=233
 set showcmd
 set showmode
 set backspace=indent,eol,start
+set nowrap
 
 " Key remapping
 :imap jj <Esc>
@@ -41,9 +42,9 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set smarttab
-set autoindent
-set smartindent
+" set smarttab
+" set autoindent
+" set smartindent
 
 " Autoclose brackets
 inoremap (<CR> (<CR>)<C-c>O<TAB>

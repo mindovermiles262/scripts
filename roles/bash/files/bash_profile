@@ -73,7 +73,8 @@ alias py="python3 $@"
 # Git Aliases
 alias gss="git status"
 alias gaa="git add ."
-# alias gcc="git commit -m $1"
+alias gcc="git commit -m $1"
+alias gpo="git push origin $@"
 
 # C++ Aliases
 alias cpp="g++ -std=c++0x $1"

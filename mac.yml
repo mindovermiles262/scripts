@@ -1,0 +1,6 @@
+---
+- name: Configure MacOS
+  hosts: localhost
+  roles:
+    - bash
+    - vim

@@ -1,0 +1,27 @@
+---
+- name: Install vim - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  homebrew:
+    name: macvim
+    state: present
+    update_homebrew: yes
+
+# TODO
+# - name: Install vim - Fedora
+#     dnf install neovim
+
+# TODO
+# - name: Install vim - Ubuntu
+#   apt-get install vim curl
+
+- name: Symlink vim Config Files
+  file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_facts.user_dir }}/.vim"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+    force: yes
+
+- name: Install vim Plugins
+  command: vim +'PlugInstall --sync' +qa
