@@ -1,0 +1,59 @@
+---
+- name: Install ASDF Prerequisites - MAC
+  when: ansible_facts.distribution == "MacOSX"
+  with_items:
+    - gnupg
+    - coreutils
+  homebrew:
+    name: "{{ item }}"
+    state: present
+
+ # TODO: Linux prerequisites
+ # sudo apt-get install -y
+ # - build-essential
+ # - curl
+ # - gcc
+ # - git
+ # - gpg
+ # - dirmngr
+ # - make
+ # - libbz2-dev
+ # - libffi-dev
+ # - liblzma-dev
+ # - libncurses5-dev
+ # - libncursesw5-dev
+ # - libpq-dev
+ # - libreadline-dev
+ # - libssl-dev
+ # - libsqlite3-dev
+ # - llvm
+ # - python-openssl
+ # - tk-dev
+ # - xz-utils
+ # - zlib1g-dev
+ # - wget
+
+- name: Update or Install ASDF
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    remote: "origin"
+    dest: "{{ ansible_facts.user_dir }}/.asdf"
+    update: yes
+
+- name: Check Installed Plugins
+  with_items: "{{ asdf_plugins }}"
+  stat:
+    path: "{{ ansible_facts.user_dir }}/.asdf/plugins/{{ item }}"
+  register: asdf_plugins_installed
+
+- name: Install missing ASDF plugins
+  with_items: "{{ asdf_plugins_installed.results }}"
+  when: item.stat.exists is false
+  command: "{{ ansible_facts.user_dir }}/.asdf/bin/asdf plugin-add {{ item.item }}"
+
+- name: Update all ASDF plugins
+  command: "{{ ansible_facts.user_dir }}/.asdf/bin/asdf plugin-update --all"
+
+- name: Import ASDF NodeJS Keyring
+  when: '"nodejs" in asdf_plugins'
+  command: "{{ ansible_facts.user_dir }}/.asdf/plugins/nodejs/bin/import-release-team-keyring"

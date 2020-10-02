@@ -1,6 +1,0 @@
----
-- name: Symlink Bash Profile
-  hosts: localhost
-  roles:
-    - bash
-

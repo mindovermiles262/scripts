@@ -1,0 +1,14 @@
+---
+- name: Configure MacOS
+  # when: ansible_facts.distribution == "MacOSX"
+  hosts: localhost
+  vars:
+    asdf_plugins:
+      - "ruby"
+      - "nodejs"
+      - "python"
+      - "terraform"
+  roles:
+    - asdf
+    - bash
+    - vim
