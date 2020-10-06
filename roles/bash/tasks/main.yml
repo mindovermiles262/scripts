@@ -1,10 +1,4 @@
 ---
-# - name: Debug
-#   debug: var=ansible_facts
-
-# - name: Role
-#   debug: var=role_path
-
 - name: Symlink Bash Profile
   file:
     src: "{{ role_path }}/files/bash_profile"

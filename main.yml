@@ -1,6 +1,6 @@
 ---
 - name: Configure MacOS
-  # when: ansible_facts.distribution == "MacOSX"
+  when: ansible_facts.distribution == "MacOSX"
   hosts: localhost
   vars:
     asdf_plugins:
@@ -12,3 +12,17 @@
     - asdf
     - bash
     - vim
+
+- name: Configure Ubuntu
+  when: ansible_facts.distribution == "Ubuntu"
+  hosts: localhost
+  vars:
+    asdf_plugins:
+      - "ruby"
+      - "nodejs"
+      - "python"
+  roles:
+    - asdf
+    - bash
+    - vim
+ 
