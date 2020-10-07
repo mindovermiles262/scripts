@@ -8,7 +8,8 @@
     name: "{{ item }}"
     state: present
 
-- name: Install ASDF Prerequisites - Ubuntu
+- name: Install ASDF Prerequisites - (X)Ubuntu
+  when: ansible_facts.distribution == "Ubuntu"
   become: yes
   become_method: sudo
   apt:

@@ -1,5 +1,5 @@
 ---
-- name: Install tmux - Ubuntu
+- name: Install tmux - (X)Ubuntu
   when: ansible_facts.distribution == "Ubuntu"
   become: yes
   become_method: sudo
@@ -11,8 +11,8 @@
 # TODO: Install tmux on MacOS
 
 # TODO: Install tmux on Fedora
-#
-- name: Symlink tmux Config
+
+- name: Symlink main tmux config
   file:
     src: "{{ role_path }}/files/tmux.conf"
     dest: "{{ ansible_facts.user_dir }}/.tmux.conf"
@@ -31,7 +31,7 @@
     state: link
     force: yes
 
-- name: Symlink tmux Config - Linux
+- name: Symlink tmux Config - (X)Ubuntu
   when: ansible_facts.distribution == "Ubuntu"
   file:
     src: "{{ role_path }}/files/tmux.linux"

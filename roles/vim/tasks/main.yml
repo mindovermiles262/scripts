@@ -10,7 +10,7 @@
 # - name: Install vim - Fedora
 #     dnf install neovim
 
-- name: Install vim - Ubuntu
+- name: Install vim - (X)Ubuntu
   when: ansible_facts.distribution == "Ubuntu"
   become: yes
   become_method: sudo
