@@ -1,4 +1,9 @@
 ---
+- name: Install bash-command-timer
+  git:
+    repo: "https://github.com/jichu4n/bash-command-timer"
+    dest: "{{ ansible_facts.user_dir }}/Documents/bash-command-timer"
+
 - name: Symlink Bash Profile
   file:
     src: "{{ role_path }}/files/bash_profile"
