@@ -1,0 +1,15 @@
+---
+- name: Configure MacOS
+  hosts: localhost
+  vars:
+    asdf_plugins:
+      - "ruby"
+      - "nodejs"
+      - "python"
+      - "terraform"
+  roles:
+    - asdf
+    - bash
+    - tmux
+    - vim
+

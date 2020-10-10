@@ -8,7 +8,12 @@
       - tmux
     state: latest
 
-# TODO: Install tmux on MacOS
+- name: Install tmux - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  homebrew:
+    name: tmux
+    state: present
+    update_homebrew: yes
 
 # TODO: Install tmux on Fedora
 
@@ -22,7 +27,7 @@
     force: yes
 
 - name: Symlink tmux Config - MacOS
-  when: ansible_facts.distribution == "MacOS"
+  when: ansible_facts.distribution == "MacOSX"
   file:
     src: "{{ role_path }}/files/tmux.macos"
     dest: "{{ ansible_facts.user_dir }}/.tmux.macos"
