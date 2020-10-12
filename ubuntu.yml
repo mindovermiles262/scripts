@@ -11,6 +11,7 @@
   roles:
     - asdf
     - bash
+    - redshift
     - tmux 
     - vim
 
