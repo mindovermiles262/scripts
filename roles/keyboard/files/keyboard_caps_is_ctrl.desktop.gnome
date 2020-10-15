@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/setxkbmap -option "ctrl:nocaps"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Keyboard: Caps is CTRL
+Name=Keyboard: Caps is CTRL
+Comment[en_US]=Overwrites Caps to be Control
+Comment=Overwrites Caps to be Control

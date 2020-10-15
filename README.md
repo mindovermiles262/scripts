@@ -22,6 +22,7 @@ Clone repo and run `./autorun.sh` from the base directory
 
 - MacOS   => `ansible_facts.distribution == "MacOS"`
 - Ubuntu  => `ansible_facts.distribution == "Ubuntu"`
+          => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "ubuntu"`
 - Xubuntu => `ansible_facts.distribution == "Ubuntu"`
           => `ansible_distribution_file_variety == "Debian"`
-          => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "xubuntu"
+          => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "xubuntu"`

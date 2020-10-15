@@ -17,18 +17,26 @@
     group: " {{ ansible_facts.user_gid }}"
     state: link
 
-- name: Autostart Redshift
-  when: ansible_facts.distribution == "Ubuntu"
+- name: Autostart Redshift - Ubuntu Gnome
+  when: ansible_facts.env.DESKTOP_SESSION == "ubuntu"
   copy:
-    src: "{{ role_path }}/files/Redshift.template"
-    dest: "{{ ansible_facts.user_dir }}/.config/autostart/Redshift.desktop"
+    src: "{{ role_path }}/files/Redshift.gnome"
+    dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
   
+- name: Autostart Redshift - XFCE
+  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+  copy:
+    src: "{{ role_path }}/files/Redshift.xfce"
+    dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+
 - name: Fix autostart command
   # Template uses '$HOME' which is not valid inside of a desktop file
   when: ansible_facts.distribution == "Ubuntu"
   replace:
-    path: "{{ ansible_facts.user_dir }}/.config/autostart/Redshift.desktop"
+    path: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     regexp: '\$HOME'
     replace: "{{ ansible_facts.user_dir }}"
