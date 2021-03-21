@@ -7,8 +7,13 @@ BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/mas
 
 # Load settings from .bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
-source ~/Documents/bash-command-timer/bash_command_timer.sh
+# source ~/Documents/bash-command-timer/bash_command_timer.sh
 
+if [ -d "$HOME/.phpbrew" ]; then
+  source /Users/aduss/.phpbrew/bashrc
+  export PHPBREW_SET_PROMPT=1
+  export PHPBREW_RC_ENABLE=1
+fi
 
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
@@ -58,8 +63,12 @@ fi
 # Work
 alias st="cd /opt/storable && ls -lGh"
 alias std="cd /opt/storable/devops && ls -lGh"
-alias sf="cd /opt/sparefoot && ls -lGh"
-alias sfd="cd /opt/sparefoot/devops && ls -lGh"
+alias stm="cd /opt/storable/sparefoot && ls -lGh"
+alias sts="cd /opt/storable/services && ls -lGh"
+# alias sf="cd /opt/sparefoot && ls -lGh"
+# alias sfd="cd /opt/sparefoot/devops && ls -lGh"
+alias cstd="code /opt/storable/devops/."
+alias cstm="code /opt/storable/sparefoot/."
 
 # DevOps Tool Aliases
 alias tf="terraform $@"
@@ -78,6 +87,9 @@ alias gpo="git push origin $@"
 
 # C++ Aliases
 alias cpp="g++ -std=c++0x $1"
+
+# DotNET Aliases
+alias dn="dotnet $@"
 
 # Random Aliases
 alias cip="curl https://andyduss.com/ip"
@@ -144,4 +156,26 @@ fi
 # Add golang to PATH
 if [ -d "/usr/local/go" ]; then
   export PATH="$PATH:/usr/local/go/bin"
+fi
+
+# if [ -d "$HOME/.phpenv" ]; then
+#   export PATH="/usr/local/opt/bison/bin:$PATH"
+#   export PHPENV_ROOT="$HOME/.phpenv"
+#   export PATH="$PHPENV_ROOT/bin:$PATH"
+#   eval "$(phpenv init -)"
+#   export PHPENV_CONFIG="--with-zlib-dir=$(brew --prefix zlib) --with-bz2=$(brew --prefix bzip2) --with-curl=$(brew --prefix curl) --with-iconv=$(brew --prefix libiconv) --with-libedit=$(brew --prefix libedit) --with-readline=$(brew --prefix readline) --with-tidy=$(brew --prefix tidy-html5)"
+# fi
+
+# Add Istio to PATH
+if [ -d "$HOME/Applications/istio" ]; then
+  export PATH="$PATH:$HOME/Applications/istio/bin"
+fi
+
+# Add gcloud to PATH
+if [ -d "$HOME/Applications/google-cloud-sdk" ]; then
+  export PATH="$PATH:$HOME/Applications/google-cloud-sdk/bin"
+fi
+
+if [ -d "$HOME/Applications/neovim" ]; then
+  export PATH="$PATH:$HOME/Applications/neovim/bin"
 fi

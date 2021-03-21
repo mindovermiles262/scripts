@@ -13,6 +13,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'fatih/vim-go'
   Plug 'hashivim/vim-terraform'
   Plug 'kien/ctrlp.vim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mattn/emmet-vim'
   Plug 'preservim/nerdtree'
   Plug 'tpope/vim-commentary'
