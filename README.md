@@ -17,3 +17,12 @@ Clone repo and run `./autorun.sh` from the base directory
 - [x] Write better libinput to determine trackpad name via grep/sed/cut
 - [ ] Add Flameshot
 - [ ] Add Uninstall scripts
+
+# Ansible
+
+- MacOS   => `ansible_facts.distribution == "MacOS"`
+- Ubuntu  => `ansible_facts.distribution == "Ubuntu"`
+          => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "ubuntu"`
+- Xubuntu => `ansible_facts.distribution == "Ubuntu"`
+          => `ansible_distribution_file_variety == "Debian"`
+          => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "xubuntu"`

@@ -1,0 +1,13 @@
+# REQUIRES reattach-to-user-namespace
+# $ brew install reattach-to-user-namespace
+
+# Setup 'v' to begin selection as in Vim
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+
+# Use 'y' to copy to system clipboard. Be sure to `brew install reattach-to-user-namespace`
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+
+# Update default binding of `Enter` to also copy to system clipboard
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+

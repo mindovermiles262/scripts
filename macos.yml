@@ -1,6 +1,5 @@
 ---
 - name: Configure MacOS
-  # when: ansible_facts.distribution == "MacOSX"
   hosts: localhost
   vars:
     asdf_plugins:
@@ -11,4 +10,6 @@
   roles:
     - asdf
     - bash
+    - tmux
     - vim
+

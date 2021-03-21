@@ -10,9 +10,15 @@
 # - name: Install vim - Fedora
 #     dnf install neovim
 
-# TODO
-# - name: Install vim - Ubuntu
-#   apt-get install vim curl
+- name: Install vim - (X)Ubuntu
+  when: ansible_facts.distribution == "Ubuntu"
+  become: yes
+  become_method: sudo
+  apt:
+    pkg:
+      - curl
+      - vim-athena
+    state: latest
 
 - name: Symlink vim Config Files
   file:
@@ -21,7 +27,6 @@
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
     state: link
-    force: yes
 
 - name: Install vim Plugins
   command: vim +'PlugInstall --sync' +qa

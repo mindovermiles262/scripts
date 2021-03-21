@@ -1,0 +1,18 @@
+---
+- name: Configure Ubuntu
+  hosts: localhost
+  vars:
+    # https://github.com/ansible/ansible/issues/14468 
+    ansible_python_interpreter: /usr/bin/python3
+    asdf_plugins:
+      - "ruby"
+      - "nodejs"
+      - "python"
+  roles:
+    - asdf
+    - bash
+    - keyboard
+    - redshift
+    - tmux 
+    - vim
+
