@@ -104,6 +104,9 @@ alias ta="tmux attach -t $1"
 alias tls="tmux ls"
 alias gc="gcloud $1"
 alias vpn="expressvpn $@"
+alias kcc="kubectl config current-context"
+alias kls="kubectl config get-contexts"
+alias kuc="kubectl config use-context $1"
 
 ks() {
   if [[ -f "/snap/bin/microk8s" ]]; then
