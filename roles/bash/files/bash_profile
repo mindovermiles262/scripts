@@ -106,7 +106,7 @@ alias gc="gcloud $1"
 alias vpn="expressvpn $@"
 alias kcc="kubectl config current-context"
 alias kls="kubectl config get-contexts"
-alias kuc="kubectl config use-context $1"
+alias kuse="kubectl config use-context $1"
 
 ks() {
   if [[ -f "/snap/bin/microk8s" ]]; then
