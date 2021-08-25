@@ -65,10 +65,7 @@ alias st="cd /opt/storable && ls -lGh"
 alias std="cd /opt/storable/devops && ls -lGh"
 alias stm="cd /opt/storable/sparefoot && ls -lGh"
 alias sts="cd /opt/storable/services && ls -lGh"
-# alias sf="cd /opt/sparefoot && ls -lGh"
-# alias sfd="cd /opt/sparefoot/devops && ls -lGh"
-alias cstd="code /opt/storable/devops/."
-alias cstm="code /opt/storable/sparefoot/."
+alias sta="cd /opt/storable/access && ls -lGh"
 
 # DevOps Tool Aliases
 alias tf="terraform $@"
@@ -182,3 +179,4 @@ fi
 if [ -d "$HOME/Applications/neovim" ]; then
   export PATH="$PATH:$HOME/Applications/neovim/bin"
 fi
+
