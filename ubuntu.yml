@@ -12,6 +12,8 @@
     - asdf
     - bash
     - keyboard
+    - libinput
+    - mouse
     - redshift
     - tmux 
     - vim
