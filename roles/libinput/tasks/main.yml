@@ -1,0 +1,24 @@
+#
+# Installs config for Logitech M720 Triathalon Mouse
+# Only set for Xubuntu as I'm not sure if Ubuntu needs this
+# configuration as well.
+#
+---
+- name: Install Mouse libinput packages - Xubuntu
+  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+  become: yes
+  become_method: sudo
+  apt:
+    pkg:
+      - xserver-xorg-input-libinput
+    state: latest
+
+- name: Configure Mouse - Xubuntu
+  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+  become: yes
+  become_method: sudo
+  copy:
+    src: "{{ role_path }}/files/libinput.conf.xfce"
+    dest: "/usr/share/X11/xorg.conf.d/40-libinput.conf"
+    # owner: "{{ ansible_facts.user_id }}"
+    # group: " {{ ansible_facts.user_gid }}"

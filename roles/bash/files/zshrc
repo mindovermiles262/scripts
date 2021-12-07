@@ -1,0 +1,175 @@
+# OS Specific Commands
+if [[ "$OSTYPE" == 'linux'* ]]; then
+  alias open="xdg-open"
+elif [[ "$OSTYPE" =~ "darwin" ]]; then
+  export CLICOLOR=1
+  export LSCOLORS=GxFxCxDxBxegedabagaced
+  alias unmount="diskutil unmountDisk $1"
+  alias eject="diskutil unmountDisk $1"
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+fi
+
+# Git branch in terminal.
+function git_branch_name() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+function git_remote_name() {
+  git remote -v 2> /dev/null | head -1 | cut -f2 | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev | cut -d'.' -f1
+}
+
+function git_all_in_one() {
+  REMOTE=$(git remote -v 2> /dev/null | head -1 | cut -f2 | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev | cut -d'.' -f1)
+  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+  if [ ! -z "$REMOTE" ]; then
+    echo " ($REMOTE#$BRANCH)"
+  fi
+}
+
+function directory_trim() {
+  # echo "${PWD%/*}" | sed "s;$HOME;~;" | sed -e "s;\(/..\)[^/]*;\1;g" 
+  # echo "${PWD%/*}" | sed "s;$HOME;~;" | rev | cut -d'/' -f-1-3 | rev 
+  # pwd | sed "s;$HOME;~;" | rev | cut -d'/' -f1-3 | rev
+  pwd | sed "s;$HOME;~;" | sed "s;storable;st;" | sed "s;devops;do;"
+}
+
+# Add color to Terminal:
+autoload -U colors && colors
+setopt PROMPT_SUBST
+PS1="%{$fg[green]%}%n%{$reset_color%} %{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%}
+%% "
+
+###########
+# Aliases #
+###########
+
+# File Aliases
+if [[ "$OSTYPE" == 'linux'* ]]; then
+  alias l="/bin/ls -lh --color"
+  alias ls="/bin/ls -h --color"
+  alias ll="/bin/ls -lha --color"
+  alias la="/bin/ls -ha --color"
+else
+  alias l="/bin/ls -lhG"
+  alias ls="/bin/ls -hG"
+  alias ll="/bin/ls -lhaG"
+  alias la="/bin/ls -haG"
+fi
+
+# Git Aliases
+alias gss="git status"
+alias gaa="git add ."
+alias gcc="git commit -m '$@'"
+alias gph="git push origin HEAD"
+
+
+# Work
+alias st="cd ~/storable && ls -lGh"
+alias std="cd ~/storable/devops && ls -lGh"
+alias stm="cd ~/storable/sparefoot && ls -lGh"
+alias sta="cd ~/storable/access && ls -lGh"
+alias stp="cd ~/storable/polaris && ls -lGh"
+export AP="storable-access-astria-porta"
+export FS="storable-polaris-facility-service"
+export TS="storable-polaris-tenant-service"
+
+
+# DevOps Tool Aliases
+alias tf="terraform $@"
+alias tplan="terraform plan -out out.plan $@"
+alias mk="minikube $@"
+alias dc="docker-compose $@"
+alias gc="gcloud $@"
+
+# Random Aliases
+alias cip="curl https://andyduss.com/ip"
+alias lip="ifconfig | grep 'inet '"
+alias \:q="exit"
+alias c="cd .."
+alias ta="tmux attach -t $1"
+alias tls="tmux ls"
+alias gc="gcloud $1"
+alias mks="microk8s $@"
+alias kls="kubectl config get-contexts"
+alias kuse="kubectl config use-context $1"
+export KUBE_EDITOR=vim
+
+ks() {
+  if [[ -f "/snap/bin/microk8s" ]]; then
+    microk8s.kubectl "$@"
+  else
+    kubectl "$@"
+  fi
+}
+
+
+tada() {
+  # Check if tmux is installed
+  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" ]]; then
+    echo "Tmux not found.. exiting..."
+    return 1
+  fi
+
+  tmux ls | grep -q dflt
+  CPE_EXITCODE=$?
+  if [[ "$CPE_EXITCODE" -eq 0 ]]; then
+    # 0 => Session is running, attach to existing session
+    echo "Attaching to 'dflt' session . . ."
+    tmux attach -t dflt
+  else
+    # 1 => Session does not exist, create new session
+    echo "Creating new tmux session, 'dflt' . . ."
+    tmux new -s dflt
+  fi
+}
+
+preprod_admin () {
+    aws sso login --profile sso-st-preprod-admin
+}
+
+# Use bash-completion
+if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
+  . /usr/local/etc/profile.d/bash_completion.sh
+fi
+
+# Add asdf to PATH
+if [ -d "$HOME/.asdf" ]; then
+  . $HOME/.asdf/asdf.sh
+fi
+
+# Add pyenv to PATH
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+# Add rbenv to PATH
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+# Add golang to PATH
+if [ -d "/usr/local/go" ]; then
+  export PATH="$PATH:/usr/local/go/bin"
+fi
+
+# Add Istio to PATH
+if [ -d "$HOME/Applications/istio" ]; then
+  export PATH="$PATH:$HOME/Applications/istio/bin"
+fi
+
+if [ -d "$HOME/.istioctl" ]; then
+  export PATH="$PATH:$HOME/.istioctl/bin"
+fi
+
+# Add gcloud to PATH
+if [ -d "$HOME/Applications/google-cloud-sdk" ]; then
+  export PATH="$PATH:$HOME/Applications/google-cloud-sdk/bin"
+fi
+
+# Use MySQL from brew
+if [ -d "/usr/local/opt/mysql-client" ]; then
+  export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+fi

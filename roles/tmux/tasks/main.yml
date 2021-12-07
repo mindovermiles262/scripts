@@ -1,0 +1,47 @@
+---
+- name: Install tmux - (X)Ubuntu
+  when: ansible_facts.distribution == "Ubuntu"
+  become: yes
+  become_method: sudo
+  apt:
+    pkg:
+      - tmux
+    state: latest
+
+- name: Install tmux - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  homebrew:
+    name: tmux
+    state: present
+    update_homebrew: yes
+
+# TODO: Install tmux on Fedora
+
+- name: Symlink main tmux config
+  file:
+    src: "{{ role_path }}/files/tmux.conf"
+    dest: "{{ ansible_facts.user_dir }}/.tmux.conf"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+    force: yes
+
+- name: Symlink tmux Config - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  file:
+    src: "{{ role_path }}/files/tmux.macos"
+    dest: "{{ ansible_facts.user_dir }}/.tmux.macos"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+    force: yes
+
+- name: Symlink tmux Config - (X)Ubuntu
+  when: ansible_facts.distribution == "Ubuntu"
+  file:
+    src: "{{ role_path }}/files/tmux.linux"
+    dest: "{{ ansible_facts.user_dir }}/.tmux.linux"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+    force: yes
