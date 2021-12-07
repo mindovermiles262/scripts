@@ -1,20 +1,3 @@
-# File Location: ~/.bash_profile
-# Run the following to download and initialize:
-# curl -o ~/.bash_profile https://raw.githubusercontent.com/mindovermiles262/scripts/master/bash/bash_profile && source ~/.bash_profile
-
-BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/master/bash/bash_profile"
-
-
-# Load settings from .bashrc
-[[ -r ~/.bashrc ]] && . ~/.bashrc
-# source ~/Documents/bash-command-timer/bash_command_timer.sh
-
-if [ -d "$HOME/.phpbrew" ]; then
-  source /Users/aduss/.phpbrew/bashrc
-  export PHPBREW_SET_PROMPT=1
-  export PHPBREW_RC_ENABLE=1
-fi
-
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
   alias open="xdg-open"
@@ -26,22 +9,35 @@ elif [[ "$OSTYPE" =~ "darwin" ]]; then
   export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 
-# Add color to Terminal:
-# export PS1='\[\033[32m\]$(hostname_displ) \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
-export PS1='\[\033[32m\]\u \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$\[\033[8m\]•\[\033[00m\]'
-
-# Get first 4 letters of hostname and upcase
-hostname_displ() {
-  # HOST="$(hostname | head -c 4)"
-  HOST="$(hostname)"
-  # echo $HOST | tr '[:lower:]' '[:upper:]'
-  echo $HOST | tr '[:upper:]' '[:lower:]'
-}
-
 # Git branch in terminal.
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+function git_branch_name() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
+
+function git_remote_name() {
+  git remote -v 2> /dev/null | head -1 | cut -f2 | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev | cut -d'.' -f1
+}
+
+function git_all_in_one() {
+  REMOTE=$(git remote -v 2> /dev/null | head -1 | cut -f2 | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev | cut -d'.' -f1)
+  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+  if [ ! -z "$REMOTE" ]; then
+    echo " ($REMOTE#$BRANCH)"
+  fi
+}
+
+function directory_trim() {
+  # echo "${PWD%/*}" | sed "s;$HOME;~;" | sed -e "s;\(/..\)[^/]*;\1;g" 
+  # echo "${PWD%/*}" | sed "s;$HOME;~;" | rev | cut -d'/' -f-1-3 | rev 
+  # pwd | sed "s;$HOME;~;" | rev | cut -d'/' -f1-3 | rev
+  pwd | sed "s;$HOME;~;" | sed "s;storable;st;" | sed "s;devops;do;"
+}
+
+# Add color to Terminal:
+autoload -U colors && colors
+setopt PROMPT_SUBST
+PS1="%{$fg[green]%}%n%{$reset_color%} %{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%}
+%% "
 
 ###########
 # Aliases #
@@ -60,18 +56,30 @@ else
   alias la="/bin/ls -haG"
 fi
 
+# Git Aliases
+alias gss="git status"
+alias gaa="git add ."
+alias gcc="git commit -m '$@'"
+alias gph="git push origin HEAD"
+
+
 # Work
 alias st="cd ~/storable && ls -lGh"
 alias std="cd ~/storable/devops && ls -lGh"
 alias stm="cd ~/storable/sparefoot && ls -lGh"
 alias sta="cd ~/storable/access && ls -lGh"
 alias stp="cd ~/storable/polaris && ls -lGh"
+export AP="storable-access-astria-porta"
+export FS="storable-polaris-facility-service"
+export TS="storable-polaris-tenant-service"
+
 
 # DevOps Tool Aliases
 alias tf="terraform $@"
 alias tplan="terraform plan -out out.plan $@"
 alias mk="minikube $@"
 alias dc="docker-compose $@"
+alias gc="gcloud $@"
 
 # Random Aliases
 alias cip="curl https://andyduss.com/ip"
@@ -81,8 +89,10 @@ alias c="cd .."
 alias ta="tmux attach -t $1"
 alias tls="tmux ls"
 alias gc="gcloud $1"
+alias mks="microk8s $@"
 alias kls="kubectl config get-contexts"
 alias kuse="kubectl config use-context $1"
+export KUBE_EDITOR=vim
 
 ks() {
   if [[ -f "/snap/bin/microk8s" ]]; then
@@ -92,7 +102,6 @@ ks() {
   fi
 }
 
-export KUBE_EDITOR=vim
 
 tada() {
   # Check if tmux is installed
@@ -114,6 +123,10 @@ tada() {
   fi
 }
 
+preprod_admin () {
+    aws sso login --profile sso-st-preprod-admin
+}
+
 # Use bash-completion
 if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
   . /usr/local/etc/profile.d/bash_completion.sh
@@ -122,7 +135,6 @@ fi
 # Add asdf to PATH
 if [ -d "$HOME/.asdf" ]; then
   . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
 fi
 
 # Add pyenv to PATH
@@ -143,14 +155,6 @@ if [ -d "/usr/local/go" ]; then
   export PATH="$PATH:/usr/local/go/bin"
 fi
 
-# if [ -d "$HOME/.phpenv" ]; then
-#   export PATH="/usr/local/opt/bison/bin:$PATH"
-#   export PHPENV_ROOT="$HOME/.phpenv"
-#   export PATH="$PHPENV_ROOT/bin:$PATH"
-#   eval "$(phpenv init -)"
-#   export PHPENV_CONFIG="--with-zlib-dir=$(brew --prefix zlib) --with-bz2=$(brew --prefix bzip2) --with-curl=$(brew --prefix curl) --with-iconv=$(brew --prefix libiconv) --with-libedit=$(brew --prefix libedit) --with-readline=$(brew --prefix readline) --with-tidy=$(brew --prefix tidy-html5)"
-# fi
-
 # Add Istio to PATH
 if [ -d "$HOME/Applications/istio" ]; then
   export PATH="$PATH:$HOME/Applications/istio/bin"
@@ -165,20 +169,7 @@ if [ -d "$HOME/Applications/google-cloud-sdk" ]; then
   export PATH="$PATH:$HOME/Applications/google-cloud-sdk/bin"
 fi
 
-# Add neovim to PATH
-if [ -d "$HOME/Applications/neovim" ]; then
-  export PATH="$PATH:$HOME/Applications/neovim/bin"
-fi
-
-# Add pack to PATH
-if [ -d "$HOME/.pack" ]; then
-  . $(pack completion)
-fi
-
-# Use Minikube docker
-if [ -d "$HOME/.minikube" ]; then
-  export DOCKER_TLS_VERIFY="1"
-  export DOCKER_HOST="tcp://192.168.64.2:2376"
-  export DOCKER_CERT_PATH="/Users/aduss/.minikube/certs"
-  export MINIKUBE_ACTIVE_DOCKERD="minikube"
+# Use MySQL from brew
+if [ -d "/usr/local/opt/mysql-client" ]; then
+  export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 fi
