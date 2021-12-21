@@ -62,3 +62,4 @@
 - name: Import ASDF NodeJS Keyring
   when: '"nodejs" in asdf_plugins'
   command: "{{ ansible_facts.user_dir }}/.asdf/plugins/nodejs/bin/import-release-team-keyring"
+  ignore_errors: yes
