@@ -1,4 +1,9 @@
 ---
+- name: Austostart Directory
+  file:
+    path: "{{ ansible_facts.user_dir }}/.config/autostart"
+    state: directory
+
 - name: Autostart Redshift - Ubuntu Gnome
   when: ansible_facts.env.DESKTOP_SESSION == "ubuntu"
   copy:
