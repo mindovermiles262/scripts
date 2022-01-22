@@ -1,5 +1,5 @@
 ---
-- name: Install ASDF Prerequisites - MAC
+- name: Install ASDF Prerequisites - MacOS
   when: ansible_facts.distribution == "MacOSX"
   with_items:
     - gnupg
@@ -8,7 +8,7 @@
     name: "{{ item }}"
     state: present
 
-- name: Install ASDF Prerequisites - (X)Ubuntu
+- name: Install ASDF Prerequisites - All Ubuntu's
   when: ansible_facts.distribution == "Ubuntu"
   become: yes
   become_method: sudo

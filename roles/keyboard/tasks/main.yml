@@ -4,15 +4,15 @@
     path: "{{ ansible_facts.user_dir }}/.config/autostart"
     state: directory
 
-- name: Autostart Redshift - Ubuntu Gnome
-  when: ansible_facts.env.DESKTOP_SESSION == "ubuntu"
+- name: Autostart Keyboard Settings - Ubuntu (Gnome)
+  when: (ansible_facts.env.DESKTOP_SESSION == "ubuntu") or (ansible_facts.ansible_env["DESKTOP_SESSION"] == "budgie-desktop")
   copy:
     src: "{{ role_path }}/files/keyboard_caps_is_ctrl.desktop.gnome"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/setxkbmap.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
   
-- name: Autostart Redshift - XFCE
+- name: Autostart Keyboard Settings - XFCE
   when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
   copy:
     src: "{{ role_path }}/files/keyboard_caps_is_ctrl.desktop.xfce"

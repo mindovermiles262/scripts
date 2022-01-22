@@ -4,7 +4,8 @@
     repo: "https://github.com/jichu4n/bash-command-timer"
     dest: "{{ ansible_facts.user_dir }}/Documents/bash-command-timer"
 
-- name: Symlink Bash Profile
+- name: Symlink Bash Profile - All Ubuntu's
+  when: ansible_facts.distribution == "Ubuntu"
   file:
     src: "{{ role_path }}/files/bash_profile"
     dest: "{{ ansible_facts.user_dir }}/.bash_profile"
