@@ -5,7 +5,7 @@
     state: directory
 
 - name: Autostart Keyboard Settings - Ubuntu (Gnome)
-  when: (ansible_facts.env.DESKTOP_SESSION == "ubuntu") or (ansible_facts.ansible_env["DESKTOP_SESSION"] == "budgie-desktop")
+  when: (ansible_facts.env.DESKTOP_SESSION == "ubuntu") or (ansible_facts.env.DESKTOP_SESSION == "budgie-desktop")
   copy:
     src: "{{ role_path }}/files/keyboard_caps_is_ctrl.desktop.gnome"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/setxkbmap.desktop"
