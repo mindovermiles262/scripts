@@ -19,3 +19,13 @@
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/setxkbmap.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
+
+- name: Install kb script
+  when: ansible_facts.distribution == "Ubuntu"
+  become: yes
+  become_method: sudo
+  copy:
+    src: "{{ role_path }}/files/kb"
+    dest: "/usr/local/bin"
+    mode: 0755
+    
