@@ -1,6 +1,6 @@
 ---
 - name: Install redshift - Xubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+  when: ansible_facts.distribution == "Ubuntu"
   become: yes
   become_method: sudo
   apt:
@@ -9,7 +9,7 @@
     state: latest
 
 - name: Symlink redshift config file - Xubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+  when: ansible_facts.distribution == "Ubuntu"
   file:
     src: "{{ role_path }}/files/redshift.conf"
     dest: "{{ ansible_facts.user_dir }}/.config/redshift.conf"
@@ -21,6 +21,14 @@
   when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
   copy:
     src: "{{ role_path }}/files/Redshift.xfce"
+    dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+
+- name: Autostart Redshift - Ubuntu
+  when: ansible_facts.env.DESKTOP_SESSION == "ubuntu"
+  copy:
+    src: "{{ role_path }}/files/Redshift.gnome"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
