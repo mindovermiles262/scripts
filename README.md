@@ -19,6 +19,7 @@ $ source ./venv/bin/activate
 ## TODO
 
 - [ ] Add Flameshot
+- [ ] xclip - Linux
 
 
 ## Ansible Facts
