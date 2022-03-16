@@ -114,6 +114,20 @@ tada() {
   fi
 }
 
+dslr() {
+  if [ -n "$1" ]
+  then
+    DEVICE="$1"
+  else
+    DEVICE="/dev/video4"
+  fi
+  gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 $DEVICE
+}
+
+dslr-reset() {
+  gphoto2 --stdout --capture-movie > /dev/null
+}
+
 # Use bash-completion
 if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
   . /usr/local/etc/profile.d/bash_completion.sh
