@@ -19,14 +19,15 @@ $ source ./venv/bin/activate
 ## TODO
 
 - [ ] Add Flameshot
-- [ ] xclip - Linux
+- [x] xclip - Linux
 
 
 ## Ansible Facts
 
 - MacOS   => `ansible_facts.distribution == "MacOS"`
 
-- ALL     => `ansible_facts.distribution == "Ubuntu"`
-- Ubuntu  => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "ubuntu"`
-- Xubuntu => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "xubuntu"`
-- Budgie  => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "budgie-desktop"`
+- ALL Ubuntus   => `ansible_facts.distribution == "Ubuntu"`
+- Ubuntu        => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "ubuntu"`
+- Xubuntu       => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "xubuntu"`
+- Budgie        => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "budgie-desktop"`
+- Kubuntu       => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "plasma"`

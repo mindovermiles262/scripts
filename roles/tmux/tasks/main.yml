@@ -6,6 +6,7 @@
   apt:
     pkg:
       - tmux
+      - xclip
     state: latest
 
 - name: Install tmux - MacOS

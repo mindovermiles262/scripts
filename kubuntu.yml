@@ -8,13 +8,13 @@
       - "ruby"
       - "nodejs"
       - "python"
-      - "gcloud"
-      - "awscli"
   roles:
     - asdf
     - bash
     - keyboard
+    - libinput
     - mouse
+    - redshift
     - tmux 
     - vim
 
