@@ -1,5 +1,5 @@
 ---
-- name: Install redshift - (X)Ubuntu
+- name: Install redshift - Xubuntu
   when: ansible_facts.distribution == "Ubuntu"
   become: yes
   become_method: sudo
@@ -8,7 +8,7 @@
       - redshift-gtk
     state: latest
 
-- name: Symlink redshift config file
+- name: Symlink redshift config file - Xubuntu
   when: ansible_facts.distribution == "Ubuntu"
   file:
     src: "{{ role_path }}/files/redshift.conf"
@@ -16,19 +16,27 @@
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
     state: link
+  
+- name: Autostart Redshift - Xubuntu
+  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+  copy:
+    src: "{{ role_path }}/files/Redshift.xfce"
+    dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
 
-- name: Autostart Redshift - Ubuntu Gnome
+- name: Autostart Redshift - Ubuntu
   when: ansible_facts.env.DESKTOP_SESSION == "ubuntu"
   copy:
     src: "{{ role_path }}/files/Redshift.gnome"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
-  
-- name: Autostart Redshift - XFCE
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+
+- name: Autostart Redshift - Kubuntu
+  when: ansible_facts.env.DESKTOP_SESSION == "plasma"
   copy:
-    src: "{{ role_path }}/files/Redshift.xfce"
+    src: "{{ role_path }}/files/Redshift.gnome"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"

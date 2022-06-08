@@ -2,27 +2,32 @@
 
 Configuration scripts for devices.
 
-Clone repo and run `./autorun.sh` from the base directory
+## Getting Started
 
-# Environments
+```
+$ sudo apt-get install -y python3 python3-pip
+$ pip install virtualenv
 
-* `macos`
-* `fedora`
-* `ubuntu`
-* `xubuntu`
+# Make sure you're in this 'scripts' directory
+$ ~/.local/bin/virtualenv venv
+$ source ./venv/bin/activate
+(venv) $ pip install -r requirements.txt
 
-# TODO
+(venv) $ ansible-playbook [FILENAME] -K
+```
 
-- [x] Figure out how to use "$HOME" variable in `.desktop` files (Compton and Redshift)
-- [x] Write better libinput to determine trackpad name via grep/sed/cut
+## TODO
+
 - [ ] Add Flameshot
-- [ ] Add Uninstall scripts
+- [x] xclip - Linux
 
-# Ansible
+
+## Ansible Facts
 
 - MacOS   => `ansible_facts.distribution == "MacOS"`
-- Ubuntu  => `ansible_facts.distribution == "Ubuntu"`
-          => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "ubuntu"`
-- Xubuntu => `ansible_facts.distribution == "Ubuntu"`
-          => `ansible_distribution_file_variety == "Debian"`
-          => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "xubuntu"`
+
+- ALL Ubuntus   => `ansible_facts.distribution == "Ubuntu"`
+- Ubuntu        => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "ubuntu"`
+- Xubuntu       => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "xubuntu"`
+- Budgie        => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "budgie-desktop"`
+- Kubuntu       => `ansible_facts.ansible_env["DESKTOP_SESSION"] == "plasma"`

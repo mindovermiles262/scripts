@@ -28,7 +28,7 @@ fi
 
 # Add color to Terminal:
 # export PS1='\[\033[32m\]$(hostname_displ) \[\033[34m\][\W]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\$ '
-export PS1='\[\033[32m\]\u \[\033[34m\][\w]\[\033[33m\]$(parse_git_branch)\[\033[00m\]\n\$\[\033[8m\]•\[\033[00m\]'
+export PS1='\[\033[1;32m\]\u \[\033[1;34m\][\w]\[\033[1;33m\]$(parse_git_branch)\[\033[00m\]\n\$\[\033[8m\]•\[\033[00m\]'
 
 # Get first 4 letters of hostname and upcase
 hostname_displ() {
@@ -114,6 +114,20 @@ tada() {
   fi
 }
 
+dslr() {
+  if [ -n "$1" ]
+  then
+    DEVICE="$1"
+  else
+    DEVICE="/dev/video4"
+  fi
+  gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 $DEVICE
+}
+
+dslr-reset() {
+  gphoto2 --stdout --capture-movie > /dev/null
+}
+
 # Use bash-completion
 if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
   . /usr/local/etc/profile.d/bash_completion.sh
@@ -176,9 +190,9 @@ if [ -d "$HOME/.pack" ]; then
 fi
 
 # Use Minikube docker
-if [ -d "$HOME/.minikube" ]; then
-  export DOCKER_TLS_VERIFY="1"
-  export DOCKER_HOST="tcp://192.168.64.2:2376"
-  export DOCKER_CERT_PATH="/Users/aduss/.minikube/certs"
-  export MINIKUBE_ACTIVE_DOCKERD="minikube"
-fi
+# if [ -d "$HOME/.minikube" ]; then
+#   export DOCKER_TLS_VERIFY="1"
+#   export DOCKER_HOST="tcp://192.168.64.2:2376"
+#   export DOCKER_CERT_PATH="/Users/aduss/.minikube/certs"
+#   export MINIKUBE_ACTIVE_DOCKERD="minikube"
+# fi

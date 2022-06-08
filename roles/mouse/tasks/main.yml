@@ -1,11 +1,20 @@
 #
-# Installs config for Logitech M720 Triathalon Mouse
-# Only set for Xubuntu as I'm not sure if Ubuntu needs this
-# configuration as well.
+# Run `xev` in terminal, then find the `keycode` of the event
+#
+# Logitech M720 Triathalon:
+#   Button 8 => Side button backwards
+#   Button 9 => Side button forward
+#   Keycode 37 => Bottom Thumb 
 #
 ---
-- name: Install Mouse xbindkeys packages - Xubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+- name: Austostart Directory
+  when: ansible_facts.distribution == "Ubuntu"
+  file:
+    path: "{{ ansible_facts.user_dir }}/.config/autostart"
+    state: directory
+
+- name: Install Mouse xbindkeys packages - All Ubuntu's
+  when: ansible_facts.distribution == "Ubuntu"
   become: yes
   become_method: sudo
   apt:
@@ -14,16 +23,16 @@
       - xdotool
     state: latest
 
-- name: Install Xbindkeys.desktop file - Xubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+- name: Install Xbindkeys.desktop file - All Ubuntu's
+  when: ansible_facts.distribution == "Ubuntu"
   copy:
     src: "{{ role_path }}/files/Xbindkeys.desktop"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/Xbindkeys.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
 
-- name: Install xbindkeysrc config file - Xubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+- name: Install xbindkeysrc config file - All Ubuntu's
+  when: ansible_facts.distribution == "Ubuntu"
   copy:
     src: "{{ role_path }}/files/xbindkeysrc"
     dest: "{{ ansible_facts.user_dir }}/.xbindkeysrc"

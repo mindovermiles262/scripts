@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=/usr/bin/redshift-gtk -c $HOME/.config/redshift.conf &
+Exec=/usr/bin/redshift -c $HOME/.config/redshift.conf
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
 Name[en_US]=Redshift
 Name=Redshift
-Comment[en_US]=Start Redshift with Configuration
-Comment=Start Redshift with Configuration
+Comment[en_US]=Start Redshift with Custom Settings
+Comment=Start Redshift with Custom Settings
