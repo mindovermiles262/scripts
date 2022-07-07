@@ -7,7 +7,11 @@ BASH_PROFILE_URL="https://raw.githubusercontent.com/mindovermiles262/scripts/mas
 
 # Load settings from .bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
-# source ~/Documents/bash-command-timer/bash_command_timer.sh
+
+if [ -f "~/Documents/bash-command-timer/bash_command_timer.sh" ]; then
+  source ~/Documents/bash-command-timer/bash_command_timer.sh
+fi
+
 
 if [ -d "$HOME/.phpbrew" ]; then
   source /Users/aduss/.phpbrew/bashrc
