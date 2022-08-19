@@ -12,13 +12,6 @@ if [ -f "~/Documents/bash-command-timer/bash_command_timer.sh" ]; then
   source ~/Documents/bash-command-timer/bash_command_timer.sh
 fi
 
-
-if [ -d "$HOME/.phpbrew" ]; then
-  source /Users/aduss/.phpbrew/bashrc
-  export PHPBREW_SET_PROMPT=1
-  export PHPBREW_RC_ENABLE=1
-fi
-
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
   alias open="xdg-open"
@@ -47,6 +40,20 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+dslr() {
+  if [ -n "$1" ]
+  then
+    DEVICE="$1"
+  else
+    DEVICE="/dev/video4"
+  fi
+  gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 $DEVICE
+}
+
+dslr-reset() {
+  gphoto2 --stdout --capture-movie > /dev/null
+}
+
 ###########
 # Aliases #
 ###########
@@ -64,29 +71,53 @@ else
   alias la="/bin/ls -haG"
 fi
 
+# Git Aliases
+alias gss="git status"
+alias gaa="git add ."
+alias gcc="git commit -m '$@'"
+alias gph="git push origin HEAD"
+alias gc='git commit -am "$(date)"'
+
+
 # Work
 alias st="cd ~/storable && ls -lGh"
 alias std="cd ~/storable/devops && ls -lGh"
 alias stm="cd ~/storable/sparefoot && ls -lGh"
 alias sta="cd ~/storable/access && ls -lGh"
 alias stp="cd ~/storable/polaris && ls -lGh"
+export AP="storable-access-astria-porta"
+export FS="storable-polaris-facility-service"
+export TS="storable-polaris-tenant-service"
+export CS="storable-polaris-cowsay"
+export SLP="storable-sitelink-palantir"
+export SLS="storable-sitelink-slapipals"
+export ES="external-secrets"
+export SSO="storable-polaris-sso-service"
+export TW="storable-toast-toast-web"
+export TA="storable-toast-toast-api"
+export SLIP="storable-sitelink-insurance-processor"
 
-# DevOps Tool Aliases
+# Program Aliases
 alias tf="terraform $@"
 alias tplan="terraform plan -out out.plan $@"
 alias mk="minikube $@"
 alias dc="docker-compose $@"
+export DOCKER_BUILDKIT=0
+alias gc="gcloud $@"
+alias ta="tmux attach -t $1"
+alias tls="tmux ls"
+alias gc="gcloud $@"
+alias mks="microk8s $@"
+alias kls="kubectl config get-contexts"
+alias kuse="kubectl config use-context $1"
+export KUBE_EDITOR=vim
+alias dn="dotnet $@"
 
 # Random Aliases
 alias cip="curl https://andyduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
-alias ta="tmux attach -t $1"
-alias tls="tmux ls"
-alias gc="gcloud $1"
-alias kls="kubectl config get-contexts"
-alias kuse="kubectl config use-context $1"
 
 ks() {
   if [[ -f "/snap/bin/microk8s" ]]; then
@@ -96,7 +127,6 @@ ks() {
   fi
 }
 
-export KUBE_EDITOR=vim
 
 tada() {
   # Check if tmux is installed
@@ -118,18 +148,24 @@ tada() {
   fi
 }
 
-dslr() {
-  if [ -n "$1" ]
-  then
-    DEVICE="$1"
-  else
-    DEVICE="/dev/video4"
-  fi
-  gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 $DEVICE
+preprod_admin () {
+    aws sso login --profile sso-st-preprod-admin
 }
 
-dslr-reset() {
-  gphoto2 --stdout --capture-movie > /dev/null
+jwt-ap-dev() {
+    dotnet run \
+      --project ~/storable/polaris/jwt-generation-util/src/Storable.Polaris.JwtGenerationUtil \
+      --private-key ~/.storable/storable-developer-local.pem \
+      --issuer Storable.Developer.Local \
+      --kid storable
+}
+
+tf-check() {
+  docker run --rm -it -v $(pwd):/lint -w /lint ghcr.io/antonbabenko/pre-commit-terraform:latest run --all-files
+}
+
+tf-doc() {
+  pre-commit run --show-diff-on-failure --all-files terraform_docs
 }
 
 # Use bash-completion
@@ -140,7 +176,7 @@ fi
 # Add asdf to PATH
 if [ -d "$HOME/.asdf" ]; then
   . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
+  export PATH=$PATH:$HOME/.asdf/shims
 fi
 
 # Add pyenv to PATH
@@ -161,13 +197,10 @@ if [ -d "/usr/local/go" ]; then
   export PATH="$PATH:/usr/local/go/bin"
 fi
 
-# if [ -d "$HOME/.phpenv" ]; then
-#   export PATH="/usr/local/opt/bison/bin:$PATH"
-#   export PHPENV_ROOT="$HOME/.phpenv"
-#   export PATH="$PHPENV_ROOT/bin:$PATH"
-#   eval "$(phpenv init -)"
-#   export PHPENV_CONFIG="--with-zlib-dir=$(brew --prefix zlib) --with-bz2=$(brew --prefix bzip2) --with-curl=$(brew --prefix curl) --with-iconv=$(brew --prefix libiconv) --with-libedit=$(brew --prefix libedit) --with-readline=$(brew --prefix readline) --with-tidy=$(brew --prefix tidy-html5)"
-# fi
+if [ -d "$HOME/code/go" ]; then
+  export GOPATH="$HOME/code/go"
+  export PATH="$PATH:$GOPATH/bin"
+fi
 
 # Add Istio to PATH
 if [ -d "$HOME/Applications/istio" ]; then
@@ -183,20 +216,16 @@ if [ -d "$HOME/Applications/google-cloud-sdk" ]; then
   export PATH="$PATH:$HOME/Applications/google-cloud-sdk/bin"
 fi
 
-# Add neovim to PATH
-if [ -d "$HOME/Applications/neovim" ]; then
-  export PATH="$PATH:$HOME/Applications/neovim/bin"
+# Use MySQL from brew
+if [ -d "/usr/local/opt/mysql-client" ]; then
+  export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 fi
 
-# Add pack to PATH
-if [ -d "$HOME/.pack" ]; then
-  . $(pack completion)
+if [ -d "$HOME/.dotnet/tools" ]; then
+  export PATH="$PATH:$HOME/.dotnet/tools"
 fi
 
-# Use Minikube docker
-# if [ -d "$HOME/.minikube" ]; then
-#   export DOCKER_TLS_VERIFY="1"
-#   export DOCKER_HOST="tcp://192.168.64.2:2376"
-#   export DOCKER_CERT_PATH="/Users/aduss/.minikube/certs"
-#   export MINIKUBE_ACTIVE_DOCKERD="minikube"
-# fi
+if [ -d "$HOME/Applications/kafka" ]; then
+  export PATH="$PATH:$HOME/Applications/kafka/bin"
+  export CLASSPATH="$HOME/Applications/kafka/bin/aws-msk-iam-auth-1.1.4-all.jar"
+fi
