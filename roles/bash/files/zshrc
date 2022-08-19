@@ -25,6 +25,13 @@ function git_remote_name() {
   git remote -v 2> /dev/null | head -1 | cut -f2 | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev | cut -d'.' -f1
 }
 
+function k8s_current_context() {
+  if [ -f "$HOME/.kube/config" ]; then
+    CURRENT_CONTEXT=$(grep "current-context" "$HOME/.kube/config" | cut -d" " -f2)
+    echo "[$CURRENT_CONTEXT]"
+  fi
+}
+
 function git_all_in_one() {
   REMOTE=$(git remote -v 2> /dev/null | head -1 | cut -f2 | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev | cut -d'.' -f1)
   BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
@@ -37,13 +44,13 @@ function directory_trim() {
   # echo "${PWD%/*}" | sed "s;$HOME;~;" | sed -e "s;\(/..\)[^/]*;\1;g" 
   # echo "${PWD%/*}" | sed "s;$HOME;~;" | rev | cut -d'/' -f-1-3 | rev 
   # pwd | sed "s;$HOME;~;" | rev | cut -d'/' -f1-3 | rev
-  pwd | sed "s;$HOME;~;" | sed "s;storable;st;" | sed "s;devops;do;"
+  pwd | sed "s;$HOME;~;" | sed "s;storable;st;" | sed "s;devops;do;" | sed "s;infrastructure;infra;" | sed "s;terraform;tf;" | sed "s;development;dvl;" | sed "s;staging;stg;" | sed "s;production;prd;"
 }
 
 # Add color to Terminal:
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PS1="%{$fg[green]%}%n%{$reset_color%} %{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%}
+PS1="%{$fg[green]%}%n%{$reset_color%} %{$fg[white]%}(\$(date +"%T"))%{$reset_color%} %{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[magenta]%}\$(k8s_current_context)%{$reset_color%}
 %% "
 
 ###########
@@ -88,6 +95,8 @@ export SSO="storable-polaris-sso-service"
 export TW="storable-toast-toast-web"
 export TA="storable-toast-toast-api"
 export SLIP="storable-sitelink-insurance-processor"
+export EBP="storable-polaris-eventbus-proxy"
+export PAPI="storable-payments-payments-api"
 
 # Program Aliases
 alias tf="terraform $@"
@@ -152,12 +161,26 @@ jwt-ap-dev() {
       --kid storable
 }
 
+jwt-ap-prod() {
+    dotnet run \
+      --project ~/storable/polaris/jwt-generation-util/src/Storable.Polaris.JwtGenerationUtil \
+      --private-key ~/.storable/storable-access-astria-porta-production.pem \
+      --issuer astria-porta.access.storable.io \
+      --kid storable
+}
+
 tf-check() {
   docker run --rm -it -v $(pwd):/lint -w /lint ghcr.io/antonbabenko/pre-commit-terraform:latest run --all-files
 }
 
 tf-doc() {
   pre-commit run --show-diff-on-failure --all-files terraform_docs
+}
+
+ssols() {
+    if [ -f "$HOME/.aws/credentials" ]; then
+      cat "$HOME/.aws/credentials" | grep "\["
+    fi
 }
 
 # Use bash-completion
