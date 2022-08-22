@@ -73,7 +73,7 @@ fi
 # Git Aliases
 alias gss="git status"
 alias gaa="git add ."
-alias gcc="git commit -m '$@'"
+alias gcc="git commit -sm $@"
 alias gph="git push origin HEAD"
 alias gc='git commit -am "$(date)"'
 
@@ -181,6 +181,10 @@ ssols() {
     if [ -f "$HOME/.aws/credentials" ]; then
       cat "$HOME/.aws/credentials" | grep "\["
     fi
+}
+
+fpush() {
+    git add . && git commit -sm "$(date)" && git push origin HEAD
 }
 
 # Use bash-completion
