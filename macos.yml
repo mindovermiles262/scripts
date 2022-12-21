@@ -3,9 +3,16 @@
   hosts: localhost
   vars:
     asdf_plugins:
-      - "ruby"
+      - "awscli"
+      - "dotnet-core"
+      - "gcloud"
+      - "golang"
+      - "helm"
+      - "kubectl"
+      - "kubectx"
       - "nodejs"
       - "python"
+      - "ruby"
       - "terraform"
   roles:
     - asdf
