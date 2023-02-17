@@ -24,7 +24,7 @@ call plug#end()
 
 " set autoindent
 set number
-set numberwidth=3
+set numberwidth=2
 
 " Set Ruler
 set colorcolumn=79
@@ -87,3 +87,15 @@ let g:user_emmet_expandabbr_key='<C-e>'
 
 " vim-terraform
 let g:terraform_fmt_on_save=1
+
+" NerdTree Stuff
+" show hidden files by default, 'I' to toggle
+let NERDTreeShowHidden=1
+" Ignore these types of files
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,.git
+" Nerdtree config for wildignore
+let NERDTreeRespectWildIgnore=1
+
+" Use '\sp' '\snp' to :set [no] paste
+nmap <leader>sp :set paste<CR>
+nmap <leader>snp :set nopaste<CR>

@@ -50,7 +50,9 @@ function directory_trim() {
 # Add color to Terminal:
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PS1="%{$fg[green]%}%n%{$reset_color%} %{$fg[white]%}(\$(date +"%T"))%{$reset_color%} %{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[magenta]%}\$(k8s_current_context)%{$reset_color%}
+# PS1="%{$fg[green]%}%n%{$reset_color%} %{$fg[white]%}(\$(date +"%T"))%{$reset_color%} %{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[magenta]%}\$(k8s_current_context)%{$reset_color%}
+# %% "
+PS1="%{$fg[blue]%}[\$(directory_trim)]%{$reset_color%} %{$fg[white]%}(\$(date +"%T"))%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[magenta]%}\$(k8s_current_context)%{$reset_color%}
 %% "
 
 ###########
@@ -84,6 +86,7 @@ alias std="cd ~/storable/devops && ls -lGh"
 alias stm="cd ~/storable/sparefoot && ls -lGh"
 alias sta="cd ~/storable/access && ls -lGh"
 alias stp="cd ~/storable/polaris && ls -lGh"
+alias stt="cd ~/storable/devops/terraform-modules && ls -lGh"
 export AP="storable-access-astria-porta"
 export FS="storable-polaris-facility-service"
 export TS="storable-polaris-tenant-service"
@@ -99,6 +102,9 @@ export EBP="storable-polaris-eventbus-proxy"
 export PAPI="storable-payments-payments-api"
 export DEB="storable-devops-demos-dapr-eventbus"
 export DDD="storable-devops-demos-debbie"
+export BENJ="storable-devops-benjamin"
+export IIS="storable-insurance-insurance-service"
+export PPP="storable-payments-payments-portal"
 
 # Program Aliases
 alias tf="terraform $@"
@@ -107,16 +113,14 @@ alias mk="minikube $@"
 alias dc="docker-compose $@"
 export DOCKER_BUILDKIT=0
 alias gc="gcloud $@"
-alias ta="tmux attach -t $1"
 alias tls="tmux ls"
-alias tnew="tmux new -s $@"
-alias tn="tmux new -s $@"
 alias gc="gcloud $@"
 alias mks="microk8s $@"
 alias kls="kubectl config get-contexts"
 alias kuse="kubectl config use-context $1"
 export KUBE_EDITOR=vim
 alias dn="dotnet $@"
+alias kn="kubens $@"
 
 # Random Aliases
 alias cip="curl https://andyduss.com/ip"
@@ -129,6 +133,24 @@ ks() {
     microk8s.kubectl "$@"
   else
     kubectl "$@"
+  fi
+}
+
+tm() {
+  if [ $# -eq 0 ]; then
+    tmux ls
+  else
+    tmux ls | grep -q $1
+    CPE_EXITCODE=$?
+    if [[ "$CPE_EXITCODE" -eq 0 ]]; then
+      # 0 => Session is running, attach to existing session
+      echo "Attaching to '$1' session ..."
+      tmux attach -t $1
+    else
+      # 1 => Session does not exist, create new session
+      echo "Creating new tmux session, $1 ..."
+      tmux new -s $1
+    fi
   fi
 }
 
@@ -157,7 +179,7 @@ preprod_admin () {
     aws sso login --profile sso-st-preprod-admin
 }
 
-jwt-ap-dev() {
+jwt-dev() {
     dotnet run \
       --project ~/storable/polaris/jwt-generation-util/src/Storable.Polaris.JwtGenerationUtil \
       --private-key ~/.storable/storable-developer-local.pem \
@@ -165,7 +187,7 @@ jwt-ap-dev() {
       --kid storable
 }
 
-jwt-ap-prod() {
+jwt-prod() {
     dotnet run \
       --project ~/storable/polaris/jwt-generation-util/src/Storable.Polaris.JwtGenerationUtil \
       --private-key ~/.storable/storable-access-astria-porta-production.pem \
@@ -189,6 +211,10 @@ ssols() {
 
 fpush() {
     git add . && git commit -sm "$(date)" && git push origin HEAD
+}
+
+b64() {
+    echo $1 | base64 -d
 }
 
 # Use bash-completion
@@ -256,3 +282,5 @@ fi
 if [ -d "$HOME/.linkerd2/bin" ]; then
   export PATH=$PATH:$HOME/.linkerd2/bin
 fi
+
+source /Users/aduss/.docker/init-zsh.sh || true # Added by Docker Desktop

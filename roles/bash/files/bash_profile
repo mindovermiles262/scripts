@@ -240,3 +240,5 @@ if [ -d "$HOME/Applications/kafka" ]; then
   export PATH="$PATH:$HOME/Applications/kafka/bin"
   export CLASSPATH="$HOME/Applications/kafka/bin/aws-msk-iam-auth-1.1.4-all.jar"
 fi
+
+source /Users/aduss/.docker/init-bash.sh || true # Added by Docker Desktop
