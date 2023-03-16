@@ -74,10 +74,13 @@ fi
 
 # Git Aliases
 alias gss="git status"
+alias gs="git status"
 alias gaa="git add ."
+alias ga="git add ."
 alias gcc="git commit -sm $@"
+alias gc="git commit -sm $@"
 alias gph="git push origin HEAD"
-alias gc='git commit -am "$(date)"'
+alias gp="git push origin HEAD"
 
 
 # Work
@@ -105,6 +108,9 @@ export DDD="storable-devops-demos-debbie"
 export BENJ="storable-devops-benjamin"
 export IIS="storable-insurance-insurance-service"
 export PPP="storable-payments-payments-portal"
+export GPP="storable-devops-demos-gustp-payments-portal"
+export GFS="storable-devops-demos-gustp-facility-service"
+export GSS="storable-devops-demos-gustp-search-service"
 
 # Program Aliases
 alias tf="terraform $@"
