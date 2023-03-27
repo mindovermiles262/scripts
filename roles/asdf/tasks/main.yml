@@ -9,7 +9,7 @@
     state: present
 
 - name: Install ASDF Prerequisites - All Ubuntu's
-  when: ansible_facts.distribution == "Ubuntu"
+  when: ansible_facts.pkg_mgr == "apt" 
   become: yes
   become_method: sudo
   apt:
@@ -31,7 +31,6 @@
       - libssl-dev
       - libsqlite3-dev
       - llvm
-      - python-openssl
       - tk-dev
       - xz-utils
       - zlib1g-dev
