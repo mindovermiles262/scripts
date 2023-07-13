@@ -1,10 +1,11 @@
+
+# Load settings from .bashrc
+[[ -r ~/.bashrc ]] && . ~/.bashrc
+
 # Source shell file
 if [ -f "$HOME/.terminal_profile" ]; then
   . "$HOME/.terminal_profile"
 fi
-
-# Load settings from .bashrc
-[[ -r ~/.bashrc ]] && . ~/.bashrc
 
 # Add color to Terminal:
 export PS1='\[\033[1;32m\]\u \[\033[1;00m\](\D{%T}) \[\033[1;34m\][\w]\[\033[1;33m\]$(parse_git_branch) \[\033[1;31m\]$(k8s_current_context)\[\033[00m\]\n\$\[\033[8m\]•\[\033[00m\]'
