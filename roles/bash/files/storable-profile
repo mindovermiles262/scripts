@@ -1,0 +1,50 @@
+preprod_admin () {
+    aws sso login --profile sso-st-preprod-admin
+}
+
+jwt-dev() {
+    dotnet run \
+      --project ~/storable/polaris/jwt-generation-util/src/Storable.Polaris.JwtGenerationUtil \
+      --private-key ~/.storable/storable-developer-local.pem \
+      --issuer Storable.Developer.Local \
+      --kid storable
+}
+
+jwt-prod() {
+    dotnet run \
+      --project ~/storable/polaris/jwt-generation-util/src/Storable.Polaris.JwtGenerationUtil \
+      --private-key ~/.storable/storable-access-astria-porta-production.pem \
+      --issuer astria-porta.access.storable.io \
+      --kid storable
+}
+
+alias st="cd ~/storable && ls -lGh"
+alias std="cd ~/storable/devops && ls -lGh"
+alias stm="cd ~/storable/sparefoot && ls -lGh"
+alias sta="cd ~/storable/access && ls -lGh"
+alias stp="cd ~/storable/polaris && ls -lGh"
+alias stt="cd ~/storable/devops/terraform-modules && ls -lGh"
+
+export AP="storable-access-astria-porta"
+export FS="storable-polaris-facility-service"
+export TS="storable-polaris-tenant-service"
+export CS="storable-polaris-cowsay"
+export SLP="storable-sitelink-palantir"
+export SLS="storable-sitelink-slapipals"
+export ES="external-secrets"
+export SSO="storable-polaris-sso-service"
+export TW="storable-toast-toast-web"
+export TA="storable-toast-toast-api"
+export SLIP="storable-sitelink-insurance-processor"
+export EBP="storable-polaris-eventbus-proxy"
+export PAPI="storable-payments-payments-api"
+export DEB="storable-devops-demos-dapr-eventbus"
+export DDD="storable-devops-demos-debbie"
+export BENJ="storable-devops-benjamin"
+export IIS="storable-insurance-insurance-service"
+export PPP="storable-payments-payments-portal"
+export GPP="storable-devops-demos-gustp-payments-portal"
+export GFS="storable-devops-demos-gustp-facility-service"
+export GSS="storable-devops-demos-gustp-search-service"
+export SCM="storable-storedge-shipping-consumer-manager"
+export STSMS="storable-polaris-sms-serivce"

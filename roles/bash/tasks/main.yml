@@ -4,11 +4,28 @@
     repo: "https://github.com/jichu4n/bash-command-timer"
     dest: "{{ ansible_facts.user_dir }}/Documents/bash-command-timer"
 
-- name: Symlink Bash Profile - All Ubuntu's
-  when: ansible_facts.distribution == "Ubuntu"
+- name: Symlink Bash Profile
+  when: ansible_facts.user_shell == "/bin/bash"
   file:
     src: "{{ role_path }}/files/bash_profile"
     dest: "{{ ansible_facts.user_dir }}/.bash_profile"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+
+- name: Symlink ZSH Profile
+  when: ansible_facts.user_shell == "/usr/bin/zsh" and ansible_facts.distribution != "Kali"
+  file:
+    src: "{{ role_path }}/files/zshrc"
+    dest: "{{ ansible_facts.user_dir }}/.zshrc"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+
+- name: Symlink Terminal Profile
+  file:
+    src: "{{ role_path }}/files/terminal_profile"
+    dest: "{{ ansible_facts.user_dir }}/.terminal_profile"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
     state: link
