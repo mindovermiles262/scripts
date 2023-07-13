@@ -27,9 +27,15 @@ function git_remote_name() {
 
 function k8s_current_context() {
   if [ -f "$HOME/.kube/config" ]; then
-    CURRENT_CONTEXT=$(grep "current-context" "$HOME/.kube/config" | cut -d" " -f2)
-    echo "[$CURRENT_CONTEXT]"
+    export CURRENT_CONTEXT=$(grep "current-context" "$HOME/.kube/config" | cut -d" " -f2)
+    CURRENT_NAMESPACE=$(k8s_current_namespace)
+    echo "[$CURRENT_CONTEXT@$CURRENT_NAMESPACE]"
   fi
+}
+
+function k8s_current_namespace() {
+  CURRENT_CONTEXT=$(grep "current-context" "$HOME/.kube/config" | cut -d" " -f2)
+  yq '.contexts[] | select(.context.cluster == env(CURRENT_CONTEXT)).context.namespace' ~/.kube/config
 }
 
 function git_all_in_one() {
@@ -111,13 +117,15 @@ export PPP="storable-payments-payments-portal"
 export GPP="storable-devops-demos-gustp-payments-portal"
 export GFS="storable-devops-demos-gustp-facility-service"
 export GSS="storable-devops-demos-gustp-search-service"
+export SCM="storable-storedge-shipping-consumer-manager"
+export STSMS="storable-polaris-sms-serivce"
 
 # Program Aliases
 alias tf="terraform $@"
 alias tplan="terraform plan -out out.plan $@"
 alias mk="minikube $@"
-alias dc="docker-compose $@"
-export DOCKER_BUILDKIT=0
+# alias dc="docker-compose $@"
+# export DOCKER_BUILDKIT=0
 alias gc="gcloud $@"
 alias tls="tmux ls"
 alias gc="gcloud $@"
@@ -216,7 +224,35 @@ ssols() {
 }
 
 fpush() {
-    git add . && git commit -sm "$(date)" && git push origin HEAD
+    git add . && git commit -sm "chore: $(date)" && git push origin HEAD
+}
+
+fffpush() {
+    printf "\n" >> README.md && git add . && git commit -m "$(date)" && git push origin HEAD
+}
+
+gfeat() {
+    git add . && git commit -sm "feat: $1"
+}
+
+gfix() {
+    git add . && git commit -sm "fix: $1"
+}
+
+gchore() {
+    git add . && git commit -sm "chore: $1"
+}
+
+gopen() {
+  if [ $# -eq 0 ]; then BRANCH="origin"; else BRANCH="$1"; fi
+  REMOTE=$(git config --get remote.$BRANCH.url)
+  if [[ "$REMOTE" =~ "git@" ]]; then
+    URL=$(echo "$REMOTE" | awk -F "@" '{print $2}' | awk -F " " '{print $1}' | sed 's/:/\//g' | sed 's/.git//g' | awk '{print "https://"$1}')
+  else
+    URL=$REMOTE
+  fi
+  echo "[*] $URL"
+  open "$URL"
 }
 
 b64() {
@@ -289,4 +325,17 @@ if [ -d "$HOME/.linkerd2/bin" ]; then
   export PATH=$PATH:$HOME/.linkerd2/bin
 fi
 
-source /Users/aduss/.docker/init-zsh.sh || true # Added by Docker Desktop
+# if [ -f "$HOME/.docker/init-zsh.sh" ]; then
+#   source "$HOME/.docker/init-zsh.sh" || true 
+# fi
+
+# If podman is installed, use it
+PODMAN_SOCKET="$HOME/.local/share/containers/podman/machine/podman.sock"
+if [ -L "$PODMAN_SOCKET" ]; then
+  export DOCKER_HOST="unix://$PODMAN_SOCKET"
+fi
+
+# Add Applications bin to PATH
+if [ -d "$HOME/Applications/bin" ]; then
+  export PATH="$PATH:$HOME/Applications/bin"
+fi
