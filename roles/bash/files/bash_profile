@@ -7,15 +7,7 @@ if [ -f "$HOME/.terminal_profile" ]; then
 fi
 
 # Add color to Terminal:
-export PS1='\[\033[1;32m\]\u \[\033[1;00m\](\D{%T}) \[\033[1;34m\][\w]\[\033[1;33m\]$(parse_git_branch) \[\033[1;31m\]$(k8s_current_context)\[\033[00m\]\n\$\[\033[8m\]•\[\033[00m\]'
-
-# Get first 4 letters of hostname and upcase
-hostname_displ() {
-  # HOST="$(hostname | head -c 4)"
-  HOST="$(hostname)"
-  # echo $HOST | tr '[:lower:]' '[:upper:]'
-  echo $HOST | tr '[:upper:]' '[:lower:]'
-}
+export PS1='\[\033[1;32m\]\u \[\033[1;00m\](\D{%T}) \[\033[1;34m\][\w]\[\033[1;33m\]$(parse_git_branch) \[\033[1;31m\]$(k8s_prompt)\[\033[00m\]\n\$\[\033[8m\]•\[\033[00m\]'
 
 # Git branch in terminal.
 parse_git_branch() {
