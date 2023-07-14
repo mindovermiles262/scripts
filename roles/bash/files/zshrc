@@ -27,7 +27,7 @@ function directory_trim() {
 # Add color to Terminal:
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PS1="%{$fg[blue]%}[\$(directory_trim)]%{$reset_color%} %{$fg[white]%}(\$(date +"%T"))%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[magenta]%}\$(k8s_prompt)%{$reset_color%}
+PS1="%{$fg[blue]%}[\$(directory_trim)]%{$reset_color%} %{$fg[white]%}(\$(date +"%T"))%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[magenta]%}[\$(k8s_current_context) %{$fg[blue]%}\$(k8s_current_namespace)%{$fg[magenta]%}]%{$reset_color%}
 %% "
 
 
