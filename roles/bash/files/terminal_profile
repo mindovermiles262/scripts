@@ -161,13 +161,15 @@ function k8s_current_context() {
 
 # Returns kubenvs namespace of current context
 function k8s_current_namespace() {
-  CURRENT_CONTEXT=$(grep "current-context" "$HOME/.kube/config" | cut -d" " -f2)
+  export CURRENT_CONTEXT=$(grep "current-context" "$HOME/.kube/config" | cut -d" " -f2)
   yq '.contexts[] | select(.context.cluster == env(CURRENT_CONTEXT)).context.namespace' ~/.kube/config
 }
 
 function k8s_prompt() {
   CONTEXT=$(k8s_current_context)
-  echo "[$CONTEXT]"
+  NAMESPACE=$(k8s_current_namespace)
+  if [[ $NAMESPACE == "null" ]]; then NAMESPACE=""; fi;
+  echo "[$CONTEXT $NAMESPACE]"
 }
 
 # Use bash-completion
