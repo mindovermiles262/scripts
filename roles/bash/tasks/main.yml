@@ -29,3 +29,12 @@
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
     state: link
+
+- name: Symlink Storable Profile
+  when: storable_device == true
+  file:
+    src: "{{ role_path }}/files/storable-profile"
+    dest: "{{ ansible_facts.user_dir }}/.storable-profile"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link

@@ -21,9 +21,9 @@
       - "snyk"
       - "terraform"
       - "vault"
+    storable_device: true
   roles:
     - asdf
     - bash
     - tmux
     - vim
-
