@@ -1,0 +1,10 @@
+---
+- name: Symlink git open (Adds `git open` command)
+  file:
+    src: "{{ role_path }}/files/git-open.sh"
+    dest: "/usr/local/bin/git-open"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    mode: 0755
+    state: link
+    force: yes
