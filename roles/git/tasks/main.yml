@@ -1,5 +1,7 @@
 ---
 - name: Symlink git open (Adds `git open` command)
+  become: yes
+  become_method: sudo
   file:
     src: "{{ role_path }}/files/git-open.sh"
     dest: "/usr/local/bin/git-open"

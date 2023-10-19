@@ -4,6 +4,7 @@
   vars:
     # https://github.com/ansible/ansible/issues/14468 
     ansible_python_interpreter: /usr/bin/python3
+    storable_device: false
     asdf_plugins:
       - "ruby"
       - "nodejs"
