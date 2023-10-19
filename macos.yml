@@ -10,7 +10,7 @@
       - "golang"
       - "helm"
       - "k9s"
-      - "kpack-cli"
+      # - "kpack-cli"
       - "kubectl"
       - "kubectx"
       - "nodejs"
