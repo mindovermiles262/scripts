@@ -9,6 +9,15 @@
       - "ruby"
       - "nodejs"
       - "python"
+      - "argocd"
+      - "awscli"
+      - "gcloud"
+      - "golang"
+      - "helm"
+      - "k9s"
+      - "kubectl"
+      - "kubectx"
+      - "vault"
   roles:
     - asdf
     - bash
