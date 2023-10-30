@@ -8,5 +8,11 @@ else
   URL=$REMOTE
 fi
 echo "[*] $URL"
-open "$URL"
+
+if [[ "$OSTYPE" == 'linux'* ]]; then
+  xdg-open "$URL"
+elif [[ "$OSTYPE" =~ "darwin" ]]; then
+  open "$URL"
+fi
+
 
