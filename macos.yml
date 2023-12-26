@@ -25,6 +25,7 @@
   roles:
     - asdf
     - bash
+    - docker
     - git
     - tmux
     - vim

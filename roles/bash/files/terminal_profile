@@ -82,7 +82,7 @@ ks() {
 
 tada() {
   # Check if tmux is installed
-  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" ]]; then
+  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
     echo "Tmux not found.. exiting..."
     return 1
   fi
@@ -172,6 +172,16 @@ function k8s_prompt() {
   echo "[$CONTEXT$NAMESPACE]"
 }
 
+# Add homebrew to path
+if [ -d "/opt/homebrew/bin" ]; then
+  export PATH="$PATH:/opt/homebrew/bin"
+fi
+
+# if [ -d "/usr/local/Homebrew/bin" ]; then
+#  alias ibrew="arch -x86_64 brew"
+#  export PATH="/usr/local/Homebrew/bin:$PATH"
+# fi
+
 # Use bash-completion
 if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
   . /usr/local/etc/profile.d/bash_completion.sh
@@ -254,4 +264,10 @@ fi
 # Add Applications bin to PATH
 if [ -d "$HOME/Applications/bin" ]; then
   export PATH="$PATH:$HOME/Applications/bin"
+fi
+
+# Google depot_tools
+if [ -d "$HOME/Applications/depot_tools" ]; then
+  export PATH="$PATH:$HOME/Applications/depot_tools"
+  alias gm="$HOME/code/v8/tools/dev/gm.py"
 fi
