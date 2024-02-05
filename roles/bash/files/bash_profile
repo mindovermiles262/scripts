@@ -23,3 +23,6 @@ fi
 if [ -f "$HOME/.docker/init-bash.sh" ]; then
   source /Users/aduss/.docker/init-bash.sh
 fi
+
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
