@@ -83,7 +83,8 @@ let g:go_def_mode="gopls"
 let g:go_info_mode="gopls"
 
 " Emmet Vim
-let g:user_emmet_expandabbr_key='<C-e>'
+" let g:user_emmet_expandabbr_key='<C-e>'
+let g:user_emmet_leader_key='<C-e>'
 
 " vim-terraform
 let g:terraform_fmt_on_save=1

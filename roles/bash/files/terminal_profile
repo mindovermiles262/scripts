@@ -65,6 +65,7 @@ alias kuse="kubectl config use-context $1"
 export KUBE_EDITOR=vim
 alias dn="dotnet $@"
 alias kn="kubens $@"
+alias pm="podman $@"
 
 # Random Aliases
 alias cip="curl https://andyduss.com/ip"
@@ -162,7 +163,7 @@ function k8s_current_context() {
 function k8s_current_namespace() {
   export CURRENT_CONTEXT=$(grep "current-context" "$HOME/.kube/config" | cut -d" " -f2)
   NS=$(yq '.contexts[] | select(.context.cluster == env(CURRENT_CONTEXT)).context.namespace' ~/.kube/config)
-  if [ "$NS" == "null" ]; then echo ""; else echo " $NS"; fi
+  if [[ "$NS" == "null" ]]; then echo ""; else echo " $NS"; fi
 }
 
 function k8s_prompt() {
