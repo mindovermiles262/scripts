@@ -25,6 +25,8 @@ alias sta="cd ~/storable/access && ls -lGh"
 alias stp="cd ~/storable/polaris && ls -lGh"
 alias stt="cd ~/storable/devops/terraform-modules && ls -lGh"
 alias stl="cd ~/storable/labs && ls -lGh"
+alias sts="cd ~/storable/storEDGE && ls -lGh"
+alias stf="cd ~/storable/storEDGE/fms && ls -lGh"
 
 export AP="storable-access-astria-porta"
 export FS="storable-polaris-facility-service"
@@ -51,3 +53,4 @@ export SCM="storable-storedge-shipping-consumer-manager"
 export STSMS="storable-polaris-sms-serivce"
 export CBW="storable-labs-ai-chatbot-widget"
 export LAN="storable-labs-ai-nexus"
+

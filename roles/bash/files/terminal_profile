@@ -174,14 +174,18 @@ function k8s_prompt() {
 }
 
 # Add homebrew to path
-if [ -d "/opt/homebrew/bin" ]; then
-  export PATH="$PATH:/opt/homebrew/bin"
+if [ "$(arch)" = "arm64" ]; then
+  # ARM Homebrew (Apple Mx chip)
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  # Rosetta Terminal Homebrew (Intel chip)
+  eval "$(/usr/local/homebrew/bin/brew shellenv)"
+  alias ibrew="arch -x86_64 /usr/local/bin/brew"
+  # https://github.com/rails/rails/issues/38560
+  export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+  export DISABLE_SPRING=true
 fi
 
-# if [ -d "/usr/local/Homebrew/bin" ]; then
-#  alias ibrew="arch -x86_64 brew"
-#  export PATH="/usr/local/Homebrew/bin:$PATH"
-# fi
 
 # Use bash-completion
 if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
@@ -203,7 +207,7 @@ fi
 
 # Add rbenv to PATH
 if [ -d "$HOME/.rbenv" ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
+  export PATH="$PATH:$HOME/.rbenv/bin"
   eval "$(rbenv init -)"
 fi
 
@@ -267,8 +271,3 @@ if [ -d "$HOME/Applications/bin" ]; then
   export PATH="$PATH:$HOME/Applications/bin"
 fi
 
-# Google depot_tools
-if [ -d "$HOME/Applications/depot_tools" ]; then
-  export PATH="$PATH:$HOME/Applications/depot_tools"
-  alias gm="$HOME/code/v8/tools/dev/gm.py"
-fi
