@@ -18,6 +18,14 @@ jwt-prod() {
       --kid storable
 }
 
+irails() {
+  arch -x86_64 bin/rails $@
+}
+
+ibundle() {
+  arch -x86_64 bin/bundle $@
+}
+
 alias st="cd ~/storable && ls -lGh"
 alias std="cd ~/storable/devops && ls -lGh"
 alias stm="cd ~/storable/sparefoot && ls -lGh"
@@ -25,7 +33,7 @@ alias sta="cd ~/storable/access && ls -lGh"
 alias stp="cd ~/storable/polaris && ls -lGh"
 alias stt="cd ~/storable/devops/terraform-modules && ls -lGh"
 alias stl="cd ~/storable/labs && ls -lGh"
-alias sts="cd ~/storable/storEDGE && ls -lGh"
+alias ste="cd ~/storable/storEDGE && ls -lGh"
 alias stf="cd ~/storable/storEDGE/fms && ls -lGh"
 
 export AP="storable-access-astria-porta"

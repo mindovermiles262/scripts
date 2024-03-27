@@ -168,9 +168,10 @@ function k8s_current_namespace() {
 
 function k8s_prompt() {
   CONTEXT=$(k8s_current_context)
-  NAMESPACE=$(k8s_current_namespace)
-  if [[ $NAMESPACE == "null" ]]; then NAMESPACE=""; fi;
-  echo "[$CONTEXT$NAMESPACE]"
+  # NAMESPACE=$(k8s_current_namespace)
+  # if [[ $NAMESPACE == "null" ]]; then NAMESPACE=""; fi;
+  # echo "[$CONTEXT$NAMESPACE]"
+  echo "[$CONTEXT]"
 }
 
 # Add homebrew to path
@@ -207,8 +208,12 @@ fi
 
 # Add rbenv to PATH
 if [ -d "$HOME/.rbenv" ]; then
-  export PATH="$PATH:$HOME/.rbenv/bin"
-  eval "$(rbenv init -)"
+  # Use rbenv if we're not on Apple Silicon
+  if [ "$(arch)" = "i386" ]; then
+    echo "Using RBENV Ruby"
+    export PATH="$PATH:$HOME/.rbenv/bin"
+    eval "$(rbenv init -)"
+  fi
 fi
 
 # Add golang to PATH
