@@ -21,7 +21,7 @@
       - "snyk"
       - "terraform"
       - "vault"
-    storable_device: true
+    work_device: true
   roles:
     - asdf
     - bash

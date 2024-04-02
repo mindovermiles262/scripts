@@ -2,9 +2,9 @@
 # Profile stuff that is not shell-specific
 #
 
-# Source Storable Stuff
-if [ -f "$HOME/.storable-profile" ]; then
-  . "$HOME/.storable-profile"
+# Source Work Stuff
+if [ -f "$HOME/.work_profile" ]; then
+  . "$HOME/.work_profile"
 fi
 
 # Source sensitive environment variables
@@ -68,7 +68,7 @@ alias kn="kubens $@"
 alias pm="podman $@"
 
 # Random Aliases
-alias cip="curl https://andyduss.com/ip"
+alias cip="curl https://andrewduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
@@ -119,14 +119,6 @@ tm() {
   fi
 }
 
-tf-check() {
-  docker run --rm -it -v $(pwd):/lint -w /lint ghcr.io/antonbabenko/pre-commit-terraform:latest run --all-files
-}
-
-tf-doc() {
-  pre-commit run --show-diff-on-failure --all-files terraform_docs
-}
-
 fpush() {
     git add . && git commit -sm "$(date)" && git push origin HEAD
 }
@@ -175,18 +167,10 @@ function k8s_prompt() {
 }
 
 # Add homebrew to path
-if [ "$(arch)" = "arm64" ]; then
+if [ -d "/opt/homebrew" ]; then
   # ARM Homebrew (Apple Mx chip)
   eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-  # Rosetta Terminal Homebrew (Intel chip)
-  eval "$(/usr/local/homebrew/bin/brew shellenv)"
-  alias ibrew="arch -x86_64 /usr/local/bin/brew"
-  # https://github.com/rails/rails/issues/38560
-  export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-  export DISABLE_SPRING=true
 fi
-
 
 # Use bash-completion
 if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
@@ -204,16 +188,6 @@ if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
-fi
-
-# Add rbenv to PATH
-if [ -d "$HOME/.rbenv" ]; then
-  # Use rbenv if we're not on Apple Silicon
-  if [ "$(arch)" = "i386" ]; then
-    echo "Using RBENV Ruby"
-    export PATH="$PATH:$HOME/.rbenv/bin"
-    eval "$(rbenv init -)"
-  fi
 fi
 
 # Add golang to PATH
@@ -270,9 +244,7 @@ if [ -f "~/Documents/bash-command-timer/bash_command_timer.sh" ]; then
   source ~/Documents/bash-command-timer/bash_command_timer.sh
 fi
 
-
 # Add Applications bin to PATH
 if [ -d "$HOME/Applications/bin" ]; then
   export PATH="$PATH:$HOME/Applications/bin"
 fi
-
