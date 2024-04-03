@@ -39,11 +39,11 @@
     group: " {{ ansible_facts.user_gid }}"
     state: link
 
-- name: Symlink Storable Profile
-  when: storable_device == true
+- name: Symlink Work Profile
+  when: work_device == true
   file:
-    src: "{{ role_path }}/files/storable-profile"
-    dest: "{{ ansible_facts.user_dir }}/.storable-profile"
+    src: "{{ role_path }}/files/work_profile"
+    dest: "{{ ansible_facts.user_dir }}/.work_profile"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
     state: link

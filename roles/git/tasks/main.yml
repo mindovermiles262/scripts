@@ -10,3 +10,18 @@
     mode: 0755
     state: link
     force: yes
+
+- name: Add Global gitignore
+  file:
+    src: "{{ role_path }}/files/gitignore-global"
+    dest: "{{ ansible_facts.user_dir }}/.gitignore"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+
+- name: Use Global gitignore
+  git_config:
+    name: core.excludesFile
+    value: "{{ ansible_facts.user_dir }}/.gitignore"
+    scope: global
+    state: present
