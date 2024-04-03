@@ -1,0 +1,31 @@
+---
+- name: Configure Ubuntu
+  hosts: localhost
+  vars:
+    # https://github.com/ansible/ansible/issues/14468 
+    ansible_python_interpreter: /usr/bin/python3
+    storable_device: false
+    asdf_plugins:
+      - "ruby"
+      - "nodejs"
+      - "python"
+      - "argocd"
+      - "awscli"
+      - "gcloud"
+      - "golang"
+      - "helm"
+      - "k9s"
+      - "kubectl"
+      - "kubectx"
+      - "vault"
+  roles:
+    - asdf
+    - bash
+    - git
+    - keyboard
+    - libinput
+    - mouse
+    - redshift
+    - tmux 
+    - vim
+
