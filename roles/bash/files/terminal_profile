@@ -248,3 +248,8 @@ fi
 if [ -d "$HOME/Applications/bin" ]; then
   export PATH="$PATH:$HOME/Applications/bin"
 fi
+
+# Add PlatformIO to PATH
+if [ -d "$HOME/.platformio/penv/bin" ]; then
+  export PATH="$PATH:$HOME/.platformio/penv/bin"
+fi

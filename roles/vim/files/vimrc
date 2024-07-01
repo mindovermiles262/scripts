@@ -100,3 +100,9 @@ let NERDTreeRespectWildIgnore=1
 " Use '\sp' '\snp' to :set [no] paste
 nmap <leader>sp :set paste<CR>
 nmap <leader>snp :set nopaste<CR>
+
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>

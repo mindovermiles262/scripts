@@ -19,13 +19,13 @@
       - "kubectx"
       - "vault"
   roles:
-    - asdf
-    - bash
-    - git
-    - keyboard
-    - libinput
-    - mouse
+    # - asdf
+    # - bash
+    # - git
+    # - keyboard
+    # - libinput
+    # - mouse
     - redshift
-    - tmux 
-    - vim
+    # - tmux 
+    # - vim
 
