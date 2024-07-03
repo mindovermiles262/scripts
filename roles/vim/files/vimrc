@@ -111,3 +111,9 @@ nmap <leader>snp :set nopaste<CR>
 let g:ale_fix_on_save = 1
 highlight ALEWarning guibg=DarkYellow
 highlight ALEError guibg=DarkRed
+
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
