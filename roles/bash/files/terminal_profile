@@ -256,8 +256,10 @@ fi
 
 if [ -f "$HOME/.asdf/shims/bat" ]; then
   export BAT_THEME=ansi
+fi
 
 # Add PlatformIO to PATH
 if [ -d "$HOME/.platformio/penv/bin" ]; then
   export PATH="$PATH:$HOME/.platformio/penv/bin"
 fi
+
