@@ -21,7 +21,7 @@ function git_all_in_one() {
 }
 
 function directory_trim() {
-  pwd | sed "s;$HOME;~;" | sed "s;villa;V;g" | sed "s;devops;do;" | sed "s;infrastructure;infra;" | sed "s;terraform;tf;" | sed "s;development;dvl;" | sed "s;staging;stg;" | sed "s;production;prd;" | sed "s;prod;prd;"
+  pwd | sed "s;$HOME;~;" | sed "s;villa;vla;g" | sed "s;devops;do;" | sed "s;infrastructure;infra;" | sed "s;terraform;tf;" | sed "s;development;dvl;" | sed "s;staging;stg;" | sed "s;production;prd;" | sed "s;prod;prd;"
 }
 
 # Add color to Terminal:
