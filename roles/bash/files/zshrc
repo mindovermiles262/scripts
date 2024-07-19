@@ -21,18 +21,19 @@ function git_all_in_one() {
 }
 
 function directory_trim() {
-  pwd | sed "s;$HOME;~;" | sed "s;storable;st;" | sed "s;devops;do;" | sed "s;infrastructure;infra;" | sed "s;terraform;tf;" | sed "s;development;dvl;" | sed "s;staging;stg;" | sed "s;production;prd;"
+  pwd | sed "s;$HOME;~;" | sed "s;villa;V;g" | sed "s;devops;do;" | sed "s;infrastructure;infra;" | sed "s;terraform;tf;" | sed "s;development;dvl;" | sed "s;staging;stg;" | sed "s;production;prd;" | sed "s;prod;prd;"
 }
 
 # Add color to Terminal:
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PS1="%{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%}
+
+PS1="%{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[green]%}(\$(date +"%T"))%{$reset_color%}
 %% "
 
 
 # If podman is installed, use it
-PODMAN_SOCKET="$HOME/.local/share/containers/podman/machine/podman.sock"
-if [ -L "$PODMAN_SOCKET" ]; then
-  export DOCKER_HOST="unix://$PODMAN_SOCKET"
-fi
+# PODMAN_SOCKET="$HOME/.local/share/containers/podman/machine/podman.sock"
+# if [ -L "$PODMAN_SOCKET" ]; then
+#   export DOCKER_HOST="unix://$PODMAN_SOCKET"
+# fi

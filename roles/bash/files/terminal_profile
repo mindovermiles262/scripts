@@ -249,7 +249,17 @@ if [ -d "$HOME/Applications/bin" ]; then
   export PATH="$PATH:$HOME/Applications/bin"
 fi
 
+# All libpq brew to path
+if [ -d "/opt/homebrew/opt/libpq/bin" ]; then
+  export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+fi
+
+if [ -f "$HOME/.asdf/shims/bat" ]; then
+  export BAT_THEME=ansi
+fi
+
 # Add PlatformIO to PATH
 if [ -d "$HOME/.platformio/penv/bin" ]; then
   export PATH="$PATH:$HOME/.platformio/penv/bin"
 fi
+

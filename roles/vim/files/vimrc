@@ -10,8 +10,8 @@ endif
 call plug#begin('~/.vim/bundle')
   Plug 'airblade/vim-gitgutter'
   Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'fatih/vim-go'
-  Plug 'hashivim/vim-terraform'
+  " Plug 'fatih/vim-go'
+  " Plug 'hashivim/vim-terraform'
   Plug 'kien/ctrlp.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mattn/emmet-vim'
@@ -19,16 +19,22 @@ call plug#begin('~/.vim/bundle')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-surround'
-  Plug 'vim-syntastic/syntastic'
+  " Plug 'vim-syntastic/syntastic'
+  Plug 'dense-analysis/ale'
+  " Plug 'vim-airline/vim-airline'
+  Plug 'sheerun/vim-polyglot'
 call plug#end()
+
+" Use Terminal Colors
+set termguicolors
 
 " set autoindent
 set number
 set numberwidth=2
 
 " Set Ruler
-set colorcolumn=79
-highlight ColorColumn ctermbg=233 
+set colorcolumn=79,119
+highlight ColorColumn guibg=#000
 
 set showcmd
 set showmode
@@ -44,9 +50,9 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-" set smarttab
-" set autoindent
-" set smartindent
+set smarttab
+set autoindent
+set smartindent
 
 " Autoclose brackets
 inoremap (<CR> (<CR>)<C-c>O<TAB>
@@ -100,6 +106,11 @@ let NERDTreeRespectWildIgnore=1
 " Use '\sp' '\snp' to :set [no] paste
 nmap <leader>sp :set paste<CR>
 nmap <leader>snp :set nopaste<CR>
+
+" Ale settings
+let g:ale_fix_on_save = 1
+highlight ALEWarning guibg=DarkYellow
+highlight ALEError guibg=DarkRed
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
