@@ -2,8 +2,8 @@
 
 MNT_DIR=/mnt/nas
 CRD=/home/dipsea/.credentials
-NAS=192.168.50.11
-SHARE=aduss
+NAS=192.168.5.11
+SHARE=andrew
 
 if [ "$EUID" -ne 0 ];
 then

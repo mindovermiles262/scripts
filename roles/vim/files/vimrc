@@ -1,4 +1,6 @@
 syntax on
+scriptencoding utf-8
+set encoding=utf-8
 
 " Install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -11,7 +13,7 @@ call plug#begin('~/.vim/bundle')
   Plug 'airblade/vim-gitgutter'
   Plug 'ctrlpvim/ctrlp.vim'
   " Plug 'fatih/vim-go'
-  " Plug 'hashivim/vim-terraform'
+  Plug 'hashivim/vim-terraform'
   Plug 'kien/ctrlp.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mattn/emmet-vim'
@@ -26,7 +28,7 @@ call plug#begin('~/.vim/bundle')
 call plug#end()
 
 " Use Terminal Colors
-set termguicolors
+" set termguicolors
 
 " set autoindent
 set number
@@ -34,7 +36,7 @@ set numberwidth=2
 
 " Set Ruler
 set colorcolumn=79,119
-highlight ColorColumn guibg=#000
+" highlight ColorColumn guibg=#000
 
 set showcmd
 set showmode
@@ -61,6 +63,11 @@ inoremap [<CR> [<CR>]<C-c>O<TAB>
 inoremap (;<CR> (<CR>);<C-c>O<TAB>
 inoremap {;<CR> {<CR>};<C-c>O<TAB>
 inoremap [;<CR> [<CR>];<C-c>O<TAB>
+
+" Set Listcharacters (Tab, Space, etc)
+" set listchars=tab:→\ ,eol:¬,space:·
+set listchars=tab:→\ ,eol:¬
+set list
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
