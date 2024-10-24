@@ -1,3 +1,24 @@
 alias vh="cd ~/villa && ls -lGh"
 alias vha="cd ~/villa/app/main && ls -lGh"
 alias vhf="cd ~/villa/functions && ls -lGh"
+
+tmv() {
+  # Check if tmux is installed
+  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
+    echo "Tmux not found.. exiting..."
+    return 1
+  fi
+
+  tmux ls | grep -q villa
+  CPE_EXITCODE=$?
+  if [[ "$CPE_EXITCODE" -eq 0 ]]; then
+    # 0 => Session is running, attach to existing session
+    echo "Attaching to 'villa' session . . ."
+    tmux attach -t villa
+  else
+    # 1 => Session does not exist, create new session
+    echo "Creating new tmux session, 'villa' . . ."
+    tmux new -s villa
+  fi
+}
+
