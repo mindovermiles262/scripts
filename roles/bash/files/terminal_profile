@@ -260,3 +260,7 @@ if [ -d "$HOME/.platformio/penv/bin" ]; then
   export PATH="$PATH:$HOME/.platformio/penv/bin"
 fi
 
+# Add ADB to PATH
+if [ -d "$HOME/Applications/platform-tools" ]; then
+  export PATH="$PATH:$HOME/Applications/platform-tools"
+fi

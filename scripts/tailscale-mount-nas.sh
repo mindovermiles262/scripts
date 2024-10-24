@@ -2,7 +2,7 @@
 
 MNT_DIR=/mnt/nas
 CRD=/home/dipsea/.credentials
-NAS=100.64.0.4
+NAS=truenas-scale.home.hs.andrewduss.com
 SHARE=aduss
 
 if [ "$EUID" -ne 0 ];
