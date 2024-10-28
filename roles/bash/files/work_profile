@@ -2,7 +2,7 @@ alias vh="cd ~/villa && ls -lGh"
 alias vha="cd ~/villa/app/main && ls -lGh"
 alias vhf="cd ~/villa/functions && ls -lGh"
 
-tmv() {
+tava() {
   # Check if tmux is installed
   if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
     echo "Tmux not found.. exiting..."
@@ -18,7 +18,7 @@ tmv() {
   else
     # 1 => Session does not exist, create new session
     echo "Creating new tmux session, 'villa' . . ."
-    tmux new -s villa
+    tmux new -s villa -c $HOME/villa
   fi
 }
 

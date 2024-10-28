@@ -37,3 +37,4 @@ PS1="%{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_bran
 # if [ -L "$PODMAN_SOCKET" ]; then
 #   export DOCKER_HOST="unix://$PODMAN_SOCKET"
 # fi
+

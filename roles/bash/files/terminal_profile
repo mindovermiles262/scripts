@@ -57,26 +57,19 @@ alias dc="docker-compose $@"
 alias gc="gcloud $@"
 alias ta="tmux attach -t $1"
 alias tls="tmux ls"
+alias mk="minikube $@"
 alias kls="kubectl config get-contexts"
 alias kuse="kubectl config use-context $1"
+alias ks="kubectl $@"
 export KUBE_EDITOR=vim
 alias kn="kubens $@"
-alias pm="podman $@"
 alias p="pnpm $@"
 
-# Random Aliases
+# Helpful Aliases
 alias cip="curl https://andrewduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
-
-ks() {
-  if [[ -f "/snap/bin/microk8s" ]]; then
-    microk8s.kubectl "$@"
-  else
-    kubectl "$@"
-  fi
-}
 
 tada() {
   # Check if tmux is installed
@@ -94,7 +87,7 @@ tada() {
   else
     # 1 => Session does not exist, create new session
     echo "Creating new tmux session, 'dflt' . . ."
-    tmux new -s dflt
+    tmux new -s dflt -c $HOME
   fi
 }
 
@@ -180,55 +173,14 @@ if [ -d "$HOME/.asdf" ]; then
   export PATH=$PATH:$HOME/.asdf/shims
 fi
 
-# Add pyenv to PATH
-if [ -d "$HOME/.pyenv" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
-
-# Add golang to PATH
-if [ -d "/usr/local/go" ]; then
-  export PATH="$PATH:/usr/local/go/bin"
-fi
-
-if [ -d "$HOME/code/go" ]; then
-  export GOPATH="$HOME/code/go"
-  export PATH="$PATH:$GOPATH/bin"
-fi
-
-# Add Istio to PATH
-if [ -d "$HOME/Applications/istio" ]; then
-  export PATH="$PATH:$HOME/Applications/istio/bin"
-fi
-
-if [ -d "$HOME/.istioctl" ]; then
-  export PATH="$PATH:$HOME/.istioctl/bin"
-fi
-
-# Add gcloud to PATH
-if [ -d "$HOME/Applications/google-cloud-sdk" ]; then
-  export PATH="$PATH:$HOME/Applications/google-cloud-sdk/bin"
+# Add mise-en-place to PATH
+if [ -d "$HOME/.local/share/mise/shims" ]; then
+  export PATH="$HOME/.local/share/mise/shims:$PATH"
 fi
 
 # Use MySQL from brew
 if [ -d "/usr/local/opt/mysql-client" ]; then
   export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-fi
-
-# Add dotnet to PATH
-if [ -d "$HOME/.dotnet/tools" ]; then
-  export PATH="$PATH:$HOME/.dotnet/tools"
-fi
-
-# Add Kafka to PATH
-if [ -d "$HOME/Applications/kafka" ]; then
-  export PATH="$PATH:$HOME/Applications/kafka/bin"
-  export CLASSPATH="$HOME/Applications/kafka/bin/aws-msk-iam-auth-1.1.4-all.jar"
-fi
-
-if [ -d "$HOME/.linkerd2/bin" ]; then
-  export PATH=$PATH:$HOME/.linkerd2/bin
 fi
 
 # Add Docker completion to bash
@@ -251,16 +203,3 @@ if [ -d "/opt/homebrew/opt/libpq/bin" ]; then
   export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 fi
 
-if [ -f "$HOME/.asdf/shims/bat" ]; then
-  export BAT_THEME=ansi
-fi
-
-# Add PlatformIO to PATH
-if [ -d "$HOME/.platformio/penv/bin" ]; then
-  export PATH="$PATH:$HOME/.platformio/penv/bin"
-fi
-
-# Add ADB to PATH
-if [ -d "$HOME/Applications/platform-tools" ]; then
-  export PATH="$PATH:$HOME/Applications/platform-tools"
-fi

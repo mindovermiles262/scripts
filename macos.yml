@@ -23,9 +23,10 @@
       - "vault"
     work_device: true
   roles:
-    - asdf
-    - bash
-    - docker
-    - git
-    - tmux
-    - vim
+    # - asdf
+    # - bash
+    # - docker
+    # - git
+    - mise-en-place
+    # - tmux
+    # - vim
