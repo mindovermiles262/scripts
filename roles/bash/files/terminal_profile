@@ -15,12 +15,17 @@ fi
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
   alias open="xdg-open"
+  watts() {
+    BATTERY=${1:-0}
+    uWATT=$(cat /sys/class/power_supply/BAT$BATTERY/power_now)
+    WATTS=$(echo "$uWATT*0.000001" | bc -l)
+    printf "Battery $BATTERY is using %.2f Watts\n" $WATTS
+  }
 elif [[ "$OSTYPE" =~ "darwin" ]]; then
   export CLICOLOR=1
   export LSCOLORS=GxFxCxDxBxegedabagaced
   alias unmount="diskutil unmountDisk $1"
   alias eject="diskutil unmountDisk $1"
-  export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 
 ###########
@@ -177,6 +182,11 @@ fi
 if [ -d "$HOME/.local/share/mise/shims" ]; then
   export PATH="$HOME/.local/share/mise/shims:$PATH"
 fi
+
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 
 # Use MySQL from brew
 if [ -d "/usr/local/opt/mysql-client" ]; then
