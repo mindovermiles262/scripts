@@ -1,0 +1,8 @@
+Type=Application
+Exec=/usr/bin/redshift -c "\\$HOME/.config/redshift.conf"
+X-GNOME-Autostart-enabled=true
+NoDisplay=false
+Hidden=false
+Name[en_US]=Redshift
+Comment[en_US]=Start Redshift with custom config
+X-GNOME-Autostart-Delay=5

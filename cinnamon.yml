@@ -25,6 +25,7 @@
     # - keyboard
     # - libinput
     # - mouse
+    # - debug
     - redshift
     # - tmux 
     # - vim
