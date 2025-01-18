@@ -203,3 +203,9 @@ if [ -d "/opt/homebrew/opt/libpq/bin" ]; then
   export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 fi
 
+# Add pnpm to path
+if [ -d "$HOME/Library/pnpm" ]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+  export PATH="$HOME/Library/pnpm:$PATH"
+fi
+
