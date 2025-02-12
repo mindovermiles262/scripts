@@ -6,20 +6,20 @@
     ansible_python_interpreter: /usr/bin/python3
     work_device: false
     asdf_plugins:
-      - "ruby"
-      - "nodejs"
-      - "python"
+      # - "ruby"
+      # - "nodejs"
+      # - "python"
       # - "argocd"
       # - "awscli"
       # - "gcloud"
       # - "golang"
-      - "helm"
-      - "k9s"
-      - "kubectl"
-      - "kubectx"
+      # - "helm"
+      # - "k9s"
+      # - "kubectl"
+      # - "kubectx"
       # - "vault"
   roles:
-    - asdf
+    # - asdf
     - bash
     # - docker
     - git

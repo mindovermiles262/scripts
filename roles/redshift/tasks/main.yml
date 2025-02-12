@@ -10,12 +10,13 @@
 
 - name: Symlink redshift config file
   when: ansible_facts.pkg_mgr == "apt"
-  file:
+  copy:
+  # file:
     src: "{{ role_path }}/files/redshift.conf"
     dest: "{{ ansible_facts.user_dir }}/.config/redshift.conf"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
-    state: link
+    # state: link
   
 - name: Autostart Redshift - XFCE
   when: ansible_facts.env.DESKTOP_SESSION in ["xubuntu", "xfce"]
@@ -28,7 +29,7 @@
 - name: Autostart Redshift - Cinnamon
   when: ansible_facts.env.DESKTOP_SESSION == "cinnamon"
   copy:
-    src: "{{ role_path }}/files/Redshift.cinnamon"
+    src: "{{ role_path }}/files/Redshift.gnome"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
@@ -51,7 +52,7 @@
 
 - name: Fix autostart command
   # Template uses '$HOME' which is not valid inside of a desktop file
-  when: ansible_facts.distribution == "Ubuntu"
+  when: ansible_facts.pkg_mgr == "apt"
   replace:
     path: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     regexp: '\$HOME'
