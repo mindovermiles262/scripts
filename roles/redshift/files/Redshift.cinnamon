@@ -1,5 +1,5 @@
 Type=Application
-Exec=/usr/bin/redshift -c "\\$HOME/.config/redshift.conf"
+Exec=/usr/bin/redshift-gtk -c "\\$HOME/.config/redshift.conf"
 X-GNOME-Autostart-enabled=true
 NoDisplay=false
 Hidden=false

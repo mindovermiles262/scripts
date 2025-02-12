@@ -1,5 +1,5 @@
 ---
-- name: Install redshift
+- name: Install Redshift GTK - APT
   when: ansible_facts.pkg_mgr == "apt"
   become: yes
   become_method: sudo
@@ -17,8 +17,8 @@
     group: " {{ ansible_facts.user_gid }}"
     state: link
   
-- name: Autostart Redshift - Xubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+- name: Autostart Redshift - XFCE
+  when: ansible_facts.env.DESKTOP_SESSION in ["xubuntu", "xfce"]
   copy:
     src: "{{ role_path }}/files/Redshift.xfce"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
@@ -28,7 +28,7 @@
 - name: Autostart Redshift - Cinnamon
   when: ansible_facts.env.DESKTOP_SESSION == "cinnamon"
   copy:
-    src: "{{ role_path }}/files/Redshift.xfce"
+    src: "{{ role_path }}/files/Redshift.cinnamon"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"

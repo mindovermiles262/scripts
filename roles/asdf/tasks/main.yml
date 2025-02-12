@@ -8,7 +8,7 @@
     name: "{{ item }}"
     state: present
 
-- name: Install ASDF Prerequisites - All Ubuntu's
+- name: Install ASDF Prerequisites - APT
   when: ansible_facts.pkg_mgr == "apt" 
   become: yes
   become_method: sudo

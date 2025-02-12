@@ -181,6 +181,7 @@ fi
 # Add mise-en-place to PATH
 if [ -d "$HOME/.local/share/mise/shims" ]; then
   export PATH="$HOME/.local/share/mise/shims:$PATH"
+  eval "$(/home/doppio/.local/bin/mise activate bash)"
 fi
 
 if [ -d "$HOME/.local/bin" ]; then

@@ -1,5 +1,5 @@
 ---
-- name: Configure Ubuntu
+- name: Configure Linux
   hosts: localhost
   vars:
     # https://github.com/ansible/ansible/issues/14468 
@@ -9,13 +9,25 @@
       - "ruby"
       - "nodejs"
       - "python"
+      # - "argocd"
+      # - "awscli"
+      # - "gcloud"
+      # - "golang"
+      - "helm"
+      - "k9s"
+      - "kubectl"
+      - "kubectx"
+      # - "vault"
   roles:
-    # - asdf
+    - asdf
     - bash
+    # - docker
+    - git
     - keyboard
     # - libinput
+    # - mise-en-place # Needs work for Linux
     - mouse
+    - podman
     - redshift
     - tmux 
     - vim
-

@@ -5,7 +5,7 @@
     state: directory
 
 - name: Autostart Keyboard Settings - Ubuntu (Gnome)
-  when: (ansible_facts.env.DESKTOP_SESSION == "ubuntu") or (ansible_facts.env.DESKTOP_SESSION == "budgie-desktop") or (ansible_facts.distribution == "Kali")
+  when: ansible_facts.env.DESKTOP_SESSION in ["ubuntu", "budgie-desktop"]
   copy:
     src: "{{ role_path }}/files/keyboard_caps_is_ctrl.desktop.gnome"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/setxkbmap.desktop"
@@ -13,7 +13,7 @@
     group: " {{ ansible_facts.user_gid }}"
   
 - name: Autostart Keyboard Settings - XFCE
-  when: ansible_facts.env.DESKTOP_SESSION == "xubuntu"
+  when: ansible_facts.env.DESKTOP_SESSION in ["xubuntu", "xfce"]
   copy:
     src: "{{ role_path }}/files/keyboard_caps_is_ctrl.desktop.xfce"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/setxkbmap.desktop"
@@ -21,7 +21,7 @@
     group: " {{ ansible_facts.user_gid }}"
 
 - name: Install kb script
-  when: ansible_facts.distribution == "Ubuntu"
+  when: ansible_facts.distribution_file_variety in ["Ubuntu", "Debian"]
   become: yes
   become_method: sudo
   copy:

@@ -14,7 +14,7 @@
     state: link
 
 - name: Symlink ZSH Profile
-  when: ansible_facts.user_shell == "/usr/bin/zsh" and ansible_facts.distribution != "Kali"
+  when: ansible_facts.user_shell == "/usr/bin/zsh"
   file:
     src: "{{ role_path }}/files/zshrc"
     dest: "{{ ansible_facts.user_dir }}/.zshrc"
@@ -23,7 +23,7 @@
     state: link
 
 - name: Symlink ZSH Profile
-  when: ansible_facts.user_shell == "/bin/zsh" and ansible_facts.distribution != "Kali"
+  when: ansible_facts.user_shell == "/bin/zsh"
   file:
     src: "{{ role_path }}/files/zshrc"
     dest: "{{ ansible_facts.user_dir }}/.zshrc"
