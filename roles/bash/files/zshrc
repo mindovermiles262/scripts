@@ -28,7 +28,7 @@ function directory_trim() {
 autoload -U colors && colors
 setopt PROMPT_SUBST
 
-PS1="%{$fg[blue]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[green]%}(\$(date +"%T"))%{$reset_color%}
+PS1="%{$fg[white]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[green]%}(\$(date +"%T"))%{$reset_color%}
 %% "
 
 

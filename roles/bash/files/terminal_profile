@@ -219,3 +219,5 @@ if [ -d "$HOME/Library/pnpm" ]; then
   export PATH="$HOME/Library/pnpm:$PATH"
 fi
 
+# Ctrl-D does not exit terminal
+set -o ignoreeof  # Same as setting IGNOREEOF=10

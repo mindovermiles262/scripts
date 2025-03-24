@@ -2,6 +2,8 @@ syntax on
 scriptencoding utf-8
 set encoding=utf-8
 
+set mouse=a
+
 " Install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -10,21 +12,18 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/bundle')
-  Plug 'airblade/vim-gitgutter'
   Plug 'ctrlpvim/ctrlp.vim'
-  " Plug 'fatih/vim-go'
+  Plug 'airblade/vim-gitgutter'
   Plug 'hashivim/vim-terraform'
-  Plug 'kien/ctrlp.vim'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mattn/emmet-vim'
   Plug 'preservim/nerdtree'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-surround'
-  " Plug 'vim-syntastic/syntastic'
-  Plug 'dense-analysis/ale'
-  " Plug 'vim-airline/vim-airline'
-  Plug 'sheerun/vim-polyglot'
+  Plug 'vim-syntastic/syntastic'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'github/copilot.vim'
 call plug#end()
 
 " Use Terminal Colors
@@ -66,14 +65,15 @@ inoremap [;<CR> [<CR>];<C-c>O<TAB>
 
 " Set Listcharacters (Tab, Space, etc)
 " set listchars=tab:→\ ,eol:¬,space:·
-set listchars=tab:→\ ,eol:¬
+set listchars=tab:→\ 
+"set listchars=eol:¬
 set list
 
 " Syntastic Linter Settings
 " https://github.com/vim-syntastic/syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
@@ -87,13 +87,6 @@ let g:syntastic_ruby_checkers = ['rubocop']
 " Use '\sc' to check syntax
 nmap <leader>sc :SyntasticCheck<CR> 
 nmap <leader>si :SyntasticInfo<CR>
-
-" Avro Schema (.avsc) files are JSON
-autocmd BufRead,BufNewFile *.avsc setlocal filetype=json
-
-" Golang
-let g:go_def_mode="gopls"
-let g:go_info_mode="gopls"
 
 " Emmet Vim
 " let g:user_emmet_expandabbr_key='<C-e>'
@@ -109,6 +102,7 @@ let NERDTreeShowHidden=1
 set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*,.git
 " Nerdtree config for wildignore
 let NERDTreeRespectWildIgnore=1
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Use '\sp' '\snp' to :set [no] paste
 nmap <leader>sp :set paste<CR>
