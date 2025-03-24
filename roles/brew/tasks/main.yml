@@ -4,8 +4,9 @@
   stat:
     path: /usr/local/bin/brew
   register: b
+
 - name: Install Homebrew
+  when: not b.stat.exists
   become: yes
   become_method: sudo
   shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  when: not b.stat.exists

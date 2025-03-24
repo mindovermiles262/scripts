@@ -5,16 +5,52 @@
     state: present
     update_homebrew: yes
 
-- name: Install Docker Compose - MacOS
-  when: ansible_facts.distribution == "MacOSX"
-  homebrew:
-    name: docker-compose
-    state: present
-    update_homebrew: yes
+- name: Install aptitude
+  when: ansible_facts.pkg_mgr == "apt"
+  become: yes
+  become_method: sudo
+  apt:
+    name: aptitude
+    state: latest
+    update_cache: true
 
-- name: Install Podman - MacOS
-  when: ansible_facts.distribution == "MacOSX"
-  homebrew:
-    name: podman
+- name: Install required system packages - APT
+  when: ansible_facts.pkg_mgr == "apt"
+  become: yes
+  become_method: sudo
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+    update_cache: true
+
+- name: Add Docker GPG Key - APT
+  when: ansible_facts.pkg_mgr == "apt"
+  become: yes
+  become_method: sudo
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
     state: present
-    update_homebrew: yes
+
+- name: Add Docker Repository - APT
+  when: ansible_facts.pkg_mgr == "apt"
+  become: yes
+  become_method: sudo
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install Docker - APT
+  when: ansible_facts.pkg_mgr == "apt"
+  become: yes
+  become_method: sudo
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true

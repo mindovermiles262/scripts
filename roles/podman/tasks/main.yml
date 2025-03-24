@@ -1,0 +1,29 @@
+- name: Install Docker CLI - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  homebrew:
+    name: docker
+    state: present
+    update_homebrew: yes
+
+- name: Install Docker Compose - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  homebrew:
+    name: docker-compose
+    state: present
+    update_homebrew: yes
+
+- name: Install Podman - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  homebrew:
+    name: podman
+    state: present
+    update_homebrew: yes
+
+- name: Install Podman - APT
+  when: ansible_facts.pkg_mgr == "apt"
+  become: yes
+  become_method: sudo
+  apt:
+    name: podman
+    state: latest
+    update_cache: true
