@@ -14,8 +14,6 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-
-
 if [ -f "$HOME/Documents/bash-command-timer/bash_command_timer.sh" ]; then
   source "$HOME/Documents/bash-command-timer/bash_command_timer.sh"
 fi

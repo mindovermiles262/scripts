@@ -12,6 +12,7 @@ if [ -f "$HOME/.authorizations" ]; then
   . "$HOME/.authorizations"  
 fi
 
+
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
   alias open="xdg-open"
@@ -50,7 +51,6 @@ alias gss="git status"
 alias gs="git status"
 alias gaa="git add ."
 alias ga="git add ."
-alias gcc="git commit -sm $@"
 alias gc="git commit -sm $@"
 alias gph="git push origin HEAD"
 alias gp="git push origin HEAD"
@@ -75,6 +75,11 @@ alias cip="curl https://andrewduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
 alias \:q="exit"
 alias c="cd .."
+alias what="echo $?"
+
+vpn() {
+   sudo openvpn --config $1 --auth-user-pass $HOME/.pia
+}
 
 tada() {
   # Check if tmux is installed
@@ -93,6 +98,26 @@ tada() {
     # 1 => Session does not exist, create new session
     echo "Creating new tmux session, 'dflt' . . ."
     tmux new -s dflt -c $HOME
+  fi
+}
+
+pd() {
+  # Check if tmux is installed
+  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
+    echo "Tmux not found.. exiting..."
+    return 1
+  fi
+
+  tmux ls | grep -q padi
+  CPE_EXITCODE=$?
+  if [[ "$CPE_EXITCODE" -eq 0 ]]; then
+    # 0 => Session is running, attach to existing session
+    echo "Attaching to 'padi' session . . ."
+    tmux attach -t padi
+  else
+    # 1 => Session does not exist, create new session
+    echo "Creating new tmux session, 'padi' . . ."
+    tmux new -s padi -c $HOME/padi
   fi
 }
 
