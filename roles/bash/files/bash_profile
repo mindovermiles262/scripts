@@ -22,7 +22,10 @@ if [ -f "$HOME/.docker/init-bash.sh" ]; then
   source /Users/aduss/.docker/init-bash.sh
 fi
 
+if [ -e "$HOME/.local/share/containers/podman/machine/qemu/podman.sock" ]; then
+  export DOCKER_HOST="unix://$HOME/.local/share/containers/podman/machine/qemu/podman.sock"
+fi
+
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias mkarm="make ARCH=arm CROSS_COMPILE=arm-unknown-linux-uclibcgnueabi- $@"
-export PATH="$PATH:$HOME/x-tools/arm-unknown-linux-uclibcgnueabi/bin:$HOME/x-tools/arm-none-eabi/bin"

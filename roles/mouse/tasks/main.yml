@@ -21,6 +21,7 @@
     pkg:
       - xbindkeys
       - xdotool
+      - xautomation
     state: latest
 
 - name: Install Xbindkeys.desktop file - Ubuntu & Mint

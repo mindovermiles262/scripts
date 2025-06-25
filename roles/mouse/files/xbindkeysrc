@@ -19,5 +19,16 @@
 "xdotool set_desktop $(expr $(expr $(xdotool get_desktop) + $(expr $(xdotool get_num_desktops) - 1)) % $(xdotool get_num_desktops))"
     b:9
 
-# "firefox-dev"
-#     b:9
+#
+# `xbindkeys -k` --> Enter Key Combo
+#  > "(Scheme function)"
+#  >     m:0x8 + c:64
+#  >     Alt + Alt_L
+#
+# Use `xte` to "press" Page Up when chord is pressed
+# "xte 'key Page_Up'"
+#    m:0x8 + c:64
+#    Alt + Alt_L
+
+"xte 'key Home'"
+    Alt_L + Left

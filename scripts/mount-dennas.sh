@@ -1,9 +1,9 @@
 #!/bin/bash
 
-MNT_DIR=/media/dennas
+MNT_DIR=/mnt/dennas
 # CRD=/home/dipsea/.credentials_denhac
-NAS=DENNAS
-SHARE=denNAS/denhac_common
+NAS=dennas.local
+SHARE=dennas
 
 if [ "$EUID" -ne 0 ];
 then
