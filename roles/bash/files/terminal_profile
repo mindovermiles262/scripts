@@ -71,6 +71,8 @@ alias kn="kubens $@"
 alias p="pnpm $@"
 alias cs="cursor . $@"
 alias ot="OLLAMA_HOST=192.168.29.42:11434 oterm $@"
+alias ec="ETCDCTL_API=3 etcdctl $@"
+alias proton="STEAM_COMPAT_DATA_PATH=~/.proton/ '~/.steam/steam/steamapps/common/Proton 9.0 (Beta)/proton'"
 
 # Helpful Aliases
 alias cip="curl https://andrewduss.com/ip"
@@ -103,7 +105,7 @@ tada() {
   fi
 }
 
-pd() {
+tapa() {
   # Check if tmux is installed
   if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
     echo "Tmux not found.. exiting..."
@@ -205,6 +207,11 @@ if [ -f "/opt/homebrew/bin/asdf" ]; then
 elif [ -d "$HOME/.asdf" ]; then
   . $HOME/.asdf/asdf.sh
   export PATH=$PATH:$HOME/.asdf/shims
+fi
+
+if [ -f "$HOME/.local/bin/asdf" ]; then
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+  . <(asdf completion bash)
 fi
 
 if [ -d "$HOME/.local/bin" ]; then
