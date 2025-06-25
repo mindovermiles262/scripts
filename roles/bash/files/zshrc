@@ -28,13 +28,14 @@ function directory_trim() {
 autoload -U colors && colors
 setopt PROMPT_SUBST
 
-PS1="%{$fg[white]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[green]%}(\$(date +"%T"))%{$reset_color%}
+# PS1="%{$fg[white]%}[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[green]%}(\$(date +"%T"))%{$reset_color%}
+PS1="[\$(directory_trim)]%{$reset_color%}%{$fg[yellow]%}\$(git_branch_name)%{$reset_color%} %{$fg[green]%}(\$(date +"%T"))%{$reset_color%}
 %% "
 
 
 # If podman is installed, use it
-# PODMAN_SOCKET="$HOME/.local/share/containers/podman/machine/podman.sock"
-# if [ -L "$PODMAN_SOCKET" ]; then
-#   export DOCKER_HOST="unix://$PODMAN_SOCKET"
-# fi
+PODMAN_SOCKET="$HOME/.local/share/containers/podman/machine/podman.sock"
+if [ -L "$PODMAN_SOCKET" ]; then
+  export DOCKER_HOST="unix://$PODMAN_SOCKET"
+fi
 

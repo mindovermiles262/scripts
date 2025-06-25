@@ -2,6 +2,9 @@ alias vh="cd ~/villa && ls -lGh"
 alias vha="cd ~/villa/app/main && ls -lGh"
 alias vhf="cd ~/villa/functions && ls -lGh"
 
+alias nodepm="npm $@"
+alias npm="pnpm $@"
+
 tava() {
   # Check if tmux is installed
   if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
@@ -18,7 +21,18 @@ tava() {
   else
     # 1 => Session does not exist, create new session
     echo "Creating new tmux session, 'villa' . . ."
-    tmux new -s villa -c $HOME/villa
+    tmux new -s villa -c $HOME/villa \; \
+      send-keys 'cd nexus' C-m \; \
+      send-keys 'clear' C-m \; \
+      rename-window 'nexus' \; \
+      new-window \; \
+      send-keys 'cd app/main' C-m \; \
+      send-keys 'clear' C-m \; \
+      rename-window 'app' \; \
+      new-window \; \
+      send-keys 'cd admin' C-m \; \
+      send-keys 'clear' C-m \; \
+      rename-window 'admin' \;
   fi
 }
 

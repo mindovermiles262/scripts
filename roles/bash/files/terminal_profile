@@ -69,6 +69,8 @@ alias ks="kubectl $@"
 export KUBE_EDITOR=vim
 alias kn="kubens $@"
 alias p="pnpm $@"
+alias cs="cursor . $@"
+alias ot="OLLAMA_HOST=192.168.29.42:11434 oterm $@"
 
 # Helpful Aliases
 alias cip="curl https://andrewduss.com/ip"
@@ -198,22 +200,11 @@ if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
 fi
 
 # Add asdf to PATH
-if [ -d "$HOME/.asdf" ]; then
+if [ -f "/opt/homebrew/bin/asdf" ]; then
+  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+elif [ -d "$HOME/.asdf" ]; then
   . $HOME/.asdf/asdf.sh
   export PATH=$PATH:$HOME/.asdf/shims
-fi
-
-# Add mise-en-place to PATH
-if [ -d "$HOME/.local/share/mise/shims" ]; then
-  export PATH="$HOME/.local/share/mise/shims:$PATH"
-  # Linux, Use Bash
-  if [ -f "$HOME/.local/bin/mise" ]; then
-    eval "$($HOME/.local/bin/mise activate bash)"
-  fi
-  # MacOS, Use Zsh
-  if [ -f "/opt/homebrew/bin/mise" ]; then
-    eval "$(/opt/homebrew/bin/mise activate zsh)"
-  fi
 fi
 
 if [ -d "$HOME/.local/bin" ]; then
