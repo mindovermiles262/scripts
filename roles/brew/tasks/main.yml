@@ -3,10 +3,16 @@
   when: ansible_facts.distribution == "MacOSX"
   stat:
     path: /usr/local/bin/brew
-  register: b
+  register: usrBrew
+
+- name: Check if Homebrew is already installed
+  when: ansible_facts.distribution == "MacOSX"
+  stat:
+    path: /opt/homebrew/bin/brew
+  register: optBrew
 
 - name: Install Homebrew
-  when: not b.stat.exists
-  become: yes
-  become_method: sudo
-  shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  when:
+    - usrBrew.stat.exists == false
+    - optBrew.stat.exists == false
+  shell: /bin/bash -c "CI=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

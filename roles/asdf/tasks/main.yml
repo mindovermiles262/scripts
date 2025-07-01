@@ -1,13 +1,4 @@
 ---
-- name: Install ASDF Prerequisites - MacOS
-  when: ansible_facts.distribution == "MacOSX"
-  with_items:
-    - gnupg
-    - coreutils
-  homebrew:
-    name: "{{ item }}"
-    state: present
-
 - name: Install ASDF Prerequisites - APT
   when: ansible_facts.pkg_mgr == "apt" 
   become: yes
@@ -37,14 +28,18 @@
       - wget
     state: latest
 
-- name: Update or Install ASDF
-  git:
-    repo: https://github.com/asdf-vm/asdf.git
-    remote: "origin"
-    dest: "{{ ansible_facts.user_dir }}/.asdf"
-    update: yes
+# TODO: Install ASDF on Linux
+
+- name: Install ASDF - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  with_items:
+    - asdf
+  homebrew:
+    name: "{{ item }}"
+    state: present
 
 - name: Check Installed Plugins
+  ignore_errors: yes
   with_items: "{{ asdf_plugins }}"
   stat:
     path: "{{ ansible_facts.user_dir }}/.asdf/plugins/{{ item }}"
@@ -53,8 +48,4 @@
 - name: Install missing ASDF plugins
   with_items: "{{ asdf_plugins_installed.results }}"
   when: item.stat.exists is false
-  command: "{{ ansible_facts.user_dir }}/.asdf/bin/asdf plugin-add {{ item.item }}"
-
-- name: Update all ASDF plugins
-  command: "{{ ansible_facts.user_dir }}/.asdf/bin/asdf plugin-update --all"
-
+  command: "asdf plugin add {{ item.item }}"

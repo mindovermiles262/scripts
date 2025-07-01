@@ -3,30 +3,31 @@
   hosts: localhost
   vars:
     asdf_plugins:
-      - "argocd"
-      - "awscli"
-      - "dotnet-core"
-      - "gcloud"
-      - "golang"
-      - "helm"
-      - "k9s"
+      # - "argocd"
+      # - "awscli"
+      # - "dotnet-core"
+      # - "gcloud"
+      # - "golang"
+      # - "helm"
+      # - "k9s"
       # - "kpack-cli"
-      - "kubectl"
-      - "kubectx"
+      # - "kubectl"
+      # - "kubectx"
       - "nodejs"
-      - "php"
+      # - "php"
       - "python"
-      - "ruby"
-      - "rust"
-      - "snyk"
+      # - "ruby"
+      # - "rust"
+      # - "snyk"
       - "terraform"
-      - "vault"
+      # - "vault"
     work_device: true
   roles:
-    # - asdf
-    # - bash
+    - brew
+    - asdf
+    - bash
     # - docker
     # - git
-    - mise-en-place
-    # - tmux
-    # - vim
+    # - mise-en-place
+    - tmux
+    - vim
