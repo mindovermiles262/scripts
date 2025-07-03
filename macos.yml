@@ -4,7 +4,7 @@
   vars:
     asdf_plugins:
       # - "argocd"
-      # - "awscli"
+      - "awscli"
       # - "dotnet-core"
       # - "gcloud"
       # - "golang"
@@ -27,7 +27,7 @@
     - asdf
     - bash
     # - docker
-    # - git
+    - git
     # - mise-en-place
     - tmux
     - vim
