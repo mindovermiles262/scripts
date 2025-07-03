@@ -5,34 +5,34 @@ alias vhf="cd ~/villa/functions && ls -lGh"
 alias nodepm="npm $@"
 alias npm="pnpm $@"
 
-tava() {
+taha() {
   # Check if tmux is installed
   if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
     echo "Tmux not found.. exiting..."
     return 1
   fi
 
-  tmux ls | grep -q villa
+  tmux ls | grep -q harper
   CPE_EXITCODE=$?
   if [[ "$CPE_EXITCODE" -eq 0 ]]; then
     # 0 => Session is running, attach to existing session
-    echo "Attaching to 'villa' session . . ."
-    tmux attach -t villa
+    echo "Attaching to 'harper' session . . ."
+    tmux attach -t harper
   else
     # 1 => Session does not exist, create new session
-    echo "Creating new tmux session, 'villa' . . ."
-    tmux new -s villa -c $HOME/villa \; \
-      send-keys 'cd nexus' C-m \; \
-      send-keys 'clear' C-m \; \
-      rename-window 'nexus' \; \
-      new-window \; \
-      send-keys 'cd app/main' C-m \; \
-      send-keys 'clear' C-m \; \
-      rename-window 'app' \; \
-      new-window \; \
-      send-keys 'cd admin' C-m \; \
-      send-keys 'clear' C-m \; \
-      rename-window 'admin' \;
+    echo "Creating new tmux session, 'harper' . . ."
+    tmux new -s harper -c $HOME/harper \;
+      # send-keys 'cd nexus' C-m \; \
+      # send-keys 'clear' C-m \; \
+      # rename-window 'nexus' \; \
+      # new-window \; \
+      # send-keys 'cd app/main' C-m \; \
+      # send-keys 'clear' C-m \; \
+      # rename-window 'app' \; \
+      # new-window \; \
+      # send-keys 'cd admin' C-m \; \
+      # send-keys 'clear' C-m \; \
+      # rename-window 'admin' \;
   fi
 }
 
