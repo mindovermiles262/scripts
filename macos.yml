@@ -3,24 +3,11 @@
   hosts: localhost
   vars:
     asdf_plugins:
-      # - "argocd"
       - "awscli"
-      # - "dotnet-core"
-      # - "gcloud"
-      # - "golang"
-      # - "helm"
-      # - "k9s"
-      # - "kpack-cli"
-      # - "kubectl"
-      # - "kubectx"
       - "nodejs"
-      # - "php"
       - "python"
-      # - "ruby"
-      # - "rust"
-      # - "snyk"
       - "terraform"
-      # - "vault"
+      - "terraform-docs"
     work_device: true
   roles:
     - brew
@@ -28,6 +15,5 @@
     - bash
     # - docker
     - git
-    # - mise-en-place
     - tmux
     - vim
