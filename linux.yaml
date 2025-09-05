@@ -23,7 +23,6 @@
     - bash
     # - docker
     - git
-    - keyboard
     - podman
     - redshift
     - tmux 
