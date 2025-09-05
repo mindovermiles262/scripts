@@ -11,49 +11,27 @@
 - name: Symlink redshift config file
   when: ansible_facts.pkg_mgr == "apt"
   copy:
-  # file:
     src: "{{ role_path }}/files/redshift.conf"
     dest: "{{ ansible_facts.user_dir }}/.config/redshift.conf"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
-    # state: link
   
 - name: Autostart Redshift - XFCE
   when: ansible_facts.env.DESKTOP_SESSION in ["xubuntu", "xfce"]
-  copy:
-    src: "{{ role_path }}/files/Redshift.xfce"
-    dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
-    owner: "{{ ansible_facts.user_id }}"
-    group: " {{ ansible_facts.user_gid }}"
-
-- name: Autostart Redshift - Cinnamon
-  when: ansible_facts.env.DESKTOP_SESSION == "cinnamon"
-  copy:
-    src: "{{ role_path }}/files/Redshift.gnome"
+  vars:
+    user_home: "{{ ansible_facts.user_dir }}"
+  template:
+    src: "{{ role_path }}/files/Redshift.xfce.j2"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
 
 - name: Autostart Redshift - Ubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "ubuntu"
-  copy:
-    src: "{{ role_path }}/files/Redshift.gnome"
+  when: ansible_facts.env.DESKTOP_SESSION in ["ubuntu", "cinnamon", "plasma"]
+  vars:
+    user_home: "{{ ansible_facts.user_dir }}"
+  template:
+    src: "{{ role_path }}/files/Redshift.gnome.j2"
     dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
-
-- name: Autostart Redshift - Kubuntu
-  when: ansible_facts.env.DESKTOP_SESSION == "plasma"
-  copy:
-    src: "{{ role_path }}/files/Redshift.gnome"
-    dest: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
-    owner: "{{ ansible_facts.user_id }}"
-    group: " {{ ansible_facts.user_gid }}"
-
-- name: Fix autostart command
-  # Template uses '$HOME' which is not valid inside of a desktop file
-  when: ansible_facts.pkg_mgr == "apt"
-  replace:
-    path: "{{ ansible_facts.user_dir }}/.config/autostart/redshift.desktop"
-    regexp: '\$HOME'
-    replace: "{{ ansible_facts.user_dir }}"

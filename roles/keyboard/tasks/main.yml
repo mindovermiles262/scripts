@@ -29,3 +29,20 @@
     dest: "/usr/local/bin"
     mode: 0755
     
+- name: Symlink Xmodmap
+  file:
+    src: "{{ role_path }}/files/xmodmap"
+    dest: "{{ ansible_facts.user_dir }}/.Xmodmap"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+    force: yes
+
+- name: Autostart Xmodmap
+  vars:
+    user_home: "{{ ansible_facts.user_dir }}"
+  template:
+    src: "{{ role_path }}/files/xmodmap.desktop.j2"
+    dest: "{{ ansible_facts.user_dir }}/.config/autostart/xmodmap.desktop"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"

@@ -1,32 +1,29 @@
 ---
-- name: Configure Linux
+- name: Configure Linux System
   hosts: localhost
   vars:
     # https://github.com/ansible/ansible/issues/14468 
     ansible_python_interpreter: /usr/bin/python3
     work_device: false
     asdf_plugins:
-      # - "ruby"
-      # - "nodejs"
-      # - "python"
-      # - "argocd"
-      # - "awscli"
-      # - "gcloud"
-      # - "golang"
-      # - "helm"
-      # - "k9s"
-      # - "kubectl"
-      # - "kubectx"
-      # - "vault"
+      - "ruby"
+      - "nodejs"
+      - "python"
+      - "argocd"
+      - "awscli"
+      - "gcloud"
+      - "golang"
+      - "helm"
+      - "k9s"
+      - "kubectl"
+      - "kubectx"
+      - "vault"
   roles:
-    # - asdf
+    - asdf
     - bash
     # - docker
     - git
     - keyboard
-    # - libinput
-    # - mise-en-place # Needs work for Linux
-    - mouse
     - podman
     - redshift
     - tmux 

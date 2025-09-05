@@ -1,35 +1,4 @@
 ---
-- name: Install ASDF Prerequisites - APT
-  when: ansible_facts.pkg_mgr == "apt" 
-  become: yes
-  become_method: sudo
-  apt:
-    pkg:
-      - build-essential
-      - curl
-      - gcc
-      - git
-      - gpg
-      - dirmngr
-      - make
-      - libbz2-dev
-      - libffi-dev
-      - liblzma-dev
-      - libncurses5-dev
-      - libncursesw5-dev
-      - libpq-dev
-      - libreadline-dev
-      - libssl-dev
-      - libsqlite3-dev
-      - llvm
-      - tk-dev
-      - xz-utils
-      - zlib1g-dev
-      - wget
-    state: latest
-
-# TODO: Install ASDF on Linux
-
 - name: Install ASDF - MacOS
   when: ansible_facts.distribution == "MacOSX"
   with_items:
@@ -37,6 +6,32 @@
   homebrew:
     name: "{{ item }}"
     state: present
+
+- name: Local Bin Directory
+  when: ansible_facts.system in ["Linux"]
+  file:
+    path: "{{ ansible_facts.user_dir }}/.local/bin"
+    state: directory
+
+- name: Get latest ASDF Releases
+  when: ansible_facts.system in ["Linux"]
+  uri:
+    url: https://api.github.com/repos/asdf-vm/asdf/releases/latest
+    return_content: true
+  register: asdf_latest_release
+
+- name: Set asdf facts
+  when: ansible_facts.system in ["Linux"]
+  set_fact:
+    latest_tag: "{{ asdf_latest_release.json.tag_name }}"
+    asdf_bin_dir: "{{ ansible_facts.user_dir }}/.local/bin"
+
+- name: Download latest version - Linux
+  when: ansible_facts.system in ["Linux"]
+  unarchive:
+    src: "https://github.com/asdf-vm/asdf/releases/download/{{ latest_tag }}/asdf-{{ latest_tag }}-linux-amd64.tar.gz"
+    dest: "{{ asdf_bin_dir }}"
+    remote_src: yes
 
 - name: Check Installed Plugins
   ignore_errors: yes
@@ -49,3 +44,6 @@
   with_items: "{{ asdf_plugins_installed.results }}"
   when: item.stat.exists is false
   command: "asdf plugin add {{ item.item }}"
+
+- name: Update all ASDF plugins
+  command: "asdf plugin update --all"

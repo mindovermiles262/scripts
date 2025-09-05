@@ -1,8 +1,22 @@
 ---
 - name: Debug
   hosts: localhost
-  vars:
-    # https://github.com/ansible/ansible/issues/14468 
-    ansible_python_interpreter: /usr/bin/python3
+  # tasks:
+  # - name: Get latest ASDF Releases
+  #   uri:
+  #     url: https://api.github.com/repos/asdf-vm/asdf/releases/latest
+  #     return_content: true
+  #   register: asdf_latest_release
+
+  # - name: Set latest release version
+  #   set_fact:
+  #     latest_tag: "{{ asdf_latest_release.json.tag_name }}"
+
+  # - name: Debug
+  #   debug:
+  #     var: latest_tag
+  # vars:
+  #   # https://github.com/ansible/ansible/issues/14468 
+  #   ansible_python_interpreter: /usr/bin/python3
   roles:
     - debug

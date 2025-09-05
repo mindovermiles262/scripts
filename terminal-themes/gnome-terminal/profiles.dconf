@@ -1,0 +1,84 @@
+[/]
+default='b5bd2ef3-960f-47bb-b163-2db27e9dfa5d'
+list=['20973b0f-a7cb-4fdd-bdfc-53cff02014c8', 'b5bd2ef3-960f-47bb-b163-2db27e9dfa5d', '1d6292b9-4a31-4220-91b5-446cf599d136', 'd7c1524c-5552-4d0a-8420-99d1dbea5f9c']
+
+[:1d6292b9-4a31-4220-91b5-446cf599d136]
+background-color='rgb(250,244,237)'
+cursor-background-color='rgb(206,202,205)'
+cursor-foreground-color='rgb(87,82,121)'
+foreground-color='rgb(87,82,121)'
+highlight-background-color='rgb(223,218,217)'
+highlight-foreground-color='rgb(87,82,121)'
+login-shell=true
+palette=['rgb(242,233,222)', 'rgb(180,99,122)', 'rgb(40,105,131)', 'rgb(234,157,52)', 'rgb(86,148,159)', 'rgb(144,122,169)', 'rgb(215,130,126)', 'rgb(87,82,121)', 'rgb(152,147,165)', 'rgb(180,99,122)', 'rgb(40,105,131)', 'rgb(234,157,52)', 'rgb(86,148,159)', 'rgb(144,122,169)', 'rgb(215,130,126)', 'rgb(87,82,121)']
+use-system-font=true
+use-theme-background=false
+use-theme-colors=false
+use-theme-transparency=false
+visible-name='Rosé Pine Dawn'
+
+[:20973b0f-a7cb-4fdd-bdfc-53cff02014c8]
+background-color='rgb(25,23,36)'
+cursor-background-color='rgb(82,79,103)'
+cursor-foreground-color='rgb(224,222,244)'
+foreground-color='rgb(224,222,244)'
+highlight-background-color='rgb(64,61,82)'
+highlight-foreground-color='rgb(224,222,244)'
+login-shell=true
+palette=['rgb(38,35,58)', 'rgb(235,111,146)', 'rgb(49,116,143)', 'rgb(246,193,119)', 'rgb(156,207,216)', 'rgb(196,167,231)', 'rgb(235,188,186)', 'rgb(224,222,244)', 'rgb(110,106,134)', 'rgb(235,111,146)', 'rgb(49,116,143)', 'rgb(246,193,119)', 'rgb(156,207,216)', 'rgb(196,167,231)', 'rgb(235,188,186)', 'rgb(224,222,244)']
+use-system-font=true
+use-theme-background=false
+use-theme-colors=false
+use-theme-transparency=false
+visible-name='Rosé Pine'
+
+[:55f3af81-d7b3-495f-aa46-a184f679272f]
+visible-name='as'
+
+[:74e3a642-233a-41d3-8d87-a016c7fa4466]
+palette=['rgb(0,0,0)', 'rgb(170,0,0)', 'rgb(0,170,0)', 'rgb(170,85,0)', 'rgb(0,0,170)', 'rgb(170,0,170)', 'rgb(0,170,170)', 'rgb(170,170,170)', 'rgb(85,85,85)', 'rgb(255,85,85)', 'rgb(85,255,85)', 'rgb(255,255,85)', 'rgb(85,85,255)', 'rgb(255,85,255)', 'rgb(85,255,255)', 'rgb(255,255,255)']
+use-theme-colors=false
+use-theme-transparency=false
+visible-name='Rose Pine Dawn'
+
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(46,52,54)'
+foreground-color='rgb(211,215,207)'
+login-shell=true
+use-theme-colors=false
+
+[:b5bd2ef3-960f-47bb-b163-2db27e9dfa5d]
+background-color='rgb(35,33,54)'
+cursor-background-color='rgb(86,82,110)'
+cursor-foreground-color='rgb(224,222,244)'
+foreground-color='rgb(224,222,244)'
+highlight-background-color='rgb(68,65,90)'
+highlight-foreground-color='rgb(224,222,244)'
+login-shell=true
+palette=['rgb(57,53,82)', 'rgb(235,111,146)', 'rgb(62,143,176)', 'rgb(246,193,119)', 'rgb(156,207,216)', 'rgb(196,167,231)', 'rgb(234,154,151)', 'rgb(224,222,244)', 'rgb(110,106,134)', 'rgb(235,111,146)', 'rgb(62,143,176)', 'rgb(246,193,119)', 'rgb(156,207,216)', 'rgb(196,167,231)', 'rgb(234,154,151)', 'rgb(224,222,244)']
+use-system-font=true
+use-theme-background=false
+use-theme-colors=false
+use-theme-transparency=false
+visible-name='Rosé Pine Moon'
+
+[:d7c1524c-5552-4d0a-8420-99d1dbea5f9c]
+background-color='#2E3440'
+bold-color='#D8DEE9'
+bold-color-same-as-fg=true
+cursor-background-color='rgb(216,222,233)'
+cursor-colors-set=true
+cursor-foreground-color='rgb(59,66,82)'
+foreground-color='#D8DEE9'
+highlight-background-color='rgb(136,192,208)'
+highlight-colors-set=true
+highlight-foreground-color='rgb(46,52,64)'
+login-shell=true
+nord-gnome-terminal-version='0.1.0'
+palette=['#3B4252', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#88C0D0', '#E5E9F0', '#4C566A', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#8FBCBB', '#ECEFF4']
+use-system-font=true
+use-theme-background=false
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=false
+visible-name='Nord'

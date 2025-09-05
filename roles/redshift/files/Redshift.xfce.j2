@@ -4,4 +4,4 @@ Name=Redshift
 Comment=Start Redshift with custom config
 StartupNotify=false
 Terminal=false
-Exec=/usr/bin/redshift -c $HOME/.config/redshift.conf
+Exec=/usr/bin/redshift -c {{ user_home }}/.config/redshift.conf
