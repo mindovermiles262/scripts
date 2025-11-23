@@ -1,0 +1,29 @@
+[/]
+custom-list=['custom0']
+
+[custom-keybindings/custom0]
+binding=['<Primary><Shift>dollar']
+command='/usr/bin/flameshot gui'
+name='Flameshot GUI'
+
+[media-keys]
+screensaver=['<Control><Alt>l', 'XF86ScreenSaver', '<Primary><Alt>q']
+suspend=['XF86Sleep', '<Primary><Alt>s']
+
+[wm]
+maximize=@as []
+minimize=@as []
+move-to-monitor-down=@as []
+move-to-monitor-left=@as []
+move-to-monitor-right=@as []
+move-to-monitor-up=@as []
+push-tile-left=['<Shift><Super>Left']
+push-tile-right=['<Shift><Super>Right']
+show-desktop=@as []
+switch-panels=['<Alt>Tab']
+switch-to-workspace-down=['<Control><Alt>Down', '<Primary>grave']
+switch-to-workspace-left=['Page_Up', '<Alt>Left']
+switch-to-workspace-right=['Page_Down', '<Alt>Right']
+switch-windows=['<Primary><Alt>Tab', '<Primary>Tab']
+toggle-fullscreen=['<Shift><Super>Up']
+toggle-maximized=['<Shift><Super>Down']

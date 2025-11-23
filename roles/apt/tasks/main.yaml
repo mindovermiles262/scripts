@@ -1,0 +1,8 @@
+---
+- name: Turn off sudo asterisks
+  become: yes
+  when: ansible_facts.distribution in ["Linux Mint"]
+  replace:
+    path: "/etc/sudoers.d/0pwfeedback"
+    regexp: "Defaults pwfeedback"
+    replace: ""

@@ -1,0 +1,4 @@
+---
+- name: Load Keyboard shortcuts via dconf
+  when: ansible_facts.env.DESKTOP_SESSION in ["cinnamon"]
+  shell: "dconf load /org/cinnamon/desktop/keybindings/ < {{ role_path }}/files/dconf-keyboard-shortcuts"

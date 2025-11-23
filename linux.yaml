@@ -2,8 +2,6 @@
 - name: Configure Linux System
   hosts: localhost
   vars:
-    # https://github.com/ansible/ansible/issues/14468 
-    ansible_python_interpreter: /usr/bin/python3
     work_device: false
     asdf_plugins:
       - "ruby"
@@ -19,11 +17,13 @@
       - "kubectx"
       - "vault"
   roles:
+    - apt
     - asdf
     - bash
     # - docker
+    - keyboard
     - git
     - podman
-    - redshift
+    # - redshift
     - tmux 
     - vim

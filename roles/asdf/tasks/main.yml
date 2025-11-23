@@ -7,12 +7,6 @@
     name: "{{ item }}"
     state: present
 
-- name: Local Bin Directory
-  when: ansible_facts.system in ["Linux"]
-  file:
-    path: "{{ ansible_facts.user_dir }}/.local/bin"
-    state: directory
-
 - name: Get latest ASDF Releases
   when: ansible_facts.system in ["Linux"]
   uri:
@@ -24,10 +18,11 @@
   when: ansible_facts.system in ["Linux"]
   set_fact:
     latest_tag: "{{ asdf_latest_release.json.tag_name }}"
-    asdf_bin_dir: "{{ ansible_facts.user_dir }}/.local/bin"
+    asdf_bin_dir: "/usr/local/bin"
 
 - name: Download latest version - Linux
   when: ansible_facts.system in ["Linux"]
+  become: yes
   unarchive:
     src: "https://github.com/asdf-vm/asdf/releases/download/{{ latest_tag }}/asdf-{{ latest_tag }}-linux-amd64.tar.gz"
     dest: "{{ asdf_bin_dir }}"
