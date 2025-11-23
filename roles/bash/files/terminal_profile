@@ -16,6 +16,7 @@ fi
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
   alias open="xdg-open"
+  alias ipod_sync="rsync -avh $HOME/Music/iTunes/iTunes\ Media/Music /media/doppio/H512/Media/Music"
   watts() {
     BATTERY=${1:-0}
     uWATT=$(cat /sys/class/power_supply/BAT$BATTERY/power_now)

@@ -1,15 +1,15 @@
-clear control
-clear mod1
-clear lock
+!clear control
+!clear mod1
+!clear lock
 
-! Swap Left Control and Left Alt Buttons
-!Remaps L-Ctrl to Alt/Meta
-keycode 37 = Alt_L Meta_L
-! Remaps L-Alt to Control_L
-keycode 64 = Control_L
+!! Swap Left Control and Left Alt Buttons
+!!Remaps L-Ctrl to Alt/Meta
+!keycode 37 = Alt_L Meta_L
+!! Remaps L-Alt to Control_L
+!keycode 64 = Control_L
 
-! Remap CAPS to L-Control
-keycode 66 = Control_L
+!! Remap CAPS to L-Control
+!keycode 66 = Control_L
 
-add control = Control_L Control_R
-add mod1 = Alt_L Meta_L Alt_R Meta_R
+!add control = Control_L Control_R
+!add mod1 = Alt_L Meta_L Alt_R Meta_R
