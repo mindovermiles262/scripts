@@ -1,0 +1,17 @@
+- name: Add battery charge limit
+  when: ansible_facts.system == "Linux"
+  become: yes
+  become_method: sudo
+  copy:
+    src: "{{ role_path }}/files/battery-charge-threshold.service"
+    dest: "/etc/systemd/system/battery-charge-threshold.service"
+
+- name: Start & Enable battery charge limit systemd service
+  when: ansible_facts.system == "Linux"
+  become: yes
+  become_method: sudo
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    daemon_reload: true
+    name: battery-charge-threshold

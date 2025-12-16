@@ -19,4 +19,5 @@
   #   # https://github.com/ansible/ansible/issues/14468 
   #   ansible_python_interpreter: /usr/bin/python3
   roles:
-    - debug
+    # - debug
+    - battery
