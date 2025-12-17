@@ -1,0 +1,11 @@
+---
+- name: Install tmux - Linux
+  when: ansible_facts.system in ["Linux"]
+  become: yes
+  become_method: sudo
+  with_items:
+    - flameshot
+  package:
+    name: "{{ item }}"
+    state: latest
+

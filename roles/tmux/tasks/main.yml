@@ -1,12 +1,13 @@
 ---
-- name: Install tmux - All Ubuntu's
-  when: ansible_facts.os_family == "Debian"
+- name: Install tmux - Linux
+  when: ansible_facts.system in ["Linux"]
   become: yes
   become_method: sudo
-  apt:
-    pkg:
-      - tmux
-      - xclip
+  with_items:
+    - tmux
+    - xclip
+  package:
+    name: "{{ item }}"
     state: latest
 
 - name: Install tmux - MacOS
@@ -35,8 +36,8 @@
     state: link
     force: yes
 
-- name: Symlink tmux Config - All Ubuntu's
-  when: ansible_facts.os_family == "Debian"
+- name: Symlink tmux Config - Linux
+  when: ansible_facts.system in ["Linux"]
   file:
     src: "{{ role_path }}/files/tmux.linux"
     dest: "{{ ansible_facts.user_dir }}/.tmux.linux"

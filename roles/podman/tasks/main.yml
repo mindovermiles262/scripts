@@ -19,11 +19,11 @@
     state: present
     update_homebrew: yes
 
-- name: Install Podman - APT
-  when: ansible_facts.pkg_mgr == "apt"
+- name: Install Podman - Linux
+  when: ansible_facts.system in ["Linux"]
   become: yes
   become_method: sudo
-  apt:
+  package:
     name: podman
     state: latest
     update_cache: true
