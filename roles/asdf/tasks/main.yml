@@ -42,3 +42,17 @@
 
 - name: Update all ASDF plugins
   command: "asdf plugin update --all"
+
+- name: Symlink main tool versions
+  file:
+    src: "{{ role_path }}/files/tool-versions"
+    dest: "{{ ansible_facts.user_dir }}/.tool-versions"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
+    force: yes
+
+- name: Install tools
+  ignore_errors: yes
+  command: "asdf install"
+

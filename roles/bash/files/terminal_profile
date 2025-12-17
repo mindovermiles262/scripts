@@ -206,7 +206,7 @@ fi
 if [ -f "/opt/homebrew/bin/asdf" ]; then
   export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 elif [ -d "$HOME/.asdf" ]; then
-  export PATH=$PATH:$HOME/.asdf/shims
+  export PATH=$HOME/.asdf/shims:$PATH
 fi
 
 if [ -f "$HOME/.local/bin/asdf" ]; then

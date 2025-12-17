@@ -1,0 +1,38 @@
+#
+# Basic configuration of linux devices
+#
+# TODO:
+#   - Remap <CAPS> to Ctrl_L
+#
+#
+---
+- name: Configure Linux System
+  hosts: localhost
+  vars:
+    work_device: false
+    asdf_plugins:
+      #- "ruby"
+      - "nodejs"
+      - "python"
+      #- "argocd"
+      - "awscli"
+      - "gcloud"
+      - "golang"
+      - "helm"
+      - "k9s"
+      - "kubectl"
+      - "kubectx"
+      #- "vault"
+  roles:
+    # - apt
+    - asdf
+    # - bash
+    # - battery
+    # - docker
+    # - keyboard
+    # - flameshot
+    # - git
+    # - podman
+    # - redshift
+    # - tmux 
+    # - vim
