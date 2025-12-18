@@ -1,0 +1,7 @@
+#
+# Included and sourced on non-work devices
+# shell-agnostic
+#
+
+alias vim="neovim $@"
+

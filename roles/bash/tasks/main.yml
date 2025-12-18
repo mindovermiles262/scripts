@@ -47,3 +47,12 @@
     owner: "{{ ansible_facts.user_id }}"
     group: " {{ ansible_facts.user_gid }}"
     state: link
+
+- name: Symlink Personal Profile
+  when: work_device != true
+  file:
+    src: "{{ role_path }}/files/personal_profile"
+    dest: "{{ ansible_facts.user_dir }}/.personal_profile"
+    owner: "{{ ansible_facts.user_id }}"
+    group: " {{ ansible_facts.user_gid }}"
+    state: link
