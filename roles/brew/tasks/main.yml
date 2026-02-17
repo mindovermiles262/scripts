@@ -12,6 +12,7 @@
   register: optBrew
 
 - name: Install Homebrew
+  become: true
   when:
     - usrBrew.stat.exists == false
     - optBrew.stat.exists == false

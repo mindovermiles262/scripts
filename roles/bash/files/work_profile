@@ -1,27 +1,29 @@
-alias vh="cd ~/villa && ls -lGh"
-alias vha="cd ~/villa/app/main && ls -lGh"
-alias vhf="cd ~/villa/functions && ls -lGh"
+alias lr="cd ~/ledgerrun && ls -lGh"
+alias lrf="cd ~/ledgerrun/frontend"
+alias lrb="cd ~/ledgerrun/backend"
 
 alias nodepm="npm $@"
 alias npm="pnpm $@"
 
-taha() {
+export LRAPP_ENV=qa2_local
+
+tala() {
   # Check if tmux is installed
   if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
     echo "Tmux not found.. exiting..."
     return 1
   fi
 
-  tmux ls | grep -q harper
+  tmux ls | grep -q lr
   CPE_EXITCODE=$?
   if [[ "$CPE_EXITCODE" -eq 0 ]]; then
     # 0 => Session is running, attach to existing session
-    echo "Attaching to 'harper' session . . ."
-    tmux attach -t harper
+    echo "Attaching to Ledger Run session . . ."
+    tmux attach -t lr
   else
     # 1 => Session does not exist, create new session
-    echo "Creating new tmux session, 'harper' . . ."
-    tmux new -s harper -c $HOME/harper \;
+    echo "Creating new tmux session, 'lr' . . ."
+    tmux new -s lr -c $HOME/ledgerrun \;
       # send-keys 'cd nexus' C-m \; \
       # send-keys 'clear' C-m \; \
       # rename-window 'nexus' \; \
