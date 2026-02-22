@@ -20,6 +20,8 @@ $ source ./venv/bin/activate
 
 - [ ] Add Flameshot
 - [x] xclip - Linux
+- [ ] Linux - Remap L_CTRL & L_ALT
+- [ ] Linux - Remap <CAPS> to Ctrl_L
 
 
 ## Ansible Facts
