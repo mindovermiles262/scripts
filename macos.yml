@@ -11,9 +11,10 @@
     work_device: true
   roles:
     - brew
-    - asdf
+    # - asdf
     - bash
     # - docker
     - git
+    # - mise # TODO
     - tmux
     - vim

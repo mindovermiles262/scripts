@@ -1,0 +1,12 @@
+---
+- name: Install Fedora-Specific Packages
+  when: ansible_facts.distribution in ["Fedora"]
+  become: yes
+  become_method: sudo
+  with_items:
+    - intel-media-driver 
+    - libva-intel-driver
+  package:
+    name: "{{ item }}"
+    state: latest
+

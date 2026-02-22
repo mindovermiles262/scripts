@@ -25,13 +25,14 @@
       #- "vault"
   roles:
     - apt
-    - asdf
+    # - asdf
     - bash
     - battery
     # - docker
     - keyboard
     - flameshot
     - git
+    # - mise # TODO
     - podman
     # - redshift
     - tmux 
