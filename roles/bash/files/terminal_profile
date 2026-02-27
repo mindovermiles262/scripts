@@ -230,6 +230,9 @@ if [ -f "/opt/homebrew/bin/mise" ]; then
  eval "$(mise activate zsh)" 
 fi
 
+if [ -f "/usr/local/bin/mise" ]; then
+ eval "$(mise activate bash)" 
+fi
 
 # Use MySQL from brew
 if [ -d "/usr/local/opt/mysql-client" ]; then
