@@ -22,6 +22,9 @@ $ source ./venv/bin/activate
 - [x] xclip - Linux
 - [ ] Linux - Remap L_CTRL & L_ALT
 - [ ] Linux - Remap <CAPS> to Ctrl_L
+- [ ] Syncthing
+- [ ] VS Code
+- [ ] Linux - appimaged
 
 
 ## Ansible Facts

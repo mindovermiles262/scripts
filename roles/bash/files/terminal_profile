@@ -228,6 +228,8 @@ fi
 # Activate mise-en-place
 if [ -f "/opt/homebrew/bin/mise" ]; then
  eval "$(mise activate zsh)" 
+elif [ -f "/usr/local/bin/mise" ]; then
+ eval "$(mise activate bash)" 
 fi
 
 if [ -f "/usr/local/bin/mise" ]; then
