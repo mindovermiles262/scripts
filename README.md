@@ -18,11 +18,11 @@ $ source ./venv/bin/activate
 
 ## TODO
 
-- [ ] Add Flameshot
+- [x] Add Flameshot
 - [x] xclip - Linux
-- [ ] Linux - Remap L_CTRL & L_ALT
-- [ ] Linux - Remap <CAPS> to Ctrl_L
-- [ ] Syncthing
+- [x] Linux - Remap L_CTRL & L_ALT
+- [x] Linux - Remap <CAPS> to Ctrl_L
+- [/] Syncthing - MacOS
 - [ ] VS Code
 - [ ] Linux - appimaged
 

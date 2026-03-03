@@ -3,3 +3,13 @@ set -g status-bg colour240
 # Visual Mode Yank to System Clipboard
 # https://unix.stackexchange.com/questions/131011/use-system-clipboard-in-vi-copy-mode-in-tmux
 bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
+
+# Begin selection with 'v' (vim style)
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+
+# Copy to clipboard on Enter
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
+
+# Copy to clipboard when mouse drag ends
+bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'

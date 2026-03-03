@@ -1,10 +1,6 @@
 #
 # Basic configuration of linux devices
 #
-# TODO:
-#   - Remap <CAPS> to Ctrl_L
-#
-#
 ---
 - name: Configure Linux System
   hosts: localhost
@@ -35,5 +31,6 @@
     - mise
     - podman
     # - redshift
+    - syncthing
     - tmux 
     - vim
