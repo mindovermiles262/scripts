@@ -25,6 +25,7 @@ $ source ./venv/bin/activate
 - [/] Syncthing - MacOS
 - [ ] VS Code
 - [ ] Linux - appimaged
+- [ ] tlp, powertop - Linux
 
 
 ## Ansible Facts
