@@ -23,7 +23,7 @@
     - apt
     # - asdf
     - bash
-    # - battery
+    - battery
     # - docker
     - keyboard
     - flameshot
