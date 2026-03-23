@@ -1,0 +1,486 @@
+[
+    {
+        "GroupId": "sg-04d4004db56f7bd1c",
+        "GroupName": "rds-launch-wizard-1",
+        "Ingress": [
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 0,
+                "ToPort": 65535,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "183.236.148.204/32"
+                    },
+                    {
+                        "CidrIp": "183.236.148.185/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 5432,
+                "ToPort": 5432,
+                "UserIdGroupPairs": [
+                    {
+                        "UserId": "223553761657",
+                        "GroupId": "sg-04d4004db56f7bd1c"
+                    },
+                    {
+                        "UserId": "223553761657",
+                        "GroupId": "sg-09dbd01aa85156ad7"
+                    }
+                ],
+                "IpRanges": [
+                    {
+                        "CidrIp": "68.41.210.45/32"
+                    },
+                    {
+                        "CidrIp": "34.229.196.230/32"
+                    },
+                    {
+                        "CidrIp": "73.234.205.66/32"
+                    },
+                    {
+                        "CidrIp": "74.105.175.162/32"
+                    },
+                    {
+                        "CidrIp": "71.184.241.8/32"
+                    },
+                    {
+                        "CidrIp": "70.236.195.146/32"
+                    },
+                    {
+                        "CidrIp": "3.93.166.23/32"
+                    },
+                    {
+                        "CidrIp": "73.190.191.167/32"
+                    },
+                    {
+                        "CidrIp": "44.214.227.68/32"
+                    },
+                    {
+                        "CidrIp": "24.188.55.92/32"
+                    },
+                    {
+                        "CidrIp": "108.35.28.187/32"
+                    },
+                    {
+                        "CidrIp": "3.92.112.28/32"
+                    },
+                    {
+                        "CidrIp": "54.80.86.16/32"
+                    },
+                    {
+                        "CidrIp": "47.188.87.202/32"
+                    },
+                    {
+                        "CidrIp": "72.14.201.204/32"
+                    },
+                    {
+                        "CidrIp": "76.116.151.64/32"
+                    },
+                    {
+                        "CidrIp": "149.20.199.228/32"
+                    },
+                    {
+                        "CidrIp": "146.115.144.38/32"
+                    },
+                    {
+                        "CidrIp": "75.87.140.163/32"
+                    },
+                    {
+                        "CidrIp": "72.159.151.93/32"
+                    },
+                    {
+                        "CidrIp": "47.20.213.225/32"
+                    },
+                    {
+                        "CidrIp": "104.182.238.160/32"
+                    },
+                    {
+                        "CidrIp": "154.36.230.43/32"
+                    },
+                    {
+                        "CidrIp": "173.63.253.137/32"
+                    },
+                    {
+                        "CidrIp": "98.109.32.132/32"
+                    },
+                    {
+                        "CidrIp": "179.61.216.132/32"
+                    },
+                    {
+                        "CidrIp": "54.198.180.2/32"
+                    },
+                    {
+                        "CidrIp": "97.70.96.209/32"
+                    },
+                    {
+                        "CidrIp": "3.223.61.64/32"
+                    },
+                    {
+                        "CidrIp": "69.231.75.247/32"
+                    },
+                    {
+                        "CidrIp": "108.31.167.225/32"
+                    },
+                    {
+                        "CidrIp": "73.160.56.141/32"
+                    },
+                    {
+                        "CidrIp": "54.221.225.17/32"
+                    },
+                    {
+                        "CidrIp": "69.113.88.223/32"
+                    },
+                    {
+                        "CidrIp": "70.21.180.184/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 22,
+                "ToPort": 22,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "204.114.196.5/32"
+                    },
+                    {
+                        "CidrIp": "148.168.216.183/32"
+                    },
+                    {
+                        "CidrIp": "97.70.96.209/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 2049,
+                "ToPort": 2049,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "107.133.173.229/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    },
+    {
+        "GroupId": "sg-04e5da5b32dab1fc7",
+        "GroupName": "default",
+        "Ingress": [
+            {
+                "IpProtocol": "-1",
+                "UserIdGroupPairs": [
+                    {
+                        "UserId": "223553761657",
+                        "GroupId": "sg-04e5da5b32dab1fc7"
+                    }
+                ],
+                "IpRanges": [],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    },
+    {
+        "GroupId": "sg-09dbd01aa85156ad7",
+        "GroupName": "ClinRun Prod",
+        "Ingress": [
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 80,
+                "ToPort": 80,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 1433,
+                "ToPort": 1433,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 5300,
+                "ToPort": 5300,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "97.70.96.209/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 0,
+                "ToPort": 65535,
+                "UserIdGroupPairs": [
+                    {
+                        "UserId": "223553761657",
+                        "GroupId": "sg-09dbd01aa85156ad7"
+                    }
+                ],
+                "IpRanges": [
+                    {
+                        "CidrIp": "75.114.175.186/32"
+                    },
+                    {
+                        "CidrIp": "98.250.133.25/32"
+                    },
+                    {
+                        "CidrIp": "69.113.88.223/32"
+                    },
+                    {
+                        "CidrIp": "44.214.227.68/32"
+                    },
+                    {
+                        "CidrIp": "146.115.144.38/32"
+                    },
+                    {
+                        "CidrIp": "149.20.199.228/32"
+                    },
+                    {
+                        "CidrIp": "68.41.210.45/32"
+                    },
+                    {
+                        "CidrIp": "76.116.151.64/32"
+                    },
+                    {
+                        "CidrIp": "47.188.87.202/32"
+                    },
+                    {
+                        "CidrIp": "172.32.1.52/32"
+                    },
+                    {
+                        "CidrIp": "73.190.191.167/32"
+                    },
+                    {
+                        "CidrIp": "72.159.151.93/32"
+                    },
+                    {
+                        "CidrIp": "47.20.213.225/32"
+                    },
+                    {
+                        "CidrIp": "74.105.175.162/32"
+                    },
+                    {
+                        "CidrIp": "70.236.195.146/32"
+                    },
+                    {
+                        "CidrIp": "98.109.32.132/32"
+                    },
+                    {
+                        "CidrIp": "57.132.171.194/32"
+                    },
+                    {
+                        "CidrIp": "154.36.230.43/32"
+                    },
+                    {
+                        "CidrIp": "73.160.56.141/32"
+                    },
+                    {
+                        "CidrIp": "172.32.1.137/32"
+                    },
+                    {
+                        "CidrIp": "69.231.75.247/32"
+                    },
+                    {
+                        "CidrIp": "24.101.185.108/32"
+                    },
+                    {
+                        "CidrIp": "183.236.148.204/32"
+                    },
+                    {
+                        "CidrIp": "24.188.55.92/32"
+                    },
+                    {
+                        "CidrIp": "183.236.148.185/32"
+                    },
+                    {
+                        "CidrIp": "70.21.180.184/32"
+                    },
+                    {
+                        "CidrIp": "74.132.153.90/32"
+                    },
+                    {
+                        "CidrIp": "108.31.167.225/32"
+                    },
+                    {
+                        "CidrIp": "71.184.241.8/32"
+                    },
+                    {
+                        "CidrIp": "173.63.253.137/32"
+                    },
+                    {
+                        "CidrIp": "174.129.173.198/32"
+                    },
+                    {
+                        "CidrIp": "54.221.225.17/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 5432,
+                "ToPort": 5432,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "107.133.173.229/32"
+                    },
+                    {
+                        "CidrIp": "172.32.1.244/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "-1",
+                "UserIdGroupPairs": [
+                    {
+                        "UserId": "223553761657",
+                        "GroupId": "sg-09dbd01aa85156ad7"
+                    }
+                ],
+                "IpRanges": [
+                    {
+                        "CidrIp": "172.32.0.0/16"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 21,
+                "ToPort": 21,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "24.188.55.92/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 22,
+                "ToPort": 22,
+                "UserIdGroupPairs": [
+                    {
+                        "UserId": "223553761657",
+                        "GroupId": "sg-09dbd01aa85156ad7"
+                    }
+                ],
+                "IpRanges": [
+                    {
+                        "CidrIp": "204.114.196.5/32"
+                    },
+                    {
+                        "CidrIp": "192.168.1.230/32"
+                    },
+                    {
+                        "CidrIp": "69.231.75.247/32"
+                    },
+                    {
+                        "CidrIp": "172.56.124.89/32"
+                    },
+                    {
+                        "CidrIp": "69.244.146.161/32"
+                    },
+                    {
+                        "CidrIp": "148.168.216.183/32"
+                    },
+                    {
+                        "CidrIp": "172.58.122.121/32"
+                    },
+                    {
+                        "CidrIp": "38.111.34.3/32"
+                    },
+                    {
+                        "CidrIp": "44.222.1.211/32"
+                    },
+                    {
+                        "CidrIp": "173.49.125.65/32"
+                    },
+                    {
+                        "CidrIp": "97.70.96.209/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 5900,
+                "ToPort": 5900,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "3.229.74.26/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 5000,
+                "ToPort": 5900,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "34.228.225.183/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 443,
+                "ToPort": 443,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    }
+]

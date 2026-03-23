@@ -1,9 +1,8 @@
 alias lr="cd ~/ledgerrun && ls -lGh"
 alias lrf="cd ~/ledgerrun/frontend"
-alias lrb="cd ~/ledgerrun/backend"
-
-alias nodepm="npm $@"
-alias npm="pnpm $@"
+alias lrb="cd ~/ledgerrun/backend && ls -lGh"
+alias lri="cd ~/ledgerrun/infrastructure && ls -lGh"
+alias lrm="cd ~/ledgerrun/terraform-modules"
 
 export LRAPP_ENV=qa2_local
 

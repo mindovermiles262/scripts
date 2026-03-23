@@ -1,0 +1,261 @@
+[
+    {
+        "GroupId": "sg-0252cdf6f54e76d96",
+        "GroupName": "production-internal-sg",
+        "Ingress": [
+            {
+                "IpProtocol": "-1",
+                "UserIdGroupPairs": [
+                    {
+                        "Description": "All traffic from same SG",
+                        "UserId": "223553761657",
+                        "GroupId": "sg-0252cdf6f54e76d96"
+                    }
+                ],
+                "IpRanges": [],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    },
+    {
+        "GroupId": "sg-0abd228959d15df8e",
+        "GroupName": "production-web-sg",
+        "Ingress": [
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 80,
+                "ToPort": 80,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "Description": "HTTP",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            },
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 443,
+                "ToPort": 443,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "Description": "HTTPS",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    },
+    {
+        "GroupId": "sg-01e4b749f39709d15",
+        "GroupName": "production-ssh-sg",
+        "Ingress": [
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 22,
+                "ToPort": 22,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "Description": "Ryan DiCesare home",
+                        "CidrIp": "98.114.45.110/32"
+                    },
+                    {
+                        "Description": "Richard Fu home",
+                        "CidrIp": "179.61.216.132/32"
+                    },
+                    {
+                        "Description": "Legacy partner/VPN",
+                        "CidrIp": "172.58.122.121/32"
+                    },
+                    {
+                        "Description": "Pfizer SFTP",
+                        "CidrIp": "148.168.216.183/32"
+                    },
+                    {
+                        "Description": "Pfizer SFTP",
+                        "CidrIp": "204.114.196.5/32"
+                    },
+                    {
+                        "Description": "Pfizer",
+                        "CidrIp": "148.168.96.0/24"
+                    },
+                    {
+                        "Description": "Pfizer",
+                        "CidrIp": "148.168.40.0/24"
+                    },
+                    {
+                        "Description": "Pfizer",
+                        "CidrIp": "148.168.96.5/32"
+                    },
+                    {
+                        "Description": "J&J",
+                        "CidrIp": "199.65.0.0/17"
+                    },
+                    {
+                        "Description": "J&J",
+                        "CidrIp": "199.65.128.0/18"
+                    },
+                    {
+                        "Description": "J&J",
+                        "CidrIp": "199.65.224.0/20"
+                    },
+                    {
+                        "Description": "J&J",
+                        "CidrIp": "199.65.192.0/19"
+                    },
+                    {
+                        "Description": "J&J",
+                        "CidrIp": "148.177.0.0/16"
+                    },
+                    {
+                        "Description": "Uday home",
+                        "CidrIp": "107.133.173.229/32"
+                    },
+                    {
+                        "Description": "Ryan Washburn home",
+                        "CidrIp": "70.123.11.18/32"
+                    },
+                    {
+                        "Description": "Tao Yu home",
+                        "CidrIp": "74.105.175.162/32"
+                    },
+                    {
+                        "Description": "VPN Server",
+                        "CidrIp": "44.214.227.68/32"
+                    },
+                    {
+                        "Description": "Zhihong Lu home",
+                        "CidrIp": "154.36.230.43/32"
+                    },
+                    {
+                        "Description": "Geliang Tong home",
+                        "CidrIp": "70.21.180.184/32"
+                    },
+                    {
+                        "Description": "Yijun Lyu home",
+                        "CidrIp": "174.95.204.159/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    },
+    {
+        "GroupId": "sg-07dd07b5205993b18",
+        "GroupName": "production-dev-ports-sg",
+        "Ingress": [
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 5000,
+                "ToPort": 8500,
+                "UserIdGroupPairs": [],
+                "IpRanges": [
+                    {
+                        "Description": "Application/Consul ports (5000-8500) from team members",
+                        "CidrIp": "44.214.227.68/32"
+                    },
+                    {
+                        "Description": "Application/Consul ports (5000-8500) from team members",
+                        "CidrIp": "74.105.175.162/32"
+                    },
+                    {
+                        "Description": "Application/Consul ports (5000-8500) from team members",
+                        "CidrIp": "70.123.11.18/32"
+                    },
+                    {
+                        "Description": "Application/Consul ports (5000-8500) from team members",
+                        "CidrIp": "107.133.173.229/32"
+                    },
+                    {
+                        "Description": "Application/Consul ports (5000-8500) from team members",
+                        "CidrIp": "154.36.230.43/32"
+                    },
+                    {
+                        "Description": "Application/Consul ports (5000-8500) from team members",
+                        "CidrIp": "70.21.180.184/32"
+                    },
+                    {
+                        "Description": "Application/Consul ports (5000-8500) from team members",
+                        "CidrIp": "174.95.204.159/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    },
+    {
+        "GroupId": "sg-082a28d16e3847d40",
+        "GroupName": "production-db-sg",
+        "Ingress": [
+            {
+                "IpProtocol": "tcp",
+                "FromPort": 5432,
+                "ToPort": 5432,
+                "UserIdGroupPairs": [
+                    {
+                        "Description": "PostgreSQL from internal",
+                        "UserId": "223553761657",
+                        "GroupId": "sg-082a28d16e3847d40"
+                    }
+                ],
+                "IpRanges": [
+                    {
+                        "Description": "PostgreSQL (5432) from Uday home",
+                        "CidrIp": "107.133.173.229/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Ryan Washburn home",
+                        "CidrIp": "70.123.11.18/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from VPN Server",
+                        "CidrIp": "44.214.227.68/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Tao Yu home",
+                        "CidrIp": "74.105.175.162/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Feature compute (data refresh - remove after)",
+                        "CidrIp": "3.223.61.64/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Geliang Tong home",
+                        "CidrIp": "70.21.180.184/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Zhihong Lu home",
+                        "CidrIp": "154.36.230.43/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Yijun Lyu home",
+                        "CidrIp": "174.95.204.159/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Richard Fu home",
+                        "CidrIp": "179.61.216.132/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Jeff Jing home",
+                        "CidrIp": "71.184.241.8/32"
+                    },
+                    {
+                        "Description": "PostgreSQL (5432) from Kaiyu Wan home",
+                        "CidrIp": "136.52.110.161/32"
+                    }
+                ],
+                "Ipv6Ranges": [],
+                "PrefixListIds": []
+            }
+        ]
+    }
+]

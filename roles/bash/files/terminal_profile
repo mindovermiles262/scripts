@@ -54,12 +54,12 @@ fi
 
 # Git Aliases
 alias gss="git status"
-alias gs="git status"
 alias gaa="git add ."
-alias ga="git add ."
-alias gc="git commit -sm $@"
-alias gph="git push origin HEAD"
+alias gcc="git commit -sm $@"
 alias gp="git push origin HEAD"
+alias gb="git branch"
+alias gf="git fetch --all"
+alias gw="git worktree $@"
 
 # Program Aliases
 alias tf="terraform $@"
@@ -80,6 +80,7 @@ alias cs="cursor . $@"
 alias ot="OLLAMA_HOST=192.168.29.42:11434 oterm $@"
 alias ec="ETCDCTL_API=3 etcdctl $@"
 alias proton="STEAM_COMPAT_DATA_PATH=~/.proton/ '~/.steam/steam/steamapps/common/Proton 9.0 (Beta)/proton'"
+alias pe="pipenv $@"
 
 # Helpful Aliases
 alias cip="curl https://andrewduss.com/ip"
@@ -88,6 +89,7 @@ alias \:q="exit"
 alias c="cd .."
 alias what="echo $?"
 alias sv="source venv/bin/activate"
+# alias sv="sed -i '' -E 's/("[a-zA-Z0-9]+") /(*) /' venv/bin/activate && source venv/bin/activate"
 
 vpn() {
    sudo openvpn --config $1 --auth-user-pass $HOME/.pia
@@ -130,6 +132,26 @@ tapa() {
     # 1 => Session does not exist, create new session
     echo "Creating new tmux session, 'padi' . . ."
     tmux new -s padi -c $HOME/code/padi
+  fi
+}
+
+tava() {
+  # Check if tmux is installed
+  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
+    echo "Tmux not found.. exiting..."
+    return 1
+  fi
+
+  tmux ls | grep -q vscode
+  CPE_EXITCODE=$?
+  if [[ "$CPE_EXITCODE" -eq 0 ]]; then
+    # 0 => Session is running, attach to existing session
+    echo "Attaching to 'vscode' session . . ."
+    tmux attach -t vscode
+  else
+    # 1 => Session does not exist, create new session
+    echo "Creating new tmux session, 'vscode' . . ."
+    tmux new -s vscode
   fi
 }
 
