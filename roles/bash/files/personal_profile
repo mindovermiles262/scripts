@@ -3,5 +3,3 @@
 # shell-agnostic
 #
 
-alias vim="neovim $@"
-

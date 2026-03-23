@@ -12,7 +12,7 @@
   become_method: sudo
   with_items:
     - curl
-    - vim-X11
+    - vim-gtk3
   package:
     name: "{{ item }}"
     state: latest

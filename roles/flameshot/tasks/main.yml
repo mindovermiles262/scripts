@@ -1,5 +1,13 @@
 ---
-- name: Install tmux - Linux
+- name: Install Flameshot - MacOS
+  when: ansible_facts.distribution == "MacOSX"
+  with_items:
+    - flameshot
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+
+- name: Install Flameshot - Linux
   when: ansible_facts.system in ["Linux"]
   become: yes
   become_method: sudo
@@ -8,4 +16,3 @@
   package:
     name: "{{ item }}"
     state: latest
-

@@ -1,4 +1,15 @@
 ---
-- name: Load Keyboard shortcuts via dconf
+- name: Set CAPS --> Ctrl_L, Alt_L <--> Ctrl_L
+  when: ansible_facts.system in ["Linux"]
+  become: yes
+  become_method: sudo
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/pc"
+    dest: "/usr/share/X11/xkb/symbols/pc"
+    owner: root
+    group: root
+    mode: '0644'
+  
+- name: Load Keyboard shortcuts via dconf (Tiling, etc)
   when: ansible_facts.env.DESKTOP_SESSION in ["cinnamon"]
   shell: "dconf load /org/cinnamon/desktop/keybindings/ < {{ role_path }}/files/dconf-keyboard-shortcuts"

@@ -2,18 +2,19 @@
 - name: Configure MacOS
   hosts: localhost
   vars:
-    asdf_plugins:
-      - "awscli"
-      - "nodejs"
-      - "python"
-      - "terraform"
-      - "terraform-docs"
+    # asdf_plugins:
+    #   - "awscli"
+    #   - "nodejs"
+    #   - "python"
+    #   - "terraform"
+    #   - "terraform-docs"
     work_device: true
   roles:
     - brew
-    - asdf
+    # - asdf
     - bash
     # - docker
     - git
+    - mise # TODO - Verify config dir
     - tmux
     - vim
