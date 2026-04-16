@@ -45,3 +45,13 @@
     group: " {{ ansible_facts.user_gid }}"
     state: link
     force: yes
+
+- name: Create Tmux Plugin Directory
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir }}/.tmux/plugins"
+    state: directory
+
+- name: Install Tmux Logging Plugin
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-logging.git
+    dest: "{{ ansible_facts.user_dir }}/.tmux/plugins/tmux-logging"
