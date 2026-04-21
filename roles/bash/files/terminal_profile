@@ -258,10 +258,10 @@ elif [ -d "$HOME/.asdf" ]; then
   export PATH=$HOME/.asdf/shims:$PATH
 fi
 
-if [ -f "$HOME/.local/bin/asdf" ]; then
-  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-  . <(asdf completion bash)
-fi
+# if [ -f "$HOME/.local/bin/asdf" ]; then
+#   export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+#   . <(asdf completion bash)
+# fi
 
 if [ -d "$HOME/.local/bin" ]; then
   export PATH="$HOME/.local/bin:$PATH"
@@ -280,9 +280,9 @@ if [ -d "/usr/local/opt/mysql-client" ]; then
 fi
 
 # Add Docker completion to bash
-if [ -f "$HOME/.docker/init-bash.sh" ]; then
-  source "$HOME/.docker/init-bash.sh"
-fi
+# if [ -f "$HOME/.docker/init-bash.sh" ]; then
+#   source "$HOME/.docker/init-bash.sh"
+# fi
 
 # Add timer to bash
 if [ -f "~/Documents/bash-command-timer/bash_command_timer.sh" ]; then
