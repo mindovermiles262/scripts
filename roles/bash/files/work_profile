@@ -1,39 +1,40 @@
 alias lr="cd ~/ledgerrun && ls -lGh"
 alias lrf="cd ~/ledgerrun/frontend"
 alias lrb="cd ~/ledgerrun/backend && ls -lGh"
-alias lri="cd ~/ledgerrun/infrastructure && ls -lGh"
+alias lri="cd ~/ledgerrun/infrastructure-ledgerrun && ls -lGh"
 alias lrm="cd ~/ledgerrun/terraform-modules"
 
-export LRAPP_ENV=qa2_local
-
-tala() {
+_tmux_session() {
+  local SESSION=$1
+  local SESSION_HOME=$2
+  local DISPLAY_NAME=${3:-$SESSION}
+  
   # Check if tmux is installed
-  if [[ ! -f "/usr/local/bin/tmux" && ! -f "/usr/bin/tmux" && ! -f "/opt/homebrew/bin/tmux" ]]; then
+  if ! command -v tmux &>/dev/null; then
     echo "Tmux not found.. exiting..."
     return 1
   fi
-
-  tmux ls | grep -q lr
-  CPE_EXITCODE=$?
-  if [[ "$CPE_EXITCODE" -eq 0 ]]; then
-    # 0 => Session is running, attach to existing session
-    echo "Attaching to Ledger Run session . . ."
-    tmux attach -t lr
+  
+  if tmux ls | grep -q "^$SESSION:"; then
+    # Session is running, attach to existing session
+    echo "Attaching to $DISPLAY_NAME session . . ."
+    tmux attach -t $SESSION
   else
-    # 1 => Session does not exist, create new session
-    echo "Creating new tmux session, 'lr' . . ."
-    tmux new -s lr -c $HOME/ledgerrun \;
-      # send-keys 'cd nexus' C-m \; \
-      # send-keys 'clear' C-m \; \
-      # rename-window 'nexus' \; \
-      # new-window \; \
-      # send-keys 'cd app/main' C-m \; \
-      # send-keys 'clear' C-m \; \
-      # rename-window 'app' \; \
-      # new-window \; \
-      # send-keys 'cd admin' C-m \; \
-      # send-keys 'clear' C-m \; \
-      # rename-window 'admin' \;
+    # Session does not exist, create new session
+    echo "Creating new tmux session, '$SESSION' . . ."
+    tmux new-session -s $SESSION -c $SESSION_HOME
   fi
 }
 
+# Alias functions
+tala() {
+  _tmux_session "tala" "$HOME/ledgerrun" "Ledger Run"
+}
+
+taf() {
+  _tmux_session "taf" "$HOME/ledgerrun/frontend" "Ledger Run Frontend"
+}
+
+tab() {
+  _tmux_session "tab" "$HOME/ledgerrun/backend" "Ledger Run Backend"
+}

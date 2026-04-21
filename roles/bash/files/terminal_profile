@@ -17,6 +17,29 @@ if [ -f "$HOME/.authorizations" ]; then
   . "$HOME/.authorizations"  
 fi
 
+_exit_with_logging() {
+  # Check if we're inside a tmux session
+  if [[ -n "$TMUX" ]]; then
+    local SESSION_NAME=$(tmux display-message -p '#{session_name}')
+    local WINDOW_NAME=$(tmux display-message -p '#{window_name}')
+    local PANE_INDEX=$(tmux display-message -p '#{pane_index}')
+    
+    # Create logs directory if it doesn't exist
+    local LOG_DIR="$HOME/.tmux_logs"
+    mkdir -p "$LOG_DIR"
+    
+    # Generate log filename with timestamp
+    local TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+    local LOG_FILE="$LOG_DIR/${SESSION_NAME}_${WINDOW_NAME}_${TIMESTAMP}.log"
+    
+    # Capture pane history to file
+    tmux capture-pane -t "$SESSION_NAME:$WINDOW_NAME.$PANE_INDEX" -p -S - > "$LOG_FILE"
+    
+    echo "Session log saved to: $LOG_FILE"
+  fi
+  
+  exit
+}
 
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
@@ -64,8 +87,10 @@ alias gw="git worktree $@"
 # Program Aliases
 alias tf="terraform $@"
 alias tplan="terraform plan -out out.plan $@"
-alias tap="terraform apply out.plan"
-alias dc="docker-compose $@"
+alias dc="docker compose $@"
+alias pc="podman compose $@"
+alias pu="podman compose up $@"
+alias pd="podman compose down $@"
 alias gc="gcloud $@"
 alias ta="tmux attach -t $1"
 alias tls="tmux ls"
@@ -76,16 +101,11 @@ alias ks="kubectl $@"
 export KUBE_EDITOR=vim
 alias kn="kubens $@"
 alias p="pnpm $@"
-alias cs="cursor . $@"
-alias ot="OLLAMA_HOST=192.168.29.42:11434 oterm $@"
-alias ec="ETCDCTL_API=3 etcdctl $@"
-alias proton="STEAM_COMPAT_DATA_PATH=~/.proton/ '~/.steam/steam/steamapps/common/Proton 9.0 (Beta)/proton'"
-alias pe="pipenv $@"
 
 # Helpful Aliases
 alias cip="curl https://andrewduss.com/ip"
 alias lip="ifconfig | grep 'inet '"
-alias \:q="exit"
+alias \:q="_exit_with_logging"
 alias c="cd .."
 alias what="echo $?"
 alias sv="source venv/bin/activate"
@@ -312,3 +332,4 @@ fi
 
 # Ctrl-D does not exit terminal
 set -o ignoreeof  # Same as setting IGNOREEOF=10
+autoload -U compinit; compinit

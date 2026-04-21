@@ -14,8 +14,12 @@
 
 - name: Install Podman - MacOS
   when: ansible_facts.distribution == "MacOSX"
+  with_items:
+    - podman
+    - docker-credentials-helper
+    - docker-credentials-helper-ecr
   homebrew:
-    name: podman
+    name: "{{ item }}"
     state: present
     update_homebrew: yes
 
