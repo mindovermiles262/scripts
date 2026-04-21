@@ -23,7 +23,10 @@
   when: ansible_facts.system in ["Linux"]
   become: yes
   become_method: sudo
+  with_items:
+    - podman
+    - podman-docker
   package:
-    name: podman
+    name: "{{ item }}"
     state: latest
     update_cache: true

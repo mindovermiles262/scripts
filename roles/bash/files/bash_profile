@@ -28,4 +28,3 @@ fi
 
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
-alias mkarm="make ARCH=arm CROSS_COMPILE=arm-unknown-linux-uclibcgnueabi- $@"

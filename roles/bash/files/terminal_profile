@@ -254,10 +254,6 @@ elif [ -f "/usr/local/bin/mise" ]; then
  eval "$(mise activate bash)" 
 fi
 
-if [ -f "/usr/local/bin/mise" ]; then
- eval "$(mise activate bash)" 
-fi
-
 # Use MySQL from brew
 if [ -d "/usr/local/opt/mysql-client" ]; then
   export PATH="/usr/local/opt/mysql-client/bin:$PATH"
@@ -278,6 +274,12 @@ if [ -d "$HOME/Applications/bin" ]; then
   export PATH="$PATH:$HOME/Applications/bin"
 fi
 
+# Add Android Development to PATH
+if [ -d "$HOME/code/android/sdk" ]; then
+  export ANDROID_HOME="$HOME/code/android/sdk"
+  export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin
+fi
+
 # All libpq brew to path
 if [ -d "/opt/homebrew/opt/libpq/bin" ]; then
   export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
@@ -293,6 +295,20 @@ fi
 if [ -d "$HOME/.local/bin" ]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# Podman Docker Compatibility
+if [ -f "/run/user/1000/podman/podman.sock" ]; then
+  export DOCKER_HOST="unix:///run/user/1000/podman/podman.sock"
+elif [ -f "/run//podman/podman.sock" ]; then
+  export DOCKER_HOST="unix:///run/podman/podman.sock"
+elif [ -f "$HOME/.local/share/containers/podman/machine/qemu/podman.sock" ]; then
+  export DOCKER_HOST='unix://$HOME/.local/share/containers/podman/machine/qemu/podman.sock'
+fi
+
+if [ -f "usr/bin/podman-compose" ]; then
+  export PODMAN_COMPOSE_PROVIDER=/usr/bin/podman-compose
+fi
+
 
 # Ctrl-D does not exit terminal
 set -o ignoreeof  # Same as setting IGNOREEOF=10
