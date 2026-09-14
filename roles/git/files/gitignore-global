@@ -3,3 +3,5 @@
 out.plan
 .claude/*
 
+
+**/.claude/settings.local.json

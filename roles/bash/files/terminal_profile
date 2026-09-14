@@ -44,7 +44,6 @@ _exit_with_logging() {
 # OS Specific Commands
 if [[ "$OSTYPE" == 'linux'* ]]; then
   alias open="xdg-open"
-  alias ipod_sync="rsync -avh $HOME/Music/iTunes/iTunes\ Media/Music /media/doppio/H512/Media/Music"
   watts() {
     BATTERY=${1:-0}
     uWATT=$(cat /sys/class/power_supply/BAT$BATTERY/power_now)
@@ -110,6 +109,8 @@ alias c="cd .."
 alias what="echo $?"
 alias sv="source venv/bin/activate"
 # alias sv="sed -i '' -E 's/("[a-zA-Z0-9]+") /(*) /' venv/bin/activate && source venv/bin/activate"
+
+export OLLAMA_HOST=192.168.29.42:11434
 
 vpn() {
    sudo openvpn --config $1 --auth-user-pass $HOME/.pia
@@ -332,4 +333,3 @@ fi
 
 # Ctrl-D does not exit terminal
 set -o ignoreeof  # Same as setting IGNOREEOF=10
-autoload -U compinit; compinit

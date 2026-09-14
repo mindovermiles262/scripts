@@ -1,0 +1,209 @@
+#!/usr/bin/env bash
+#
+# idrac7-launcher
+#
+# Combined tool for old iDRAC/Avocent .jnlp Virtual Console files:
+#   1. Launch mode (default): opens a .jnlp file with a pinned OpenJDK 8 +
+#      IcedTea-Web, with the security relaxations these legacy Java Web
+#      Start consoles need (weak TLS ciphers, self-signed certs, etc).
+#   2. --certs mode: fetches an iDRAC host's TLS cert and imports it into
+#      the Java trust store the launcher relies on, so a new host's
+#      console will actually connect instead of failing with
+#      "Connection failed" / cert trust errors.
+#
+# Setup once:
+#   sudo apt install openjdk-8-jre-headless icedtea-netx
+#   chmod +x idrac7-launcher
+#   Adjust JAVA_HOME / JAVAWS below if your system differs
+#   (check with: which javaws / update-java-alternatives -l)
+#   Desktop File:
+#     $ cat ~/.local/share/applications/idrac-jnlp.desktop
+#          [Desktop Entry]
+#          Type=Application
+#          Name=iDRAC Virtual Console
+#          Exec=/home/sage/Applications/bin/idrac7-launcher %f
+#          MimeType=application/x-java-jnlp-file;
+#          NoDisplay=true
+#
+#
+# Usage:
+#   idrac7-launcher /path/to/viewer.jnlp        # launch a console
+#   idrac7-launcher --certs 192.168.29.9        # trust a new iDRAC host
+#   idrac7-launcher --help
+
+set -euo pipefail
+
+JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+JAVAWS="/usr/bin/javaws"
+KEYTOOL="${JAVA_HOME}/bin/keytool"
+JAVA="${JAVA_HOME}/bin/java"
+JAVAC="${JAVA_HOME}/bin/javac"
+
+POLICY_FILE="${HOME}/.config/idrac7-launcher/idrac.policy"
+TRUST_STORE="${HOME}/.java/deployment/security/trusted.certs"
+
+usage() {
+    cat << EOF
+Usage:
+  $(basename "$0") /path/to/viewer.jnlp     Launch an iDRAC virtual console
+  $(basename "$0") --certs <host>           Trust a new iDRAC host's cert
+  $(basename "$0") --help                   Show this help
+
+Run --certs once per new iDRAC host before launching its console for the
+first time.
+EOF
+}
+
+ensure_policy_file() {
+    mkdir -p "$(dirname "${POLICY_FILE}")"
+    if [[ ! -f "${POLICY_FILE}" ]]; then
+        cat > "${POLICY_FILE}" << 'EOF'
+grant {
+    permission java.security.AllPermission;
+};
+EOF
+    fi
+}
+
+cmd_launch() {
+    local jnlp_file="$1"
+
+    if [[ ! -x "${JAVAWS}" ]]; then
+        echo "Error: javaws not found at ${JAVAWS}" >&2
+        echo "Install with: sudo apt install openjdk-8-jre-headless icedtea-netx" >&2
+        echo "Then check its real path with: which javaws" >&2
+        exit 1
+    fi
+
+    ensure_policy_file
+    mkdir -p "$(dirname "${TRUST_STORE}")"
+
+    if [[ ! -f "${TRUST_STORE}" ]]; then
+        echo "Warning: no trust store found at ${TRUST_STORE}." >&2
+        echo "If this is a new iDRAC host, run: $(basename "$0") --certs <host-ip>" >&2
+    fi
+
+    JAVA_HOME="${JAVA_HOME}" "${JAVAWS}" \
+        -J-Djava.security.policy="${POLICY_FILE}" \
+        "${jnlp_file}"
+}
+
+cmd_certs() {
+    local host="$1"
+    local tmp_cert
+    local tmp_java_dir
+
+    tmp_cert="$(mktemp /tmp/idrac-cert-XXXXXX.crt)"
+    tmp_java_dir="$(mktemp -d)"
+
+    cleanup() {
+        rm -f "${tmp_cert}"
+        rm -rf "${tmp_java_dir}"
+    }
+    trap cleanup RETURN
+
+    echo "Fetching certificate from ${host}:443 ..."
+
+    # SECLEVEL=0 is required because these old iDRACs only speak TLS1.0/1.1
+    # with weak DHE ciphers, which OpenSSL 3.x blocks at the default
+    # security level.
+    if ! echo -n | openssl s_client -connect "${host}:443" \
+            -cipher 'DEFAULT:@SECLEVEL=0' 2>/dev/null \
+            | openssl x509 > "${tmp_cert}" 2>/dev/null; then
+        echo "Error: failed to retrieve certificate from ${host}:443" >&2
+        exit 1
+    fi
+
+    if ! grep -q "BEGIN CERTIFICATE" "${tmp_cert}"; then
+        echo "Error: did not get a valid certificate from ${host}:443" >&2
+        exit 1
+    fi
+
+    echo "Certificate retrieved:"
+    "${KEYTOOL}" -printcert -file "${tmp_cert}" | head -5
+    echo
+
+    mkdir -p "$(dirname "${TRUST_STORE}")"
+
+    # The KVM applet expects an empty-password JKS keystore, and the
+    # keytool CLI refuses to create one with a password shorter than 6
+    # chars, so build/update it directly via a small inline Java program.
+    cat > "${tmp_java_dir}/MakeKeystore.java" << 'EOF'
+import java.io.*;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+
+public class MakeKeystore {
+    public static void main(String[] args) throws Exception {
+        String certPath = args[0];
+        String keystorePath = args[1];
+        String alias = args[2];
+
+        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+        Certificate cert;
+        try (FileInputStream fis = new FileInputStream(certPath)) {
+            cert = cf.generateCertificate(fis);
+        }
+
+        KeyStore ks = KeyStore.getInstance("JKS");
+        File ksFile = new File(keystorePath);
+        if (ksFile.exists()) {
+            try (FileInputStream fis = new FileInputStream(ksFile)) {
+                ks.load(fis, new char[0]);
+            }
+        } else {
+            ks.load(null, null);
+        }
+
+        ks.setCertificateEntry(alias, cert);
+
+        File parent = ksFile.getParentFile();
+        if (parent != null) {
+            parent.mkdirs();
+        }
+        try (FileOutputStream fos = new FileOutputStream(ksFile)) {
+            ks.store(fos, new char[0]);
+        }
+        System.out.println("Imported alias '" + alias + "' into " + keystorePath);
+    }
+}
+EOF
+
+    if [[ -x "${JAVAC}" ]]; then
+        "${JAVAC}" "${tmp_java_dir}/MakeKeystore.java" -d "${tmp_java_dir}"
+    else
+        javac --release 8 "${tmp_java_dir}/MakeKeystore.java" -d "${tmp_java_dir}"
+    fi
+
+    local alias="idrac-${host//[^a-zA-Z0-9]/-}"
+
+    "${JAVA}" -cp "${tmp_java_dir}" MakeKeystore "${tmp_cert}" "${TRUST_STORE}" "${alias}"
+
+    echo
+    echo "Done. ${host} is now trusted for the iDRAC Virtual Console launcher."
+}
+
+# --- main ---
+
+if [[ $# -eq 0 ]]; then
+    usage
+    exit 1
+fi
+
+case "$1" in
+    --help|-h)
+        usage
+        ;;
+    --certs)
+        if [[ -z "${2:-}" ]]; then
+            echo "Error: --certs requires a host argument" >&2
+            usage
+            exit 1
+        fi
+        cmd_certs "$2"
+        ;;
+    *)
+        cmd_launch "$1"
+        ;;
+esac

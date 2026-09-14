@@ -14,5 +14,3 @@ if [[ "$OSTYPE" == 'linux'* ]]; then
 elif [[ "$OSTYPE" =~ "darwin" ]]; then
   open "$URL"
 fi
-
-

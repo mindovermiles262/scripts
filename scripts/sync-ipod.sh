@@ -39,6 +39,15 @@ else
   sleep 2
 fi
 
-# TODO: Copy Audiobooks
-# rsync -rv --size-only --delete "$HOME/Music/Audiobooks/* $1/Audiobooks"
-# rsync -rv --size-only --delete "$HOME/Music/Podcasts/* $1/Podcasts"
+# Copy Audiobook
+rsync --dry-run -rv --size-only "$HOME/Music/Audiobooks/"* "$1/Audiobooks"
+read -n 1 -p "Look good? [y/n]: " AB_CONFIRM
+echo ""
+
+if [ "$POD_CONFIRM" = "Y" ] || [ "$POD_CONFIRM" = "y" ]; then
+  rsync -rv --size-only "$HOME/Music/Audiobooks/"* "$1/Audiobooks"
+else
+  echo "Confirmation was not 'y' ... skipping Audiobook sync"
+fi
+
+echo "[*] Sync Complete."
